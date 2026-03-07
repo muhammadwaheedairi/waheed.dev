@@ -5,10 +5,10 @@ import { motion, useInView, useMotionValue, useSpring, useTransform, animate } f
 import { Trophy, Code2, Calendar, GitCommit } from 'lucide-react';
 
 const STATS = [
-  { label: 'Projects Built',   value: 20,  suffix: '+', icon: Code2,     color: 'text-primary' },
-  { label: 'Hackathons',       value: 8,   suffix: '',  icon: Trophy,    color: 'text-secondary' },
-  { label: 'Years Experience', value: 3,   suffix: '+', icon: Calendar,  color: 'text-white' },
-  { label: 'GitHub Commits',   value: 500, suffix: '+', icon: GitCommit, color: 'text-primary' },
+  { label: 'Projects Built',   value: 54,  suffix: '+', icon: Code2,     color: 'text-primary' },
+  { label: 'Hackathons',       value: 6,   suffix: '',  icon: Trophy,    color: 'text-secondary' },
+  { label: 'Years Experience', value: 2,   suffix: '+', icon: Calendar,  color: 'text-white' },
+  { label: 'GitHub Commits',   value: 600, suffix: '+', icon: GitCommit, color: 'text-primary' },
 ];
 
 const TICKER = ['Next.js','FastAPI','Docker','Kubernetes','Claude AI','Qwen','Oracle Cloud','Kafka','Dapr','Neon DB'];
