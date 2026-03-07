@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Muhammad Waheed — AI Agent Developer & Digital FTE Architect
 
-## Getting Started
+> Building autonomous AI workforces that run 24/7
 
-First, run the development server:
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19-61dafb?logo=react)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178c6?logo=typescript)](https://www.typescriptlang.org)
+[![Tailwind](https://img.shields.io/badge/Tailwind-4.1-38bdf8?logo=tailwindcss)](https://tailwindcss.com)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🚀 About
+
+I engineer **Autonomous AI Agents** that transform complex business logic into 24/7 digital workforces. Specializing in MCP agents, RAG systems, and production-ready AI architectures.
+
+## 🛠 Tech Stack
+
+| Core | 3D/Animation | Tools |
+|------|--------------|-------|
+| Next.js 15, React 19, TypeScript | Three.js, Framer Motion, React Three Fiber | Tailwind CSS 4, Lucide, Vercel |
+
+## 📁 Project Structure
+
+```
+my-app/
+├── app/                 # Next.js App Router pages
+├── components/          # UI components (Hero, Projects, 3D Canvas)
+├── data/                # Content & project data
+├── projects/            # Case study pages
+├── lib/                 # Utilities
+└── public/              # Static assets
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ⚡ Quick Start
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev          # http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📦 Commands
 
-## Learn More
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start dev server (Turbopack) |
+| `npm run build` | Production build |
+| `npm run start` | Start production server |
+| `npm run lint` | ESLint check |
 
-To learn more about Next.js, take a look at the following resources:
+## 🎨 Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- ✨ **3D Interactive Background** — Three.js canvas with particle effects
+- 🎭 **Custom Cursor & Animations** — Framer Motion + spring physics
+- 📱 **Fully Responsive** — Mobile-first Tailwind design
+- ⚡ **Performance Optimized** — Dynamic imports, SSR/CSR split
+- 🎯 **SEO Ready** — Metadata, OpenGraph, semantic HTML
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🏆 Featured Projects
 
-## Deploy on Vercel
+- **Personal AI Employee** — Autonomous MCP agents reducing manual work by ~80%
+- **Evolution of Todo** — Enterprise architecture on Oracle Cloud Always Free
+- **Portrait.so Clone** — Pixel-perfect 3D tilt animations with Framer Motion
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📄 License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT © 2026 Muhammad Waheed
+
+---
+
+<p align="center">Built with ⚡ Next.js 15 & deployed on Vercel</p>
