@@ -2,14 +2,23 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Muhammad Waheed — AI Agent Developer & Digital FTE Architect',
-  description: 'I engineer Autonomous AI Agents that transform complex business logic into 24/7 digital workforces.',
-  keywords: ['AI Agent Developer', 'Digital FTE', 'MCP', 'RAG', 'OpenAI Agents SDK', 'Pakistan'],
+  title: 'Muhammad Waheed — AI Automation & Full-Stack Developer',
+  description: 'I build AI systems that automate business operations, full-stack products from idea to production, and pixel-perfect frontend interfaces.',
+  keywords: ['AI Automation', 'AI Agent Developer', 'Full-Stack Developer', 'Frontend Engineer', 'Digital FTE', 'MCP', 'RAG', 'OpenAI Agents SDK', 'Next.js', 'FastAPI'],
   authors: [{ name: 'Muhammad Waheed' }],
   openGraph: {
-    title: 'Muhammad Waheed — AI Agent Developer',
-    description: 'Building intelligent futures with autonomous AI agents.',
+    title: 'Muhammad Waheed — AI Automation & Full-Stack Developer',
+    description: 'I build AI systems that automate business operations, full-stack products from idea to production, and pixel-perfect frontend interfaces.',
     type: 'website',
+    url: 'https://muhammadwaheed.dev',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Muhammad Waheed — AI Automation & Full-Stack Developer',
+    description: 'I build AI systems that automate business operations, full-stack products from idea to production, and pixel-perfect frontend interfaces.',
+  },
+  icons: {
+    icon: '/favicon.svg',
   },
 };
 
