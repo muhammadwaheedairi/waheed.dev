@@ -1,5 +1,6 @@
 export interface ProjectCard {
   title: string;
+  slug: string;
   description: string;
   tech: string[];
   link?: string;
@@ -10,6 +11,7 @@ export interface ProjectCard {
 export const PROJECTS: ProjectCard[] = [
   {
     title: 'Personal-AI-Employee',
+    slug: 'personal-ai-employee',
     description: 'A local-first autonomous AI Employee that monitors emails, finances, and tasks via MCP agents.',
     tech: ['Python', 'MCP', 'Agent skills', 'CLAUDE AI','GitHub Actions','Obsidian Sync','odoo'],
     type: 'AI',
@@ -17,6 +19,7 @@ export const PROJECTS: ProjectCard[] = [
   },
   {
     title: 'The Evolution of Todo',
+    slug: 'evolution-of-todo',
     description: 'A todo app evolving from console script to AI-powered Kubernetes system via spec-driven development.',
     tech: ['Next.js', 'Python', 'FastAPI', 'Docker', 'Kubernetes', 'Oracle Cloud', 'Neon DB'],
     type: 'Full-Stack',
@@ -25,6 +28,7 @@ export const PROJECTS: ProjectCard[] = [
   },
   {
     title: 'AI Robotics Textbook',
+    slug: 'textbook-ai-robotics',
     description: 'Personal AI-Robotics portfolio: ROS 2, Gazebo, NVIDIA Isaac, VLA systems — built with latest AI tools.',
     tech: ['docusaurus', 'Python', 'Open AI Agents SDK', 'RAG','Qdrant','Cohere'],
     type: 'Robotics',
@@ -33,6 +37,7 @@ export const PROJECTS: ProjectCard[] = [
   },
   {
     title: 'OutfitPlus',
+    slug: 'outfitplus',
     description: 'Modern fashion e-commerce marketplace with authentication and CMS-powered product management.Built with Next.js, Sanity CMS, and Firebase for a responsive shopping experience.',
     tech: ['Next.js','Tailwind CSS', 'Sanity CMS', 'Firebase', 'TypeScript'],
     type: 'Full-Stack',
@@ -41,14 +46,16 @@ export const PROJECTS: ProjectCard[] = [
   },
   {
     title: 'Superwhisper Clone',
+    slug: 'superwhisper-clone',
     description: 'Pixel-perfect Superwhisper landing page clone built with modern responsive UI.Includes a simulated AI writing demo showcasing interactive frontend behavior.',
     tech: ['Next.js','TypeScript', 'Tailwind CSS', 'Framer Motion'],
     type: 'Frontend',
     github: 'https://github.com/muhammadwaheedairi/superwhisper-clone',
     link: 'https://superwhisper-clone.vercel.app/',
   },
-    {
+  {
     title: 'Portrait.so Clone',
+    slug: 'portrait-frontend-clone',
     description: 'Pixel-perfect recreation of the Portrait.so landing page with 3D tilt effects, physics-based animations, interactive card stack, and adaptive SVG network diagram.',
     tech: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     type: 'Frontend',

@@ -36,6 +36,11 @@ export default function HomePage() {
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   useEffect(() => {
+    // Skip terminal loader if returning from a case study page
+    if (sessionStorage.getItem('scrollTo')) {
+      setIsLoading(false);
+    }
+
     const isDismissed = sessionStorage.getItem('availability-banner-dismissed');
     if (!isDismissed) setIsBannerVisible(true);
 
