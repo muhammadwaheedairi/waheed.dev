@@ -11,7 +11,7 @@ const STATS = [
   { label: 'GitHub Commits',   value: 600, suffix: '+', icon: GitCommit, color: 'text-primary' },
 ];
 
-const TICKER = ['Next.js','FastAPI','Docker','Kubernetes','Claude AI','Qwen','Oracle Cloud','Kafka','Dapr','Neon DB'];
+const TICKER = ['Next.js','Typescript','Tailwind CSS','Sanity CMS','Vercel','Python','FastAPI','Neon db','OpenAI Agents SDK','MCP','Docker','Kubernetes','Kafka','Dapr','Oracle Cloud','Claude AI','Agents skills','Sub agents','SDD'];
 
 function Counter({ value, suffix, color }: { value: number; suffix: string; color: string }) {
   const count = useMotionValue(0);

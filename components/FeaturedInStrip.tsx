@@ -2,7 +2,7 @@
 
 import { motion } from 'motion/react';
 
-const BADGES = ['GIAIC', 'Panaversity', 'Governor Sindh Initiative', 'PIAIC', 'WaheedAI Solutions'];
+const BADGES = ['GIAIC', 'Panaversity','PIAIC',];
 
 export default function FeaturedInStrip() {
   return (
