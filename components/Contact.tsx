@@ -1,7 +1,13 @@
 'use client';
 
+import { useState, useRef } from 'react';
 import { motion } from 'motion/react';
-import { Mail, Linkedin, Github, Send, MapPin } from 'lucide-react';
+import { Mail, Linkedin, Github, Send, MapPin, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+
+const EMAILJS_SERVICE_ID  = 'service_8i9hwgz';
+const EMAILJS_TEMPLATE_ID = 'template_3vygkne';
+const EMAILJS_PUBLIC_KEY  = 'kNZiXiZOh17XY8H02';
 
 function ThreadsIcon({ className }: { className?: string }) {
   return (
@@ -20,31 +26,80 @@ function MediumIcon({ className }: { className?: string }) {
   );
 }
 
+type Status = 'idle' | 'loading' | 'success' | 'error';
+
 export default function Contact() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [status, setStatus] = useState<Status>('idle');
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    service_type: '',
+    message: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.name || !form.email || !form.service_type || !form.message) return;
+    setStatus('loading');
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          name:    form.name,
+          email:   form.email,
+          message: `Service: ${form.service_type}\nFrom: ${form.email}\n\n${form.message}`,
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+      setStatus('success');
+      setForm({ name: '', email: '', service_type: '', message: '' });
+    } catch {
+      setStatus('error');
+    }
+  };
+
   return (
     <section className="py-20 sm:py-32 px-4 sm:px-12 lg:px-24 relative" id="contact">
       <div className="max-w-7xl mx-auto">
         <div className="glass rounded-[2rem] sm:rounded-[4rem] p-6 sm:p-20 lg:p-32 overflow-hidden relative border-white/5">
           <div className="absolute top-0 right-0 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-primary/10 blur-[100px] sm:blur-[150px] -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-0 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-secondary/10 blur-[100px] sm:blur-[150px] translate-y-1/2 -translate-x-1/2" />
+
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+
+            {/* Left */}
             <div>
               <div className="flex items-center gap-4 mb-6 sm:mb-8">
                 <div className="h-[1px] w-8 sm:w-12 bg-primary" />
                 <span className="text-[10px] sm:text-xs font-mono text-primary uppercase tracking-[0.3em]">Connection</span>
               </div>
-              <h2 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter mb-8 sm:mb-10 leading-[0.9]">LET&apos;S <span className="text-gradient">SYNC.</span></h2>
-              <p className="text-white/40 text-base sm:text-xl font-light mb-10 sm:mb-16 max-w-md leading-relaxed">Available for high-impact AI Agent development, Digital FTE architecture, and intelligent automation consulting.</p>
+              <h2 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter mb-8 sm:mb-10 leading-[0.9]">
+                LET&apos;S <span className="text-gradient">SYNC.</span>
+              </h2>
+              <p className="text-white/40 text-base sm:text-xl font-light mb-10 sm:mb-16 max-w-md leading-relaxed">
+                Have a project in mind? Fill out the form and I will get back to you within 24 hours.
+              </p>
+
               <div className="space-y-8 sm:space-y-10">
-                <motion.a href="mailto:muhammadwaheedairi@gmail.com" whileHover={{ x: 10 }} className="flex items-center gap-4 sm:gap-6 group">
+                <motion.a href="mailto:muhammadwaheedairi@gmail.com" whileHover={{ x: 10 }}
+                  className="flex items-center gap-4 sm:gap-6 group">
                   <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-primary group-hover:text-bg-dark transition-all duration-500 shadow-xl">
                     <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
                   <div>
                     <div className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest mb-0.5 sm:mb-1">Direct_Mail</div>
-                    <span className="text-base sm:text-xl md:text-2xl font-bold group-hover:text-primary transition-colors break-all">muhammadwaheedairi@gmail.com</span>
+                    <span className="text-base sm:text-xl md:text-2xl font-bold group-hover:text-primary transition-colors break-all">
+                      muhammadwaheedairi@gmail.com
+                    </span>
                   </div>
                 </motion.a>
+
                 <div className="flex items-center gap-4 sm:gap-6">
                   <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center">
                     <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-white/40" />
@@ -54,14 +109,16 @@ export default function Contact() {
                     <span className="text-base sm:text-xl font-bold">Karachi, Pakistan</span>
                   </div>
                 </div>
+
                 <div className="flex gap-3 sm:gap-4 pt-4 sm:pt-8">
                   {[
-                    { icon: Github,   href: 'https://github.com/muhammadwaheedairi' },
-                    { icon: Linkedin, href: 'https://linkedin.com/in/muhammadwaheedairi' },
+                    { icon: Github,      href: 'https://github.com/muhammadwaheedairi' },
+                    { icon: Linkedin,    href: 'https://linkedin.com/in/muhammadwaheedairi' },
                     { icon: ThreadsIcon, href: 'https://www.threads.net/@muhammadwaheedairi' },
                     { icon: MediumIcon,  href: 'https://medium.com/@muhammadwaheedairi' },
                   ].map((s, i) => (
-                    <motion.a key={i} href={s.href} target="_blank" rel="noopener noreferrer" whileHover={{ y: -5, scale: 1.1 }}
+                    <motion.a key={i} href={s.href} target="_blank" rel="noopener noreferrer"
+                      whileHover={{ y: -5, scale: 1.1 }}
                       className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center hover:border-primary/50 hover:bg-primary/5 transition-all duration-500">
                       <s.icon className="w-5 h-5 sm:w-7 sm:h-7" />
                     </motion.a>
@@ -69,31 +126,104 @@ export default function Contact() {
                 </div>
               </div>
             </div>
+
+            {/* Right — form */}
             <div className="flex flex-col justify-center">
               <div className="p-6 sm:p-10 md:p-12 rounded-[2rem] sm:rounded-[3rem] bg-white/5 border border-white/10 backdrop-blur-2xl shadow-2xl">
-                <h3 className="text-xl sm:text-2xl font-black mb-6 sm:mb-8 uppercase tracking-tight">Initialize Connection</h3>
-                <form className="space-y-4 sm:space-y-6" onSubmit={(e) => e.preventDefault()}>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                    <div className="space-y-1.5 sm:space-y-2">
-                      <label className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest ml-1">Identity</label>
-                      <input type="text" placeholder="Your Name" className="w-full bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl px-4 sm:px-6 py-3 sm:py-4 focus:outline-none focus:border-primary transition-all placeholder:text-white/10 text-sm" />
+                <h3 className="text-xl sm:text-2xl font-black mb-6 sm:mb-8 uppercase tracking-tight">
+                  Start a Project
+                </h3>
+
+                {status === 'success' ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex flex-col items-center justify-center py-12 text-center gap-4"
+                  >
+                    <CheckCircle className="w-12 h-12 text-primary" />
+                    <p className="text-xl font-black uppercase tracking-tight">Message Sent</p>
+                    <p className="text-white/40 text-sm font-light leading-relaxed max-w-xs">
+                      Got it. I will review your project and get back to you within 24 hours.
+                    </p>
+                    <button
+                      onClick={() => setStatus('idle')}
+                      className="mt-4 text-[10px] font-mono text-white/20 hover:text-primary transition-colors uppercase tracking-widest"
+                    >
+                      Send another →
+                    </button>
+                  </motion.div>
+                ) : (
+                  <form ref={formRef} onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest ml-1">Your Name</label>
+                        <input
+                          type="text" name="name" value={form.name} onChange={handleChange}
+                          placeholder="John Smith" required
+                          className="w-full bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl px-4 sm:px-5 py-3 sm:py-4 focus:outline-none focus:border-primary transition-all placeholder:text-white/10 text-sm"
+                        />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest ml-1">Your Email</label>
+                        <input
+                          type="email" name="email" value={form.email} onChange={handleChange}
+                          placeholder="john@company.com" required
+                          className="w-full bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl px-4 sm:px-5 py-3 sm:py-4 focus:outline-none focus:border-primary transition-all placeholder:text-white/10 text-sm"
+                        />
+                      </div>
                     </div>
-                    <div className="space-y-1.5 sm:space-y-2">
-                      <label className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest ml-1">Endpoint</label>
-                      <input type="email" placeholder="Your Email" className="w-full bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl px-4 sm:px-6 py-3 sm:py-4 focus:outline-none focus:border-primary transition-all placeholder:text-white/10 text-sm" />
+
+                    <div className="space-y-1.5">
+                      <label className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest ml-1">Service Needed</label>
+                      <select
+                        name="service_type" value={form.service_type} onChange={handleChange} required
+                        className="w-full bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl px-4 sm:px-5 py-3 sm:py-4 focus:outline-none focus:border-primary transition-all text-sm text-white/60 appearance-none cursor-pointer"
+                        style={{ backgroundColor: 'rgba(255,255,255,0.05)' }}
+                      >
+                        <option value="" disabled className="bg-[#0a0a0a]">Select a service...</option>
+                        <option value="AI Automation" className="bg-[#0a0a0a]">AI Automation</option>
+                        <option value="Full-Stack Product Build" className="bg-[#0a0a0a]">Full-Stack Product Build</option>
+                        <option value="Frontend & UI Engineering" className="bg-[#0a0a0a]">Frontend &amp; UI Engineering</option>
+                        <option value="Not sure yet" className="bg-[#0a0a0a]">Not sure yet — let&apos;s talk</option>
+                      </select>
                     </div>
-                  </div>
-                  <div className="space-y-1.5 sm:space-y-2">
-                    <label className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest ml-1">Payload</label>
-                    <textarea placeholder="Transmission details..." rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl px-4 sm:px-6 py-3 sm:py-4 focus:outline-none focus:border-primary transition-all resize-none placeholder:text-white/10 text-sm" />
-                  </div>
-                  <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} type="submit"
-                    className="w-full py-4 sm:py-5 bg-primary text-bg-dark font-black rounded-xl sm:rounded-2xl flex items-center justify-center gap-3 hover:shadow-[0_0_40px_rgba(0,255,136,0.3)] transition-all text-sm sm:text-base">
-                    SEND TRANSMISSION <Send className="w-4 h-4 sm:w-5 sm:h-5" />
-                  </motion.button>
-                </form>
+
+                    <div className="space-y-1.5">
+                      <label className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest ml-1">Project Brief</label>
+                      <textarea
+                        name="message" value={form.message} onChange={handleChange}
+                        placeholder="Tell me about your project — what you are building, what problem it solves, and roughly when you need it."
+                        rows={4} required
+                        className="w-full bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl px-4 sm:px-5 py-3 sm:py-4 focus:outline-none focus:border-primary transition-all resize-none placeholder:text-white/10 text-sm"
+                      />
+                    </div>
+
+                    {status === 'error' && (
+                      <div className="flex items-center gap-2 text-red-400 text-xs font-mono">
+                        <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                        Something went wrong. Please email me directly at muhammadwaheedairi@gmail.com
+                      </div>
+                    )}
+
+                    <motion.button
+                      whileHover={{ scale: status === 'loading' ? 1 : 1.02 }}
+                      whileTap={{ scale: status === 'loading' ? 1 : 0.98 }}
+                      type="submit" disabled={status === 'loading'}
+                      className="w-full py-4 sm:py-5 bg-primary text-bg-dark font-black rounded-xl sm:rounded-2xl flex items-center justify-center gap-3 hover:shadow-[0_0_40px_rgba(0,255,136,0.3)] transition-all text-sm sm:text-base disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                      {status === 'loading' ? (
+                        <><Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />SENDING...</>
+                      ) : (
+                        <>SEND MESSAGE <Send className="w-4 h-4 sm:w-5 sm:h-5" /></>
+                      )}
+                    </motion.button>
+
+                  </form>
+                )}
               </div>
             </div>
+
           </div>
         </div>
       </div>

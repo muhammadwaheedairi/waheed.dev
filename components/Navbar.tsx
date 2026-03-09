@@ -2,14 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Cpu, Terminal, Layers, Mail, User, Command } from 'lucide-react';
+import { Menu, X, Cpu, Terminal, Layers, Mail, User, Command, Briefcase } from 'lucide-react';
 
 const NAV = [
-  { name: 'Home',    icon: Cpu,      href: '#home' },
-  { name: 'About',   icon: User,     href: '#about' },
-  { name: 'Systems', icon: Terminal, href: '#projects' },
-  { name: 'Stack',   icon: Layers,   href: '#tech' },
-  { name: 'Sync',    icon: Mail,     href: '#contact' },
+  { name: 'Home',     icon: Cpu,       href: '#home' },
+  { name: 'About',    icon: User,      href: '#about' },
+  { name: 'Systems',  icon: Terminal,  href: '#projects' },
+  { name: 'Stack',    icon: Layers,    href: '#tech' },
+  { name: 'Services', icon: Briefcase, href: '#services' },
+  { name: 'Sync',     icon: Mail,      href: '#contact' },
 ];
 
 export default function Navbar({ isBannerVisible = false }: { isBannerVisible?: boolean }) {

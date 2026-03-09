@@ -1,9 +1,5 @@
 'use client';
 
-// app/page.tsx → renders the full portfolio home page
-// Best practice: page.tsx stays thin — it imports the page-level component
-// All heavy client logic lives in components/, not in app/
-
 import { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, AnimatePresence } from 'motion/react';
 import dynamic from 'next/dynamic';
@@ -16,7 +12,8 @@ import GitHubActivity from '@/components/GitHubActivity';
 import About from '@/components/About';
 import Projects from '@/components/Projects';
 import TechStack from '@/components/TechStack';
-import Testimonials from '@/components/Testimonials';
+import Services from '@/components/Services';
+import Process from '@/components/Process';
 import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
@@ -84,7 +81,8 @@ export default function HomePage() {
                 <section id="about"><About /></section>
                 <section id="projects"><Projects /></section>
                 <section id="tech"><TechStack /></section>
-                <Testimonials />
+                <section id="services"><Services /></section>
+                <section id="process"><Process /></section>
                 <FAQ />
                 <section id="contact"><Contact /></section>
                 <Footer />
