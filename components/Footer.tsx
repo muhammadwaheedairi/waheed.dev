@@ -1,11 +1,8 @@
 'use client';
 
-// react-router-dom removed — replaced by next/navigation
-// useLocation → usePathname, useNavigate → useRouter
-
 import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { Github, Linkedin } from 'lucide-react';
+import { Github, Linkedin, ArrowRight } from 'lucide-react';
 
 function ThreadsIcon({ size = 16 }: { size?: number }) {
   return (
@@ -25,11 +22,12 @@ function MediumIcon({ size = 16 }: { size?: number }) {
 }
 
 const NAV = [
-  { name: 'Home',    id: '#home' },
-  { name: 'About',   id: '#about' },
-  { name: 'Systems', id: '#projects' },
-  { name: 'Stack',   id: '#tech' },
-  { name: 'Sync',    id: '#contact' },
+  { name: 'Home',     id: '#home' },
+  { name: 'About',    id: '#about' },
+  { name: 'Services', id: '#services' },
+  { name: 'Work',     id: '#projects' },
+  { name: 'Process',  id: '#process' },
+  { name: 'Contact',  id: '#contact' },
 ];
 
 export default function Footer() {
@@ -56,41 +54,103 @@ export default function Footer() {
   }, [pathname]);
 
   return (
-    <footer className="bg-[#0a0a0a] border-t border-white/5 py-12 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 items-start text-center md:text-left">
-          <div className="flex flex-col items-center md:items-start">
-            <span className="text-primary font-mono font-bold text-lg tracking-tight">MUHAMMAD WAHEED</span>
-            <p className="text-gray-500 text-xs mt-1">AI Agent Developer &amp; Digital FTE Architect</p>
-            <p className="text-gray-600 text-xs mt-4">© 2025 All Rights Reserved</p>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-gray-600 text-[10px] font-mono uppercase tracking-widest mb-4">QUICK LINKS</span>
-            <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
-              {NAV.map((link, idx) => (
-                <span key={link.name} className="flex items-center gap-4">
-                  <button onClick={() => scrollTo(link.id)} className="text-gray-400 hover:text-primary text-xs font-mono transition-colors">{link.name}</button>
-                  {idx < NAV.length - 1 && <span className="text-gray-700 text-xs">·</span>}
+    <footer className="bg-[#0a0a0a] border-t border-white/5">
+
+      {/* Final CTA strip — wzwebs style */}
+      <div className="border-b border-white/5 py-16 px-6 text-center">
+        <p className="text-white/30 text-xs font-mono uppercase tracking-widest mb-4">
+          Still reading? That means you have a problem worth solving.
+        </p>
+        <h3 className="text-3xl sm:text-5xl font-black tracking-tighter mb-6">
+          LET&apos;S <span className="text-primary">BUILD IT.</span>
+        </h3>
+        <a
+          href="mailto:muhammadwaheedairi@gmail.com"
+          className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-bg-dark font-black rounded-xl text-sm hover:shadow-[0_0_30px_rgba(0,255,136,0.2)] transition-all group"
+        >
+          muhammadwaheedairi@gmail.com
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </a>
+        <p className="text-white/20 text-xs font-mono mt-4">
+          Reply within 24 hours · NDA on request · No commitment to reach out
+        </p>
+      </div>
+
+      {/* Main footer */}
+      <div className="py-12 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 items-start text-center md:text-left">
+
+            {/* Left — brand */}
+            <div className="flex flex-col items-center md:items-start">
+              <span className="text-primary font-mono font-bold text-lg tracking-tight">
+                MUHAMMAD WAHEED
+              </span>
+              <p className="text-gray-500 text-xs mt-1">
+                I turn your business problems into working software.
+              </p>
+              <p className="text-gray-600 text-xs mt-4">© 2025 All Rights Reserved</p>
+            </div>
+
+            {/* Middle — nav */}
+            <div className="flex flex-col items-center">
+              <span className="text-gray-600 text-[10px] font-mono uppercase tracking-widest mb-4">
+                QUICK LINKS
+              </span>
+              <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
+                {NAV.map((link, idx) => (
+                  <span key={link.name} className="flex items-center gap-4">
+                    <button
+                      onClick={() => scrollTo(link.id)}
+                      className="text-gray-400 hover:text-primary text-xs font-mono transition-colors"
+                    >
+                      {link.name}
+                    </button>
+                    {idx < NAV.length - 1 && (
+                      <span className="text-gray-700 text-xs">·</span>
+                    )}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Right — location + socials */}
+            <div className="flex flex-col items-center md:items-end">
+              <div className="text-center md:text-right">
+                <span className="text-gray-600 text-[10px] font-mono uppercase tracking-widest block mb-1">
+                  BASE_LOCATION
                 </span>
-              ))}
+                <span className="text-gray-300 text-sm block">Karachi, Pakistan 🇵🇰</span>
+                <span className="text-gray-600 text-xs block mt-1">PKT (UTC+5) · Mon–Sat</span>
+              </div>
+              <div className="flex items-center gap-4 mt-6">
+                <a href="https://github.com/muhammadwaheedairi" target="_blank" rel="noopener noreferrer"
+                  className="text-gray-500 hover:text-primary transition-colors">
+                  <Github size={16} />
+                </a>
+                <a href="https://linkedin.com/in/muhammadwaheedairi" target="_blank" rel="noopener noreferrer"
+                  className="text-gray-500 hover:text-primary transition-colors">
+                  <Linkedin size={16} />
+                </a>
+                <a href="https://www.threads.net/@muhammadwaheedairi" target="_blank" rel="noopener noreferrer"
+                  className="text-gray-500 hover:text-primary transition-colors">
+                  <ThreadsIcon size={16} />
+                </a>
+                <a href="https://medium.com/@muhammadwaheedairi" target="_blank" rel="noopener noreferrer"
+                  className="text-gray-500 hover:text-primary transition-colors">
+                  <MediumIcon size={16} />
+                </a>
+              </div>
             </div>
+
           </div>
-          <div className="flex flex-col items-center md:items-end">
-            <div className="text-center md:text-right">
-              <span className="text-gray-600 text-[10px] font-mono uppercase tracking-widest block mb-1">BASE_LOCATION</span>
-              <span className="text-gray-300 text-sm block">Karachi, Pakistan 🇵🇰</span>
-              <span className="text-gray-600 text-xs block mt-1">PKT (UTC+5)</span>
-            </div>
-            <div className="flex items-center gap-4 mt-6">
-              <a href="https://github.com/muhammadwaheedairi" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-primary transition-colors"><Github size={16} /></a>
-              <a href="https://linkedin.com/in/muhammadwaheedairi" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-primary transition-colors"><Linkedin size={16} /></a>
-              <a href="https://www.threads.net/@muhammadwaheedairi" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-primary transition-colors"><ThreadsIcon size={16} /></a>
-              <a href="https://medium.com/@muhammadwaheedairi" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-primary transition-colors"><MediumIcon size={16} /></a>
-            </div>
+
+          {/* Bottom bar */}
+          <div className="mt-12 pt-8 border-t border-white/5 text-center">
+            <p className="text-gray-700 text-[10px] font-mono uppercase tracking-[0.2em]">
+              BUILT WITH ❤️ USING NEXT.JS + TYPESCRIPT + FRAMER MOTION
+            </p>
           </div>
-        </div>
-        <div className="mt-12 pt-8 border-t border-white/5 text-center">
-          <p className="text-gray-700 text-[10px] font-mono uppercase tracking-[0.2em]">BUILT WITH ❤️ USING NEXT.JS 16 + TYPESCRIPT + FRAMER MOTION</p>
         </div>
       </div>
     </footer>

@@ -10,12 +10,12 @@ const STEPS = [
     title: 'Discovery',
     duration: '1–2 days',
     description:
-      'We start with a focused conversation — what your business does, what problem you need solved, and what success looks like. No assumptions, no generic solutions. I ask the questions most developers skip.',
+      'Most developers skip this step and jump straight to building. I do not. We start with a real conversation — what your business does, what is broken, and what success actually looks like. I ask questions most developers never think to ask. By the end, we both know exactly what needs to be built and why.',
     details: [
-      'Understand your business context',
+      'Understand your business and users',
       'Define the exact problem to solve',
-      'Identify what success looks like',
-      'Clarify timeline and constraints',
+      'Agree on what success looks like',
+      'Clarify timeline and hard constraints',
     ],
   },
   {
@@ -24,12 +24,12 @@ const STEPS = [
     title: 'Specification',
     duration: '2–3 days',
     description:
-      'Before a single line of code is written, I document exactly what will be built — features, architecture, data flow, edge cases. You review and approve it. This document becomes the contract. No scope creep, no surprises.',
+      'Before any code is written, everything gets documented — every feature, every screen, every edge case. You read it, push back on anything that is wrong, and sign off. That document is the contract. If it is not in the spec, it does not get built without a conversation. No scope creep. Ever.',
     details: [
-      'Full feature specification written',
+      'Every feature written out in plain language',
       'Architecture and tech decisions documented',
       'You review and approve before build starts',
-      'Clear scope — nothing ambiguous',
+      'Nothing ambiguous — nothing left to interpretation',
     ],
   },
   {
@@ -38,12 +38,12 @@ const STEPS = [
     title: 'Build',
     duration: 'Project-dependent',
     description:
-      'I build against the spec — structured, documented, and tested. You get regular updates so you always know where things stand. No disappearing for two weeks and delivering something unexpected.',
+      'I build exactly what the spec says. You get regular updates — not a message two weeks later saying it is done. If something comes up that was not accounted for, I flag it immediately rather than quietly working around it. Clean code, tested, documented as I go.',
     details: [
-      'Regular progress updates',
+      'Regular progress updates throughout',
       'Built exactly to the approved spec',
       'Clean, documented, maintainable code',
-      'Testing at every stage',
+      'Issues flagged immediately — not hidden',
     ],
   },
   {
@@ -52,12 +52,12 @@ const STEPS = [
     title: 'Ship & Handoff',
     duration: '1–2 days',
     description:
-      'Deployed, documented, and handed over cleanly. You get everything — the codebase, deployment setup, and a walkthrough so you understand what was built and how to manage it. The project ends when you are fully confident.',
+      'Deployed, documented, and handed over completely. You get the codebase, the deployment setup, and a walkthrough so you understand what was built and can manage it going forward. The project does not end until you are fully confident. No ghost after delivery.',
     details: [
       'Deployed to production',
       'Full documentation provided',
-      'Walkthrough and handoff call',
-      'Post-launch support window',
+      'Walkthrough call — you understand everything',
+      'Post-launch support window included',
     ],
   },
 ];
@@ -83,7 +83,8 @@ export default function Process() {
             HOW I <span className="text-gradient">WORK.</span>
           </h2>
           <p className="text-white/40 text-base sm:text-lg font-light max-w-xl leading-relaxed">
-            Every project follows the same four steps. No surprises, no scope creep — just a clear path from problem to shipped product.
+            Four steps. Every project. No surprises, no disappearing acts —
+            just a clear path from your problem to a shipped product.
           </p>
         </motion.div>
 
@@ -165,6 +166,25 @@ export default function Process() {
             ))}
           </div>
         </div>
+
+        {/* Bottom CTA — wzwebs style */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-16 text-center"
+        >
+          <p className="text-white/30 text-sm font-light mb-6 max-w-md mx-auto">
+            This is how every project runs. The same process, every time —
+            because predictability is what lets you trust the outcome.
+          </p>
+          <button
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-bg-dark font-black rounded-xl text-sm hover:shadow-[0_0_30px_rgba(0,255,136,0.2)] transition-all"
+          >
+            START WITH DISCOVERY →
+          </button>
+        </motion.div>
 
       </div>
     </section>

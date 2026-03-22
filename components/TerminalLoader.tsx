@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 
 const BOOT_LOGS = [
-  '$ booting WaheedAI.systems...',
-  '$ loading agentic modules ✓',
-  '$ syncing cloud infrastructure ✓',
-  '$ SYSTEM ONLINE — Welcome',
+  '$ initializing Muhammad Waheed portfolio...',
+  '$ loading case studies ✓',
+  '$ preparing solutions ✓',
+  '$ READY — Let\'s solve your problem.',
 ];
 
 export default function TerminalLoader({ onComplete }: { onComplete: () => void }) {
@@ -19,18 +19,18 @@ export default function TerminalLoader({ onComplete }: { onComplete: () => void 
     if (currentLineIndex < BOOT_LOGS.length) {
       const currentLine = BOOT_LOGS[currentLineIndex];
       if (currentCharIndex < currentLine.length) {
-        const t = setTimeout(() => setCurrentCharIndex((p) => p + 1), 30);
+        const t = setTimeout(() => setCurrentCharIndex((p) => p + 1), 8);
         return () => clearTimeout(t);
       } else {
         const t = setTimeout(() => {
           setVisibleLogs((p) => [...p, currentLine]);
           setCurrentLineIndex((p) => p + 1);
           setCurrentCharIndex(0);
-        }, 200);
+        }, 80);
         return () => clearTimeout(t);
       }
     } else {
-      const t = setTimeout(onComplete, 800);
+      const t = setTimeout(onComplete, 300);
       return () => clearTimeout(t);
     }
   }, [currentLineIndex, currentCharIndex, onComplete]);
@@ -45,7 +45,9 @@ export default function TerminalLoader({ onComplete }: { onComplete: () => void 
       <div className="max-w-xl w-full">
         <div className="space-y-3">
           {visibleLogs.map((log, i) => (
-            <div key={i} className="text-primary text-sm sm:text-base md:text-lg tracking-tight">{log}</div>
+            <div key={i} className="text-primary text-sm sm:text-base md:text-lg tracking-tight">
+              {log}
+            </div>
           ))}
           {currentLineIndex < BOOT_LOGS.length && (
             <div className="text-primary text-sm sm:text-base md:text-lg tracking-tight flex items-center">

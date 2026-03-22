@@ -20,7 +20,7 @@ export const PROJECTS: Project[] = [
   {
     slug: 'personal-ai-employee',
     title: 'Personal AI Employee',
-    tagline: 'What if your business kept running — emails answered, invoices sent, clients followed up — while you slept?',
+    tagline: '15–20 hours recovered every week. Emails answered, invoices sent, clients followed up — without you touching any of it.',
     type: 'AI Automation',
     duration: '~60 hours build time',
     status: 'Live & Running',
@@ -35,11 +35,11 @@ export const PROJECTS: Project[] = [
     tech: ['Python', 'Claude AI', 'Gmail API', 'WhatsApp', 'Odoo Accounting', 'Oracle Cloud', 'Obsidian', 'Playwright'],
     highlights: [
       { label: 'Hours Recovered Per Week', value: '15–20' },
-      { label: 'Channels Monitored', value: '5+' },
+      { label: 'Cost vs Human Hire', value: '~10%' },
       { label: 'Automated Tasks', value: '14' },
+      { label: 'Channels Monitored', value: '5+' },
       { label: 'Runs 24/7', value: 'Yes' },
       { label: 'Human Approval on Sensitive Actions', value: 'Always' },
-      { label: 'Cost vs Human Hire', value: '~10%' },
     ],
     sections: [
       {
@@ -64,7 +64,7 @@ export const PROJECTS: Project[] = [
   {
     slug: 'evolution-of-todo',
     title: 'The Evolution of Todo',
-    tagline: 'The same product, built five different ways — showing exactly how software grows from a script to a system that handles real scale.',
+    tagline: 'The same product built 5 different ways — from a script to a distributed system that handles real scale.',
     type: 'Full-Stack Application',
     duration: 'December 2025 – January 2026',
     status: 'All 5 Versions Complete',
@@ -109,7 +109,7 @@ export const PROJECTS: Project[] = [
   {
     slug: 'textbook-ai-robotics',
     title: 'AI Knowledge Platform',
-    tagline: 'Turn any body of knowledge — a product, a process, a curriculum — into an interactive platform with an AI assistant that answers questions from your own content.',
+    tagline: 'Any body of knowledge — docs, manuals, curriculum — turned into an AI assistant that answers questions instantly from your own content.',
     type: 'AI-Powered Knowledge Platform',
     duration: 'Hackathon I — Panaversity',
     status: 'Live',
@@ -120,14 +120,14 @@ export const PROJECTS: Project[] = [
     solution:
       'I built a platform where content lives in a clean, structured format — chapters, sections, guides, whatever the material calls for — and an AI assistant is trained on all of it before the platform launches. When someone asks a question, the AI does not search the internet. It searches only the platform\'s own content, finds the most relevant sections, and writes a direct answer — with a reference back to the source. The result is a knowledge base that talks back.',
     result:
-      'A live platform covering 26 chapters across 13 weeks of technical curriculum, with an AI assistant that answers questions in under 4 seconds, a fast search that works without an internet connection, and a fully responsive design that works on any device. The same architecture can be deployed for a product documentation site, an internal company wiki, a customer support portal, or an employee training system.',
+      'A live platform covering 26 chapters across 13 weeks of technical curriculum, with an AI assistant that answers questions in under 4 seconds, a fast search that works without an internet connection, and a fully responsive design that works on any device.',
     tech: ['Docusaurus', 'React', 'TypeScript', 'FastAPI', 'Python', 'Cohere AI', 'Qdrant Vector Database', 'OpenRouter', 'Docker', 'GitHub Pages', 'Hugging Face Spaces'],
     highlights: [
-      { label: 'Chapters of Content', value: '26' },
       { label: 'AI Answer Time', value: 'Under 4 sec' },
+      { label: 'Chapters of Content', value: '26' },
       { label: 'Search Works Offline', value: 'Yes' },
-      { label: 'Mobile Responsive', value: 'Yes' },
       { label: 'Hosting Cost', value: 'Near Zero' },
+      { label: 'Mobile Responsive', value: 'Yes' },
       { label: 'Deployable For', value: 'Any Content Type' },
     ],
     sections: [
@@ -154,52 +154,52 @@ export const PROJECTS: Project[] = [
   {
     slug: 'outfitplus',
     title: 'OutfitPlus',
-    tagline: 'A fully functional e-commerce marketplace — designed, built, tested, and deployed in 7 days.',
+    tagline: 'A complete, production-ready fashion store — built to be sold to local fashion businesses as a working solution.',
     type: 'E-Commerce Platform',
-    duration: '7 Days',
+    duration: '2 Weeks',
     status: 'Live',
     overview:
-      'OutfitPlus is a complete online marketplace built in one week. Customers browse products, create accounts, and purchase. The store owner manages everything — products, pricing, inventory — from a simple dashboard that requires no technical knowledge. It is live, tested, and built with the architecture to scale.',
+      'OutfitPlus is a full-stack fashion ecommerce platform built with Next.js 16, Sanity CMS, Clerk Auth, Neon Postgres, Stripe Payments, and Resend Emails. It is production-ready and designed to be handed directly to a fashion business — they log into Sanity Studio, manage their products, and the store runs itself. No developer needed for day-to-day operations.',
     problem:
-      'Most small retail and fashion brands reach a point where their informal sales process stops working. They are managing orders through DMs, payments through bank transfers, and inventory in their head. It works until it does not — and when it breaks, it breaks publicly, in front of customers. Moving to a proper e-commerce setup feels like a big project, and most agencies either overcharge for it or deliver something that is harder to manage than the problem it replaced.',
+      'Local fashion businesses are still selling through Instagram DMs and WhatsApp. Payments go through bank transfers. Inventory is tracked in a notebook. It works until it does not — and when it breaks, it breaks in front of customers. The options they are given are either a bloated agency build that costs thousands, or a Shopify subscription they do not fully own or control.',
     solution:
-      'I built a modern e-commerce store with a clean separation between the shopping experience and the management backend. Customers get a fast, polished storefront. The owner gets a simple content dashboard — no code, no developer calls — to add products, update prices, and manage the catalogue. The technical foundation is solid enough to handle real traffic and extend with new features as the business grows.',
+      'I built a complete ecommerce store that a fashion business can own entirely. Customers browse, filter, wishlist, and purchase. The store owner manages everything from a clean Sanity Studio — products, blog posts, featured banners, sale tags — with no code required. Orders flow into a custom admin dashboard where the owner tracks revenue, manages order status, and sees pending actions. Stripe handles payments securely. Resend sends confirmation emails automatically.',
     result:
-      'A live store built in seven days, from first line of code to deployed production. Tested across devices, documented, and accompanied by a full business strategy covering revenue model, market positioning, and a growth roadmap.',
-    tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Sanity CMS', 'Firebase Auth', 'Vercel'],
+      'A live, production-deployed store with real payment processing, order management, email confirmations, and a CMS the client controls. Built in 2 weeks. Every feature works end to end — from product browsing to Stripe checkout to order confirmation email landing in the customer\'s inbox.',
+    tech: ['Next.js 16', 'TypeScript', 'Tailwind CSS v4', 'Sanity CMS v5', 'Clerk Auth', 'Neon Postgres', 'Drizzle ORM', 'Stripe', 'Resend', 'Vercel'],
     highlights: [
-      { label: 'Days to Production', value: '7' },
-      { label: 'Code Required to Add Products', value: 'None' },
-      { label: 'Authentication', value: 'Secure' },
-      { label: 'Mobile Optimised', value: 'Yes' },
-      { label: 'Business Strategy', value: 'Included' },
-      { label: 'Extensible Architecture', value: 'Yes' },
+      { label: 'Payment Processing', value: 'Stripe Live' },
+      { label: 'Code to Add Products', value: 'None' },
+      { label: 'Order Emails', value: 'Automated' },
+      { label: 'Admin Dashboard', value: 'Included' },
+      { label: 'Auth System', value: 'Clerk' },
+      { label: 'Deployment', value: 'Vercel' },
     ],
     sections: [
       {
-        title: 'A content system the owner actually controls',
+        title: 'A store the owner actually controls',
         content:
-          'The most common complaint I hear from store owners who have worked with developers before is that they cannot update their own website without calling someone. OutfitPlus was built so that never happens. The product catalogue lives in a content management system with a visual editor — the owner uploads photos, writes descriptions, sets prices, and publishes. Changes appear on the live store immediately. No tickets, no waiting, no dependency on a developer for basic operations.',
+          'Every product, every blog post, every featured banner is managed through Sanity Studio — a clean visual editor the store owner logs into directly. They upload photos, set prices, apply discount tags, mark items as featured, and publish. Changes go live immediately. There are no developer calls, no tickets, no waiting. The most common complaint from business owners who have worked with agencies before is that they cannot update their own website. This store was built so that never happens.',
       },
       {
-        title: 'Built with a growth path in mind',
+        title: 'Real payments, real orders, real emails',
         content:
-          'The architecture chosen for this project was deliberate. The frontend and content system are decoupled, which means either can be upgraded without rebuilding the other. Adding a new product category, integrating a payment gateway, introducing a loyalty programme, building a seller portal for a marketplace model — all of these are extensions, not rewrites. The business strategy document developed alongside the build maps out exactly this roadmap.',
+          'Checkout goes through Stripe — the most trusted payment processor available. Card data never touches the server. When a customer completes a purchase, the order saves to Neon Postgres, the admin dashboard updates instantly, and a confirmation email lands in the customer\'s inbox via Resend. The owner sees every order, can update the status from Pending to Shipped to Delivered, and has a full order history per customer. This is not a demo — it is a working business operation.',
       },
       {
-        title: 'How I approach a 7-day build',
+        title: 'What this means if you need an ecommerce store',
         content:
-          'Day one is entirely planning — goals, users, pages, data model. Nothing is written until the thinking is done. Day two is the technical foundation. Day three is every page of the storefront. Day four is backend integration. Day five is testing — what breaks, what is slow, what confuses a real user. Day six is deployment to production. Day seven is refinement and documentation. This structure is repeatable for any product build, at any scope.',
+          'If you run a fashion business — or any product business — and you are still selling manually, this is the exact system that replaces that. I can configure it for your products, your branding, your payment account, and hand it over fully deployed. You get the codebase, the CMS access, the admin dashboard, and a walkthrough so you understand everything. From that point, you are fully independent. No monthly agency fee. No developer dependency. Just a working store that is yours.',
       },
     ],
-    github: 'https://github.com/muhammadwaheedairi/OutfitPlus',
-    demo: 'https://outfit-plus.vercel.app/',
+    github: 'https://github.com/muhammadwaheedairi/OutfitPlus-v2.git',
+    demo: 'https://outfit-plus-v2.vercel.app/',
   },
 
   {
     slug: 'superwhisper-clone',
     title: 'Superwhisper Clone',
-    tagline: 'A precise recreation of a world-class product website — built to show that any design, however polished, can be engineered exactly.',
+    tagline: 'Show me a design. I will build it exactly — not approximately.',
     type: 'Frontend Engineering',
     duration: '~1 week',
     status: 'Live',
@@ -213,12 +213,12 @@ export const PROJECTS: Project[] = [
       'A live, publicly accessible clone that can be compared directly against the original. Every section is present. Every animation runs correctly. Every layout adapts properly to mobile, tablet, and desktop. Open both and compare.',
     tech: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Lucide Icons'],
     highlights: [
-      { label: 'Sections Rebuilt', value: '8' },
       { label: 'Design Fidelity', value: 'Pixel-Perfect' },
+      { label: 'Sections Rebuilt', value: '8' },
+      { label: 'Build Time', value: '~1 Week' },
       { label: 'Mobile Responsive', value: 'Yes' },
       { label: 'Interactive Demo', value: 'Yes' },
       { label: 'Server Required', value: 'None' },
-      { label: 'Build Time', value: '~1 Week' },
     ],
     sections: [
       {
@@ -244,7 +244,7 @@ export const PROJECTS: Project[] = [
   {
     slug: 'portrait-frontend-clone',
     title: 'Portrait.so Clone',
-    tagline: 'A technically demanding UI recreation — 3D effects, physics-based animations, and adaptive layouts built from scratch to demonstrate advanced frontend capability.',
+    tagline: '3D effects, spring physics, adaptive layouts — advanced frontend engineering built from scratch to prove it is possible.',
     type: 'Frontend Engineering',
     duration: '~1 week',
     status: 'Live',

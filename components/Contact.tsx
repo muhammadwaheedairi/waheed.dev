@@ -77,23 +77,43 @@ export default function Contact() {
             <div>
               <div className="flex items-center gap-4 mb-6 sm:mb-8">
                 <div className="h-[1px] w-8 sm:w-12 bg-primary" />
-                <span className="text-[10px] sm:text-xs font-mono text-primary uppercase tracking-[0.3em]">Connection</span>
+                <span className="text-[10px] sm:text-xs font-mono text-primary uppercase tracking-[0.3em]">
+                  Connection
+                </span>
               </div>
-              <h2 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter mb-8 sm:mb-10 leading-[0.9]">
-                LET&apos;S <span className="text-gradient">SYNC.</span>
+
+              {/* Heading — wzwebs style final CTA */}
+              <h2 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter mb-6 sm:mb-8 leading-[0.9]">
+                GOT A <span className="text-gradient">PROBLEM?</span>
               </h2>
-              <p className="text-white/40 text-base sm:text-xl font-light mb-10 sm:mb-16 max-w-md leading-relaxed">
-                Have a project in mind? Fill out the form and I will get back to you within 24 hours.
+
+              {/* Subtext — direct, no fluff */}
+              <p className="text-white/40 text-base sm:text-lg font-light mb-4 max-w-md leading-relaxed">
+                Tell me what you are trying to build.
+                I will tell you if I can solve it — and how fast.
               </p>
 
+              {/* Response time badge — builds urgency */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-10 sm:mb-16">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                <span className="text-[10px] font-mono text-primary uppercase tracking-widest">
+                  Avg reply: under 24 hours
+                </span>
+              </div>
+
               <div className="space-y-8 sm:space-y-10">
-                <motion.a href="mailto:muhammadwaheedairi@gmail.com" whileHover={{ x: 10 }}
-                  className="flex items-center gap-4 sm:gap-6 group">
+                <motion.a
+                  href="mailto:muhammadwaheedairi@gmail.com"
+                  whileHover={{ x: 10 }}
+                  className="flex items-center gap-4 sm:gap-6 group"
+                >
                   <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-primary group-hover:text-bg-dark transition-all duration-500 shadow-xl">
                     <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
                   <div>
-                    <div className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest mb-0.5 sm:mb-1">Direct_Mail</div>
+                    <div className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest mb-0.5 sm:mb-1">
+                      Direct_Mail
+                    </div>
                     <span className="text-base sm:text-xl md:text-2xl font-bold group-hover:text-primary transition-colors break-all">
                       muhammadwaheedairi@gmail.com
                     </span>
@@ -105,8 +125,11 @@ export default function Contact() {
                     <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-white/40" />
                   </div>
                   <div>
-                    <div className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest mb-0.5 sm:mb-1">Location</div>
-                    <span className="text-base sm:text-xl font-bold">Karachi, Pakistan</span>
+                    <div className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest mb-0.5 sm:mb-1">
+                      Location
+                    </div>
+                    <span className="text-base sm:text-xl font-bold">Karachi, Pakistan 🇵🇰</span>
+                    <p className="text-[10px] font-mono text-white/20 mt-0.5">PKT (UTC+5) · Mon–Sat</p>
                   </div>
                 </div>
 
@@ -117,9 +140,14 @@ export default function Contact() {
                     { icon: ThreadsIcon, href: 'https://www.threads.net/@muhammadwaheedairi' },
                     { icon: MediumIcon,  href: 'https://medium.com/@muhammadwaheedairi' },
                   ].map((s, i) => (
-                    <motion.a key={i} href={s.href} target="_blank" rel="noopener noreferrer"
+                    <motion.a
+                      key={i}
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       whileHover={{ y: -5, scale: 1.1 }}
-                      className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center hover:border-primary/50 hover:bg-primary/5 transition-all duration-500">
+                      className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center hover:border-primary/50 hover:bg-primary/5 transition-all duration-500"
+                    >
                       <s.icon className="w-5 h-5 sm:w-7 sm:h-7" />
                     </motion.a>
                   ))}
@@ -130,9 +158,12 @@ export default function Contact() {
             {/* Right — form */}
             <div className="flex flex-col justify-center">
               <div className="p-6 sm:p-10 md:p-12 rounded-[2rem] sm:rounded-[3rem] bg-white/5 border border-white/10 backdrop-blur-2xl shadow-2xl">
-                <h3 className="text-xl sm:text-2xl font-black mb-6 sm:mb-8 uppercase tracking-tight">
+                <h3 className="text-xl sm:text-2xl font-black mb-2 uppercase tracking-tight">
                   Start a Project
                 </h3>
+                <p className="text-white/30 text-xs font-mono mb-6 sm:mb-8">
+                  No commitment. Just a conversation.
+                </p>
 
                 {status === 'success' ? (
                   <motion.div
@@ -141,9 +172,10 @@ export default function Contact() {
                     className="flex flex-col items-center justify-center py-12 text-center gap-4"
                   >
                     <CheckCircle className="w-12 h-12 text-primary" />
-                    <p className="text-xl font-black uppercase tracking-tight">Message Sent</p>
+                    <p className="text-xl font-black uppercase tracking-tight">Message Received</p>
                     <p className="text-white/40 text-sm font-light leading-relaxed max-w-xs">
-                      Got it. I will review your project and get back to you within 24 hours.
+                      I will review your project brief and reply within 24 hours.
+                      Check your inbox.
                     </p>
                     <button
                       onClick={() => setStatus('idle')}
@@ -157,7 +189,9 @@ export default function Contact() {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-1.5">
-                        <label className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest ml-1">Your Name</label>
+                        <label className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest ml-1">
+                          Your Name
+                        </label>
                         <input
                           type="text" name="name" value={form.name} onChange={handleChange}
                           placeholder="John Smith" required
@@ -165,7 +199,9 @@ export default function Contact() {
                         />
                       </div>
                       <div className="space-y-1.5">
-                        <label className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest ml-1">Your Email</label>
+                        <label className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest ml-1">
+                          Your Email
+                        </label>
                         <input
                           type="email" name="email" value={form.email} onChange={handleChange}
                           placeholder="john@company.com" required
@@ -175,25 +211,29 @@ export default function Contact() {
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest ml-1">Service Needed</label>
+                      <label className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest ml-1">
+                        What Do You Need?
+                      </label>
                       <select
                         name="service_type" value={form.service_type} onChange={handleChange} required
                         className="w-full bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl px-4 sm:px-5 py-3 sm:py-4 focus:outline-none focus:border-primary transition-all text-sm text-white/60 appearance-none cursor-pointer"
                         style={{ backgroundColor: 'rgba(255,255,255,0.05)' }}
                       >
-                        <option value="" disabled className="bg-[#0a0a0a]">Select a service...</option>
-                        <option value="AI Automation" className="bg-[#0a0a0a]">AI Automation</option>
-                        <option value="Full-Stack Product Build" className="bg-[#0a0a0a]">Full-Stack Product Build</option>
-                        <option value="Frontend & UI Engineering" className="bg-[#0a0a0a]">Frontend &amp; UI Engineering</option>
-                        <option value="Not sure yet" className="bg-[#0a0a0a]">Not sure yet — let&apos;s talk</option>
+                        <option value="" disabled className="bg-[#0a0a0a]">Pick the closest match...</option>
+                        <option value="AI Automation" className="bg-[#0a0a0a]">AI Automation — automate my workflows</option>
+                        <option value="Full-Stack Product Build" className="bg-[#0a0a0a]">Full-Stack Build — build my product</option>
+                        <option value="Frontend & UI Engineering" className="bg-[#0a0a0a]">Frontend — build my design / landing page</option>
+                        <option value="Not sure yet" className="bg-[#0a0a0a]">Not sure yet — let&apos;s figure it out</option>
                       </select>
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest ml-1">Project Brief</label>
+                      <label className="text-[8px] sm:text-[10px] font-mono text-white/20 uppercase tracking-widest ml-1">
+                        What Are You Building?
+                      </label>
                       <textarea
                         name="message" value={form.message} onChange={handleChange}
-                        placeholder="Tell me about your project — what you are building, what problem it solves, and roughly when you need it."
+                        placeholder="Describe the problem you are trying to solve. What does success look like? When do you need it?"
                         rows={4} required
                         className="w-full bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl px-4 sm:px-5 py-3 sm:py-4 focus:outline-none focus:border-primary transition-all resize-none placeholder:text-white/10 text-sm"
                       />
@@ -202,7 +242,7 @@ export default function Contact() {
                     {status === 'error' && (
                       <div className="flex items-center gap-2 text-red-400 text-xs font-mono">
                         <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                        Something went wrong. Please email me directly at muhammadwaheedairi@gmail.com
+                        Something went wrong. Email me directly at muhammadwaheedairi@gmail.com
                       </div>
                     )}
 
@@ -218,6 +258,10 @@ export default function Contact() {
                         <>SEND MESSAGE <Send className="w-4 h-4 sm:w-5 sm:h-5" /></>
                       )}
                     </motion.button>
+
+                    <p className="text-center text-[10px] font-mono text-white/15">
+                      No spam. No commitment. Just a reply within 24hrs.
+                    </p>
 
                   </form>
                 )}

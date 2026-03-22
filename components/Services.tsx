@@ -8,11 +8,11 @@ const SERVICES = [
     icon: Bot,
     tag: '01',
     title: 'AI Automation',
-    headline: 'Your business, running on autopilot.',
+    headline: 'Your business, running while you sleep.',
     description:
-      'I build AI systems that handle the repetitive work your team should not be doing — inbox triage, invoice generation, client follow-ups, daily briefings, social updates. The result is time back, costs down, and nothing falling through the cracks.',
+      'You are doing work a machine should handle. Inbox triage, follow-up emails, invoice generation, daily reports — your team is burning hours on tasks that should never touch a human. I build AI systems that take over that work completely. The result: time back, costs down, nothing falling through the cracks.',
     deliverables: [
-      'Custom AI agent built for your workflows',
+      'Custom AI agent built around your exact workflows',
       'Email, WhatsApp, or Slack integration',
       'Accounting & CRM system connection',
       'Human approval layer for sensitive actions',
@@ -20,6 +20,7 @@ const SERVICES = [
     ],
     timeline: '2 – 4 weeks',
     ideal: 'Consultants, agencies, solo operators',
+    painLine: 'Still doing manually what a system should handle?',
   },
   {
     icon: Layers,
@@ -27,7 +28,7 @@ const SERVICES = [
     title: 'Full-Stack Product Build',
     headline: 'From idea to live product — fast.',
     description:
-      'I take a product idea and build it end to end — frontend, backend, database, deployment. Whether it is a SaaS MVP, a marketplace, a client portal, or an internal tool, I deliver something real that users can actually use.',
+      'You have the idea. You just need someone who can actually build it — frontend, backend, database, deployment — without disappearing for 3 months and delivering something broken. I spec everything upfront, build clean, and ship a real product your users can use from day one.',
     deliverables: [
       'Complete web application (frontend + backend)',
       'User authentication & role management',
@@ -37,14 +38,15 @@ const SERVICES = [
     ],
     timeline: '3 – 6 weeks',
     ideal: 'Startups, founders, product teams',
+    painLine: 'Idea sitting in your head for months with no one to build it?',
   },
   {
     icon: Paintbrush,
     tag: '03',
     title: 'Frontend & UI Engineering',
-    headline: 'Designs that look exactly as intended — and feel premium.',
+    headline: 'Interfaces that make people trust you before they read a word.',
     description:
-      'I build pixel-perfect interfaces from Figma files, reference sites, or visual direction. Landing pages, marketing sites, SaaS dashboards, product UIs — built with the precision and animation quality that makes a product feel trustworthy before anyone reads a word.',
+      'Your product might be great — but if it looks unfinished, clients leave. I build pixel-perfect interfaces from Figma files, reference sites, or just a direction. Landing pages, SaaS dashboards, marketing sites — built with the kind of animation quality and precision that makes a product feel premium the second someone lands on it.',
     deliverables: [
       'Pixel-perfect implementation from any design',
       'Smooth animations & micro-interactions',
@@ -54,6 +56,7 @@ const SERVICES = [
     ],
     timeline: '1 – 3 weeks',
     ideal: 'SaaS companies, product launches, brands',
+    painLine: 'Great product, but the UI is killing your conversions?',
   },
 ];
 
@@ -82,7 +85,8 @@ export default function Services() {
             WHAT I <span className="text-gradient">BUILD.</span>
           </h2>
           <p className="text-white/40 text-base sm:text-lg font-light max-w-xl leading-relaxed">
-            Three focused services. Each one delivers something real — not a prototype, not a proof of concept.
+            Three focused services. Each one solves a real problem —
+            not a prototype, not a proof of concept. Working software.
           </p>
         </motion.div>
 
@@ -98,6 +102,14 @@ export default function Services() {
               className="glass rounded-[2rem] border-white/5 hover:border-primary/20 transition-all duration-500 overflow-hidden group"
             >
               <div className="p-8 sm:p-10 lg:p-12">
+
+                {/* Pain line — wzwebs style hook */}
+                <div className="mb-8 px-4 py-3 rounded-xl bg-white/[0.03] border border-white/5 inline-block">
+                  <p className="text-[11px] font-mono text-white/30 uppercase tracking-widest">
+                    💬 {s.painLine}
+                  </p>
+                </div>
+
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
 
                   {/* Left — main info */}
@@ -123,10 +135,14 @@ export default function Services() {
                     <div className="flex flex-wrap gap-4 mt-7">
                       <div className="flex items-center gap-2">
                         <Clock className="w-3.5 h-3.5 text-primary/50" />
-                        <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">{s.timeline}</span>
+                        <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">
+                          {s.timeline}
+                        </span>
                       </div>
                       <div className="h-3 w-[1px] bg-white/10 self-center hidden sm:block" />
-                      <span className="text-[10px] font-mono text-white/20 uppercase tracking-widest">{s.ideal}</span>
+                      <span className="text-[10px] font-mono text-white/20 uppercase tracking-widest">
+                        {s.ideal}
+                      </span>
                     </div>
                   </div>
 

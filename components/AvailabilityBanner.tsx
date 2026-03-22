@@ -33,12 +33,18 @@ export default function AvailabilityBanner() {
                 className="text-[10px] sm:text-xs font-mono text-primary hover:text-white transition-colors flex items-center gap-2 group"
               >
                 <span className="animate-pulse">🟢</span>
-                <span className="hidden sm:inline">Available for AI Projects &amp; Freelance —</span>
-                <span className="sm:hidden">Open for Projects —</span>
-                <span className="font-bold group-hover:translate-x-1 transition-transform">Let&apos;s Sync →</span>
+                <span className="hidden sm:inline">Taking on new projects — reply within 24hrs —</span>
+                <span className="sm:hidden">Open for projects —</span>
+                <span className="font-bold group-hover:translate-x-1 transition-transform">
+                  Start a conversation →
+                </span>
               </button>
             </div>
-            <button onClick={dismiss} className="p-1 hover:bg-white/10 rounded-full transition-colors" aria-label="Dismiss">
+            <button
+              onClick={dismiss}
+              className="p-1 hover:bg-white/10 rounded-full transition-colors"
+              aria-label="Dismiss"
+            >
               <X className="w-3 h-3 text-primary" />
             </button>
           </div>
