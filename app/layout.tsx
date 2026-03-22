@@ -2,20 +2,30 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Muhammad Waheed — AI Automation & Full-Stack Developer',
-  description: 'I build AI systems that automate business operations, full-stack products from idea to production, and pixel-perfect frontend interfaces.',
-  keywords: ['AI Automation', 'AI Agent Developer', 'Full-Stack Developer', 'Frontend Engineer', 'Digital FTE', 'MCP', 'RAG', 'OpenAI Agents SDK', 'Next.js', 'FastAPI'],
+  title: 'Muhammad Waheed — AI & Full-Stack Developer',
+  description: 'I turn business problems into working software. AI automation, full-stack products, and frontend engineering — shipped in 2-6 weeks.',
+  keywords: ['AI Automation', 'AI Agent Developer', 'Full-Stack Developer', 'Frontend Engineer', 'MCP', 'RAG', 'OpenAI Agents SDK', 'Next.js', 'FastAPI', 'Karachi'],
   authors: [{ name: 'Muhammad Waheed' }],
   openGraph: {
-    title: 'Muhammad Waheed — AI Automation & Full-Stack Developer',
-    description: 'I build AI systems that automate business operations, full-stack products from idea to production, and pixel-perfect frontend interfaces.',
+    title: 'Muhammad Waheed — AI & Full-Stack Developer',
+    description: 'I turn business problems into working software. AI automation, full-stack products, and frontend engineering — shipped in 2-6 weeks.',
     type: 'website',
-    url: 'https://muhammadwaheed.dev',
+    url: 'https://muhammadwaheedairi.vercel.app',
+    siteName: 'Muhammad Waheed',
+    images: [
+      {
+        url: 'https://muhammadwaheedairi.vercel.app/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Muhammad Waheed — AI & Full-Stack Developer',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Muhammad Waheed — AI Automation & Full-Stack Developer',
-    description: 'I build AI systems that automate business operations, full-stack products from idea to production, and pixel-perfect frontend interfaces.',
+    title: 'Muhammad Waheed — AI & Full-Stack Developer',
+    description: 'I turn business problems into working software. AI automation, full-stack products, and frontend engineering — shipped in 2-6 weeks.',
+    images: ['https://muhammadwaheedairi.vercel.app/og-image.png'],
   },
   icons: {
     icon: '/favicon.svg',
