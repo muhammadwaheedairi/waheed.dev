@@ -1,6 +1,6 @@
 # Muhammad Waheed — Client-Converting Portfolio Funnel
 
-> **Live:** [waheedairi.vercel.app](https://waheedairi.vercel.app)
+> **Live:** [muhammadwaheedairi.vercel.app](https://muhammadwaheedairi.vercel.app)
 
 A personal portfolio built as a **client-converting funnel** — not a showcase, a sales page. Every section is designed to move a visitor from "who is this?" to "I want to work with him."
 
@@ -154,8 +154,8 @@ Get your keys at [emailjs.com](https://emailjs.com) — free tier gives 200 emai
   sections: [
     { title: 'Section Title', content: '...' },
   ],
-  github: 'https://github.com/muhammadwaheedairi/waheed.dev.git',
-  demo: 'https://muhammadwaheedairi.vercel.app/',
+  github: 'https://...',
+  demo: 'https://...',
 }
 ```
 
