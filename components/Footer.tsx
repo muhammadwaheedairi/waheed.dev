@@ -56,7 +56,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#0a0a0a] border-t border-white/5">
 
-      {/* Final CTA strip — wzwebs style */}
+      {/* Final CTA strip */}
       <div className="border-b border-white/5 py-16 px-6 text-center">
         <p className="text-white/30 text-xs font-mono uppercase tracking-widest mb-4">
           Still reading? That means you have a problem worth solving.
@@ -64,14 +64,17 @@ export default function Footer() {
         <h3 className="text-3xl sm:text-5xl font-black tracking-tighter mb-6">
           LET&apos;S <span className="text-primary">BUILD IT.</span>
         </h3>
+
+        {/* Fixed: email button responsive on mobile */}
         <a
           href="mailto:muhammadwaheedairi@gmail.com"
-          className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-bg-dark font-black rounded-xl text-sm hover:shadow-[0_0_30px_rgba(0,255,136,0.2)] transition-all group"
+          className="inline-flex items-center gap-2 px-5 sm:px-8 py-4 bg-primary text-bg-dark font-black rounded-xl text-xs sm:text-sm hover:shadow-[0_0_30px_rgba(0,255,136,0.2)] transition-all group max-w-full overflow-hidden"
         >
-          muhammadwaheedairi@gmail.com
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <span className="truncate">muhammadwaheedairi@gmail.com</span>
+          <ArrowRight className="w-4 h-4 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
         </a>
-        <p className="text-white/20 text-xs font-mono mt-4">
+
+        <p className="text-white/20 text-xs font-mono mt-4 leading-relaxed">
           Reply within 24 hours · NDA on request · No commitment to reach out
         </p>
       </div>
@@ -79,7 +82,7 @@ export default function Footer() {
       {/* Main footer */}
       <div className="py-12 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 items-start text-center md:text-left">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 items-start text-center md:text-left">
 
             {/* Left — brand */}
             <div className="flex flex-col items-center md:items-start">
@@ -97,9 +100,10 @@ export default function Footer() {
               <span className="text-gray-600 text-[10px] font-mono uppercase tracking-widest mb-4">
                 QUICK LINKS
               </span>
-              <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
+              {/* Fixed: vertical list on mobile, horizontal on desktop */}
+              <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-y-2 gap-x-3">
                 {NAV.map((link, idx) => (
-                  <span key={link.name} className="flex items-center gap-4">
+                  <span key={link.name} className="flex items-center gap-3">
                     <button
                       onClick={() => scrollTo(link.id)}
                       className="text-gray-400 hover:text-primary text-xs font-mono transition-colors"
@@ -107,7 +111,7 @@ export default function Footer() {
                       {link.name}
                     </button>
                     {idx < NAV.length - 1 && (
-                      <span className="text-gray-700 text-xs">·</span>
+                      <span className="text-gray-700 text-xs hidden sm:inline">·</span>
                     )}
                   </span>
                 ))}

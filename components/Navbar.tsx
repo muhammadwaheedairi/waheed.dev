@@ -26,8 +26,9 @@ export default function Navbar({ isBannerVisible = false }: { isBannerVisible?: 
 
   return (
     <>
+      {/* Navbar — z-[60] so it stays above mobile menu */}
       <nav
-        className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${
+        className={`fixed left-1/2 -translate-x-1/2 z-[60] transition-all duration-500 ${
           isScrolled ? 'w-[90%] md:w-auto' : 'w-[95%] md:w-auto'
         }`}
         style={{ top: isBannerVisible ? 'calc(1.5rem + 36px)' : '1.5rem' }}
@@ -76,21 +77,21 @@ export default function Navbar({ isBannerVisible = false }: { isBannerVisible?: 
         </div>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — z-[55] below navbar */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-bg-dark/95 backdrop-blur-3xl md:hidden flex flex-col items-center justify-center gap-10"
+            className="fixed inset-0 z-[55] bg-bg-dark/95 backdrop-blur-3xl md:hidden flex flex-col items-center justify-start gap-6 overflow-y-auto pt-28 pb-10"
           >
             {NAV.map((item, i) => (
               <motion.a
                 key={item.name}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08 }}
+                transition={{ delay: i * 0.06 }}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
                 className="flex items-center gap-4 text-2xl font-black uppercase tracking-tighter hover:text-primary transition-colors"
@@ -100,14 +101,13 @@ export default function Navbar({ isBannerVisible = false }: { isBannerVisible?: 
               </motion.a>
             ))}
 
-            {/* Mobile contact CTA */}
             <motion.a
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: NAV.length * 0.08 }}
+              transition={{ delay: NAV.length * 0.06 }}
               href="mailto:muhammadwaheedairi@gmail.com"
               onClick={() => setMobileOpen(false)}
-              className="mt-4 px-8 py-4 bg-primary text-bg-dark font-black rounded-xl text-sm"
+              className="mt-2 px-8 py-4 bg-primary text-bg-dark font-black rounded-xl text-sm"
             >
               START A PROJECT →
             </motion.a>
