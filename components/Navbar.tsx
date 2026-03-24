@@ -84,7 +84,7 @@ export default function Navbar({ isBannerVisible = false }: { isBannerVisible?: 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-[55] bg-bg-dark/95 backdrop-blur-3xl md:hidden flex flex-col items-center justify-start gap-6 overflow-y-auto pt-28 pb-10"
+            className="fixed inset-0 z-[55] bg-bg-dark/95 backdrop-blur-3xl md:hidden flex flex-col items-center justify-start gap-6 overflow-y-auto pt-36 pb-10"
           >
             {NAV.map((item, i) => (
               <motion.a
