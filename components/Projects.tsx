@@ -1,156 +1,237 @@
 'use client';
 
-import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
-import { useRouter } from 'next/navigation';
+import { motion } from 'motion/react';
 import { PROJECTS } from '@/lib/constants';
-import { ExternalLink, Github, Terminal, ArrowUpRight } from 'lucide-react';
 
+/* ══════════════════════════════════════════════════
+   ICONS
+══════════════════════════════════════════════════ */
+function GithubIcon() {
+  return (
+    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.23 1.84 1.23 1.07 1.83 2.8 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.82.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z" />
+    </svg>
+  );
+}
+
+function LiveIcon() {
+  return (
+    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" strokeLinecap="round" />
+      <polyline points="15 3 21 3 21 9" strokeLinecap="round" />
+      <line x1="10" y1="14" x2="21" y2="3" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+/* ══════════════════════════════════════════════════
+   FILTERED PROJECTS
+══════════════════════════════════════════════════ */
+const FILTERED = PROJECTS.filter(p => p.slug !== 'personal-ai-employee');
+
+/* ══════════════════════════════════════════════════
+   PROJECT CARD
+══════════════════════════════════════════════════ */
 function ProjectCard({ project, index }: { project: (typeof PROJECTS)[0]; index: number }) {
-  const router = useRouter();
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useTransform(useSpring(y), [-0.5, 0.5], ['10deg', '-10deg']);
-  const rotateY = useTransform(useSpring(x), [-0.5, 0.5], ['-10deg', '10deg']);
-
-  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    x.set((e.clientX - r.left) / r.width - 0.5);
-    y.set((e.clientY - r.top) / r.height - 0.5);
-  };
-
-  const handleCardClick = (e: React.MouseEvent) => {
-    if ((e.target as HTMLElement).closest('a')) return;
-    router.push(`/projects/${project.slug}`);
-  };
+  const num = String(index + 1).padStart(2, '0');
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1, duration: 0.8 }}
+      transition={{ delay: index * 0.07, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
       viewport={{ once: true }}
-      onMouseMove={onMouseMove}
-      onMouseLeave={() => { x.set(0); y.set(0); }}
-      onClick={handleCardClick}
-      style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-      className="relative group perspective-1000 cursor-pointer"
+      className="group relative"
     >
-      <div className="glass p-6 sm:p-8 rounded-[1.5rem] sm:rounded-[2rem] border-white/5 group-hover:border-primary/30 transition-all duration-500 flex flex-col h-full bg-gradient-to-br from-white/5 to-transparent">
+      {/* Top divider — turns green on hover */}
+      <div className="h-px bg-gray-200 group-hover:bg-[#00572B] transition-colors duration-300" />
 
-        {/* Top row */}
-        <div className="flex justify-between items-start mb-6 sm:mb-8" style={{ transform: 'translateZ(50px)' }}>
-          <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 group-hover:bg-primary/10 group-hover:border-primary/20 transition-all">
-            <Terminal className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:text-primary transition-colors" />
-          </div>
-          <div className="flex gap-2 sm:gap-4">
-            {project.github && (
-              <a href={project.github} target="_blank" rel="noopener noreferrer"
-                className="p-2 rounded-lg hover:bg-white/10 transition-colors">
-                <Github className="w-4 h-4 sm:w-5 sm:h-5 text-white/40 hover:text-white" />
-              </a>
-            )}
-            {project.link && (
-              <a href={project.link} target="_blank" rel="noopener noreferrer"
-                className="p-2 rounded-lg hover:bg-white/10 transition-colors">
-                <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 text-white/40 hover:text-white" />
-              </a>
-            )}
-          </div>
-        </div>
+      {/* ── MOBILE layout (< sm): stacked ── */}
+      <div className="block sm:hidden py-6">
 
-        {/* Content */}
-        <div style={{ transform: 'translateZ(30px)' }}>
-          <span className="text-[9px] sm:text-[10px] font-mono text-primary/60 uppercase tracking-widest mb-3 block">
+        {/* Number + type pill row */}
+        <div className="flex items-center justify-between mb-3">
+          <span
+            className="text-4xl font-black leading-none select-none text-gray-100 group-hover:text-[#E0F2EA] transition-colors duration-300"
+            style={{ fontFamily: 'var(--font-jakarta, sans-serif)', letterSpacing: '-0.04em' }}
+          >
+            {num}
+          </span>
+          <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full border border-gray-200 text-gray-400">
             {project.type}
           </span>
-          <h3 className="text-2xl sm:text-3xl font-black mb-3 sm:mb-4 group-hover:text-primary transition-colors tracking-tight">
-            {project.title}
-          </h3>
-          {/* Tagline instead of generic description — client result focused */}
-          <p className="text-white/40 text-xs sm:text-sm leading-relaxed mb-6 sm:mb-8 flex-grow font-light">
-            {project.tagline}
-          </p>
         </div>
 
-        {/* Tech pills */}
-        <div className="flex flex-wrap gap-2 mt-auto" style={{ transform: 'translateZ(20px)' }}>
-          {project.tech.slice(0, 4).map((t) => (
-            <span key={t}
-              className="text-[8px] sm:text-[9px] font-mono px-2 sm:px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/30 group-hover:border-primary/20 transition-colors">
+        {/* Title */}
+        <h3 className="text-xl font-bold text-gray-900 leading-tight mb-2 font-[family-name:var(--font-jakarta)]">
+          {project.title.split(' ').slice(0, -1).join(' ')}{' '}
+          <span className="font-[family-name:var(--font-playfair)] italic font-black text-[#00572B]">
+            {project.title.split(' ').slice(-1)[0]}
+          </span>
+        </h3>
+
+        {/* Tagline */}
+        <p className="text-sm text-gray-500 leading-relaxed mb-4">
+          {project.tagline}
+        </p>
+
+        {/* Tech badges — wrap freely */}
+        <div className="flex flex-wrap gap-1.5 mb-5">
+          {project.tech.map((t) => (
+            <span
+              key={t}
+              className="text-[10px] font-mono font-semibold px-2 py-1 rounded-md bg-[#F0F7F4] border border-[#C8E8D8] text-[#00572B]"
+            >
               {t}
             </span>
           ))}
-          {project.tech.length > 4 && (
-            <span className="text-[8px] sm:text-[9px] font-mono px-2 sm:px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/20">
-              +{project.tech.length - 4} more
-            </span>
-          )}
         </div>
 
-        {/* CTA */}
-        <div className="flex items-center gap-2 mt-6 text-[10px] font-mono text-white/20 group-hover:text-primary transition-colors"
-          style={{ transform: 'translateZ(20px)' }}>
-          <ArrowUpRight className="w-3 h-3" />
-          <span>READ CASE STUDY</span>
+        {/* Links */}
+        <div className="flex items-center gap-2">
+          {project.github && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-full border border-gray-200 text-[11px] font-semibold text-gray-500 active:bg-[#F0F7F4] active:text-[#00572B] transition-all"
+            >
+              <GithubIcon />
+              GitHub
+            </a>
+          )}
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#00572B] text-[11px] font-semibold text-white active:bg-[#004A24] transition-all"
+            >
+              <LiveIcon />
+              Live
+            </a>
+          )}
         </div>
       </div>
-      <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full opacity-0 group-hover:opacity-20 transition-opacity -z-10" />
+
+      {/* ── DESKTOP layout (≥ sm): side-by-side number + content ── */}
+      <div className="hidden sm:grid sm:grid-cols-[96px_1fr] lg:grid-cols-[120px_1fr] gap-0 py-10">
+
+        {/* Giant number */}
+        <div className="flex items-start pt-1">
+          <span
+            className="text-[72px] lg:text-[80px] font-black leading-none select-none transition-colors duration-300 text-gray-100 group-hover:text-[#E0F2EA]"
+            style={{ fontFamily: 'var(--font-jakarta, sans-serif)', letterSpacing: '-0.04em' }}
+          >
+            {num}
+          </span>
+        </div>
+
+        {/* Content */}
+        <div className="pl-6 lg:pl-8">
+
+          {/* Type pill + links row */}
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full border border-gray-200 text-gray-400">
+              {project.type}
+            </span>
+            <div className="flex items-center gap-2">
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-200 text-[11px] font-semibold text-gray-500 hover:border-[#99D9B8] hover:text-[#00572B] hover:bg-[#F0F7F4] transition-all"
+                >
+                  <GithubIcon />
+                  GitHub
+                </a>
+              )}
+              {project.link && (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#00572B] text-[11px] font-semibold text-white hover:bg-[#004A24] transition-all"
+                >
+                  <LiveIcon />
+                  Live
+                </a>
+              )}
+            </div>
+          </div>
+
+          {/* Title */}
+          <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 leading-tight mb-3 font-[family-name:var(--font-jakarta)]">
+            {project.title.split(' ').slice(0, -1).join(' ')}{' '}
+            <span className="font-[family-name:var(--font-playfair)] italic font-black text-[#00572B]">
+              {project.title.split(' ').slice(-1)[0]}
+            </span>
+          </h3>
+
+          {/* Tagline */}
+          <p className="text-sm text-gray-500 leading-relaxed mb-6 max-w-xl">
+            {project.tagline}
+          </p>
+
+          {/* Tech badges */}
+          <div className="flex flex-wrap gap-2">
+            {project.tech.map((t) => (
+              <span
+                key={t}
+                className="text-[10px] font-mono font-semibold px-2.5 py-1 rounded-md bg-[#F0F7F4] border border-[#C8E8D8] text-[#00572B]"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
     </motion.div>
   );
 }
 
+/* ══════════════════════════════════════════════════
+   SECTION
+══════════════════════════════════════════════════ */
 export default function Projects() {
   return (
-    <section className="py-32 px-6 md:px-12 lg:px-24 bg-bg-dark/80 relative" id="projects">
-      <div className="max-w-7xl mx-auto">
+    <section className="bg-white py-16 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-24" id="projects">
+      <div className="max-w-5xl mx-auto">
 
         {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 sm:mb-24 gap-8">
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="h-[1px] w-12 bg-primary" />
-              <span className="text-xs font-mono text-primary uppercase tracking-[0.3em]">// PROOF_OF_WORK</span>
-            </div>
-            <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-6 leading-none">
-              REAL <span className="text-gradient">PROBLEMS.</span>
-              <br />REAL RESULTS.
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-4 sm:mb-6"
+        >
+          <p className="text-xs font-bold uppercase tracking-widest text-[#00572B] mb-3">
+            Proof of Work
+          </p>
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 sm:gap-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-[1.12] font-[family-name:var(--font-jakarta)]">
+              Projects that{' '}
+              <span className="font-[family-name:var(--font-playfair)] italic font-black text-[#00572B]">
+                shipped.
+              </span>
             </h2>
-            <p className="text-white/40 text-base sm:text-lg font-light leading-relaxed">
-              Not prototypes. Not demos. Working software that solved
-              actual business problems — each one with a case study
-              showing exactly what was built and why.
+            <p className="text-sm text-gray-400 max-w-xs leading-relaxed sm:text-right">
+              Not demos. Working software that solved real problems.
             </p>
           </div>
+        </motion.div>
 
-          {/* Active projects badge */}
-          <div className="hidden lg:block">
-            <div className="glass px-6 py-4 rounded-2xl border-white/5 flex items-center gap-4">
-              <div className="text-right">
-                <div className="text-xl font-black text-white">06</div>
-                <div className="text-[10px] font-mono text-white/30 uppercase tracking-widest">Projects</div>
-              </div>
-              <div className="w-[1px] h-8 bg-white/10" />
-              <div className="text-primary animate-pulse">●</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Project grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {PROJECTS.map((project, index) => (
-            <ProjectCard key={project.title} project={project} index={index} />
+        {/* Project list */}
+        <div>
+          {FILTERED.map((project, index) => (
+            <ProjectCard key={project.slug} project={project} index={index} />
           ))}
         </div>
 
-        {/* Bottom note */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center text-white/20 text-xs font-mono mt-16"
-        >
-          Click any project to read the full case study →
-        </motion.p>
+        {/* Bottom border */}
+        <div className="h-px bg-gray-200 mt-0" />
 
       </div>
     </section>

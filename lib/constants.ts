@@ -11,15 +11,6 @@ export interface ProjectCard {
 
 export const PROJECTS: ProjectCard[] = [
   {
-    title: 'Personal-AI-Employee',
-    slug: 'personal-ai-employee',
-    description: 'A local-first autonomous AI Employee that monitors emails, finances, and tasks via MCP agents.',
-    tagline: '15–20 hours recovered every week. Emails answered, invoices sent, clients followed up — without you touching any of it.',
-    tech: ['Python', 'MCP', 'Agent skills', 'CLAUDE AI', 'GitHub Actions', 'Obsidian Sync', 'odoo'],
-    type: 'AI',
-    github: 'https://github.com/muhammadwaheedairi/Personal-AI-Employee',
-  },
-  {
     title: 'The Evolution of Todo',
     slug: 'evolution-of-todo',
     description: 'A todo app evolving from console script to AI-powered Kubernetes system via spec-driven development.',

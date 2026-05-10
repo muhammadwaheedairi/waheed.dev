@@ -1,179 +1,363 @@
 'use client';
 
-import { motion } from 'motion/react';
-import { Bot, Layers, Paintbrush, ArrowRight, Clock, CheckCircle2 } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { ArrowRight } from 'lucide-react';
 
-const SERVICES = [
+/* ══════════════════════════════════════════════════
+   TYPES
+══════════════════════════════════════════════════ */
+interface Service {
+  number: string;
+  title: string;
+  titleAccent: string;
+  painLine: string;
+  headline: string;
+  description: string;
+  deliverables: string[];
+  stack: string[];
+  price: string;
+  dark: boolean;
+}
+
+/* ══════════════════════════════════════════════════
+   SERVICES DATA
+══════════════════════════════════════════════════ */
+const SERVICES: Service[] = [
   {
-    icon: Bot,
-    tag: '01',
-    title: 'AI Automation',
-    headline: 'Your business, running while you sleep.',
+    number: '01',
+    title: 'Landing',
+    titleAccent: 'Page',
+    painLine: 'Got a product but no page that sells it?',
+    headline: 'First impressions close deals.',
     description:
-      'You are doing work a machine should handle. Inbox triage, follow-up emails, invoice generation, daily reports — your team is burning hours on tasks that should never touch a human. I build AI systems that take over that work completely. The result: time back, costs down, nothing falling through the cracks.',
+      "You have something worth selling. But if your landing page looks rushed, clients won't trust you enough to buy. I build high-converting landing pages that load fast, look sharp, and turn visitors into leads.",
     deliverables: [
-      'Custom AI agent built around your exact workflows',
-      'Email, WhatsApp, or Slack integration',
-      'Accounting & CRM system connection',
-      'Human approval layer for sensitive actions',
-      'Daily automated reporting & briefings',
+      'Pixel-perfect responsive design',
+      'Smooth animations & scroll effects',
+      'Contact form / waitlist integration',
+      'SEO-ready structure',
+      'Deployed & live on Vercel',
     ],
-    timeline: '2 – 4 weeks',
-    ideal: 'Consultants, agencies, solo operators',
-    painLine: 'Still doing manually what a system should handle?',
+    stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vercel'],
+    price: 'From $600',
+    dark: false,
   },
   {
-    icon: Layers,
-    tag: '02',
-    title: 'Full-Stack Product Build',
-    headline: 'From idea to live product — fast.',
+    number: '02',
+    title: 'Full',
+    titleAccent: 'Website',
+    painLine: "Need more than one page but don't know where to start?",
+    headline: 'A website that works as hard as you do.',
     description:
-      'You have the idea. You just need someone who can actually build it — frontend, backend, database, deployment — without disappearing for 3 months and delivering something broken. I spec everything upfront, build clean, and ship a real product your users can use from day one.',
+      "A landing page isn't always enough. I build complete multi-page websites — about, services, blog, contact — structured for growth and managed through a CMS so you can update content yourself without touching code.",
     deliverables: [
-      'Complete web application (frontend + backend)',
+      'Multi-page website (4–6 pages)',
+      'CMS integration — edit content yourself',
+      'Blog & dynamic pages',
+      'Fully responsive & SEO optimized',
+      'Deployed to production, handoff-ready',
+    ],
+    stack: ['Next.js', 'TypeScript', 'Sanity CMS', 'Tailwind CSS', 'Vercel'],
+    price: 'From $1,500',
+    dark: false,
+  },
+  {
+    number: '03',
+    title: 'SaaS',
+    titleAccent: 'Dashboard',
+    painLine: 'Building a product but stuck on the frontend?',
+    headline: 'Complex apps, made simple to use.',
+    description:
+      "Your backend works. Your idea is solid. But without a clean, fast dashboard, users won't stick around. I build SaaS frontends and full-stack web apps — auth, data tables, charts, API integration — production-ready and built to scale.",
+    deliverables: [
+      'Full-stack web application',
       'User authentication & role management',
-      'Database design & API development',
-      'Third-party integrations (payments, CMS, APIs)',
-      'Deployed to production, documented, handoff-ready',
+      'Data tables, charts & analytics views',
+      'REST API integration with your backend',
+      'Dockerized & deployment-ready',
     ],
-    timeline: '3 – 6 weeks',
-    ideal: 'Startups, founders, product teams',
-    painLine: 'Idea sitting in your head for months with no one to build it?',
+    stack: ['Next.js', 'FastAPI', 'PostgreSQL', 'Custom JWT', 'Docker'],
+    price: 'From $2,500',
+    dark: true,
   },
   {
-    icon: Paintbrush,
-    tag: '03',
-    title: 'Frontend & UI Engineering',
-    headline: 'Interfaces that make people trust you before they read a word.',
+    number: '04',
+    title: 'E-Commerce',
+    titleAccent: 'Store',
+    painLine: 'Selling manually when you should have a store?',
+    headline: 'A store that sells while you sleep.',
     description:
-      'Your product might be great — but if it looks unfinished, clients leave. I build pixel-perfect interfaces from Figma files, reference sites, or just a direction. Landing pages, SaaS dashboards, marketing sites — built with the kind of animation quality and precision that makes a product feel premium the second someone lands on it.',
+      'Stop taking orders over WhatsApp. I build complete e-commerce stores with product management, cart, checkout, Stripe payments, and order tracking — everything a real online store needs, without the bloat.',
     deliverables: [
-      'Pixel-perfect implementation from any design',
-      'Smooth animations & micro-interactions',
-      'Fully responsive across all screen sizes',
-      'Performance optimised (fast load, clean code)',
-      'Ready to connect to any backend or CMS',
+      'Full storefront with product pages & filters',
+      'Cart, checkout & Stripe payments',
+      'Order management & email confirmations',
+      'CMS-powered product management',
+      'Admin dashboard included',
     ],
-    timeline: '1 – 3 weeks',
-    ideal: 'SaaS companies, product launches, brands',
-    painLine: 'Great product, but the UI is killing your conversions?',
+    stack: ['Next.js', 'Clerk', 'Stripe', 'Neon Postgres', 'Drizzle ORM', 'Sanity CMS'],
+    price: 'From $2,000',
+    dark: false,
+  },
+  {
+    number: '05',
+    title: 'RAG /',
+    titleAccent: 'AI Agent',
+    painLine: 'Sitting on data that no one can easily search or use?',
+    headline: 'Your knowledge base, finally answerable.',
+    description:
+      'Documents, PDFs, internal wikis, product data — all locked away and impossible to search. I build RAG pipelines and AI agents that let your users ask questions in plain English and get accurate, sourced answers instantly.',
+    deliverables: [
+      'Custom RAG pipeline on your data',
+      'AI chatbot embedded in your product',
+      'Vector search with semantic retrieval',
+      'REST API ready to plug into any frontend',
+      'Supports PDFs, docs, websites & databases',
+    ],
+    stack: ['FastAPI', 'OpenAI Agents SDK', 'Qdrant', 'Cohere', 'Python'],
+    price: 'From $1,500',
+    dark: true,
   },
 ];
 
+/* ══════════════════════════════════════════════════
+   NAV LABELS (short for tabs)
+══════════════════════════════════════════════════ */
+const NAV_LABELS = [
+  'Landing Page',
+  'Full Website',
+  'SaaS Dashboard',
+  'E-Commerce',
+  'RAG / AI Agent',
+];
+
+/* ══════════════════════════════════════════════════
+   CHECK ICON
+══════════════════════════════════════════════════ */
+function CheckIcon({ dark }: { dark: boolean }) {
+  return (
+    <svg viewBox="0 0 16 16" fill="none"
+      className={`w-4 h-4 flex-shrink-0 mt-0.5 ${dark ? 'text-[#66C99A]' : 'text-[#00572B]'}`}>
+      <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M5.5 8l2 2 3-3" stroke="currentColor" strokeWidth="1.3"
+        strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/* ══════════════════════════════════════════════════
+   ACTIVE SERVICE CARD
+══════════════════════════════════════════════════ */
+function ServicePanel({ s }: { s: Service }) {
+  return (
+    <div className={`rounded-2xl border overflow-hidden ${
+      s.dark
+        ? 'bg-[#00572B] border-[#006B35]'
+        : 'bg-white border-gray-100'
+    }`}>
+      <div className="p-6 sm:p-8 lg:p-10">
+
+        {/* Top row — pain line + price */}
+        <div className="flex flex-wrap items-start justify-between gap-3 mb-6">
+          <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border ${
+            s.dark ? 'bg-[#004A24] border-[#006B35]' : 'bg-gray-50 border-gray-200'
+          }`}>
+            <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
+              s.dark ? 'bg-[#66C99A]' : 'bg-[#006B35]'
+            }`} />
+            <span className={`text-[11px] font-medium ${
+              s.dark ? 'text-[#D0EFE3]' : 'text-gray-500'
+            }`}>{s.painLine}</span>
+          </div>
+
+          <div className={`flex-shrink-0 px-4 py-2 rounded-xl border font-bold text-sm ${
+            s.dark
+              ? 'bg-[#003D1E] border-[#006B35] text-[#99D9B8]'
+              : 'bg-[#00572B] border-[#004A24] text-white'
+          }`}>
+            {s.price}
+          </div>
+        </div>
+
+        {/* Service number */}
+        <span className={`text-[10px] font-bold uppercase tracking-widest ${
+          s.dark ? 'text-[#66C99A]' : 'text-gray-400'
+        }`}>
+          Service {s.number}
+        </span>
+
+        {/* Title */}
+        <h3 className="text-2xl sm:text-3xl leading-tight mt-1 mb-1 font-[family-name:var(--font-jakarta)]">
+          <span className={`font-bold ${s.dark ? 'text-white' : 'text-gray-900'}`}>
+            {s.title}{' '}
+          </span>
+          <span className={`font-[family-name:var(--font-playfair)] italic font-black ${
+            s.dark ? 'text-[#99D9B8]' : 'text-[#00572B]'
+          }`}>
+            {s.titleAccent}
+          </span>
+        </h3>
+
+        {/* Headline */}
+        <p className={`text-sm font-medium italic mb-4 ${
+          s.dark ? 'text-[#66C99A]' : 'text-[#00572B]'
+        }`}>
+          "{s.headline}"
+        </p>
+
+        {/* Description */}
+        <p className={`text-sm leading-relaxed mb-8 max-w-2xl ${
+          s.dark ? 'text-[#D0EFE3]' : 'text-gray-500'
+        }`}>
+          {s.description}
+        </p>
+
+        {/* 2-col grid on desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+
+          {/* Deliverables */}
+          <div>
+            <p className={`text-[10px] font-bold uppercase tracking-widest mb-4 ${
+              s.dark ? 'text-[#66C99A]' : 'text-gray-400'
+            }`}>
+              What You Get
+            </p>
+            <ul className="space-y-2.5">
+              {s.deliverables.map((d, j) => (
+                <li key={j} className="flex items-start gap-2.5">
+                  <CheckIcon dark={s.dark} />
+                  <span className={`text-sm leading-snug ${
+                    s.dark ? 'text-[#D0EFE3]' : 'text-gray-600'
+                  }`}>{d}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Stack + CTA */}
+          <div className="flex flex-col gap-6">
+            <div>
+              <p className={`text-[10px] font-bold uppercase tracking-widest mb-3 ${
+                s.dark ? 'text-[#66C99A]' : 'text-gray-400'
+              }`}>
+                Tech Stack
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {s.stack.map((tech, k) => (
+                  <span key={k} className={`inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-mono font-semibold border ${
+                    s.dark
+                      ? 'bg-[#003D1E] border-[#006B35] text-[#99D9B8]'
+                      : 'bg-[#F0F7F4] border-[#C8E8D8] text-[#00572B]'
+                  }`}>
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <a
+              href="mailto:muhammadwaheedairi@gmail.com"
+              className={`inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-200 w-fit ${
+                s.dark
+                  ? 'bg-white text-[#004A24] hover:bg-[#F0F7F4]'
+                  : 'bg-[#00572B] text-white hover:bg-[#004A24] hover:shadow-lg hover:shadow-[#00572B]/30'
+              }`}
+            >
+              Start a Project
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════
+   SECTION
+══════════════════════════════════════════════════ */
 export default function Services() {
-  const scrollToContact = () => {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const [active, setActive] = useState(0);
 
   return (
-    <section className="py-32 px-6 md:px-12 lg:px-24 relative overflow-hidden" id="services">
-      <div className="max-w-7xl mx-auto">
+    <section className="bg-gray-50 py-16 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-24" id="services">
+      <div className="max-w-5xl mx-auto">
 
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-col items-center text-center mb-20 sm:mb-24"
+          transition={{ duration: 0.5 }}
+          className="text-center mb-10 sm:mb-12"
         >
-          <div className="flex items-center gap-4 mb-6">
-            <div className="h-[1px] w-12 bg-primary" />
-            <span className="text-xs font-mono text-primary uppercase tracking-[0.3em]">// SERVICES</span>
-            <div className="h-[1px] w-12 bg-primary" />
-          </div>
-          <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-6 leading-none uppercase">
-            WHAT I <span className="text-gradient">BUILD.</span>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#00572B] mb-3">
+            What I Offer
+          </p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-[1.12] font-[family-name:var(--font-jakarta)]">
+            Five services.{' '}
+            <span className="font-[family-name:var(--font-playfair)] italic font-black text-[#00572B]">
+              Real results.
+            </span>
           </h2>
-          <p className="text-white/40 text-base sm:text-lg font-light max-w-xl leading-relaxed">
-            Three focused services. Each one solves a real problem —
-            not a prototype, not a proof of concept. Working software.
+          <p className="text-gray-500 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+            Not a prototype. Not a proof of concept.
+            Working software — shipped in weeks, not months.
           </p>
         </motion.div>
 
-        {/* Service cards */}
-        <div className="space-y-6">
-          {SERVICES.map((s, i) => (
-            <motion.div
+        {/* ── NAV TABS ── */}
+        {/* Mobile: horizontal scroll */}
+        {/* Desktop: centered pill row */}
+        <div className="mb-6 sm:mb-8">
+          <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0 sm:flex-wrap sm:justify-center scrollbar-hide">
+            {NAV_LABELS.map((label, i) => (
+              <button
+                key={i}
+                onClick={() => setActive(i)}
+                className={`flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-[13px] font-semibold border transition-all duration-200 ${
+                  active === i
+                    ? 'bg-[#00572B] border-[#004A24] text-white shadow-md shadow-[#00572B]/20'
+                    : 'bg-white border-gray-200 text-gray-500 hover:border-[#99D9B8] hover:text-[#00572B]'
+                }`}
+              >
+                {/* Active dot */}
+                {active === i && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-white/70 flex-shrink-0" />
+                )}
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* ── ANIMATED SERVICE PANEL ── */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <ServicePanel s={SERVICES[active]} />
+          </motion.div>
+        </AnimatePresence>
+
+        {/* ── PAGINATION DOTS (mobile only) ── */}
+        <div className="flex items-center justify-center gap-2 mt-6 sm:hidden">
+          {SERVICES.map((_, i) => (
+            <button
               key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
-              viewport={{ once: true }}
-              className="glass rounded-[2rem] border-white/5 hover:border-primary/20 transition-all duration-500 overflow-hidden group"
-            >
-              <div className="p-8 sm:p-10 lg:p-12">
-
-                {/* Pain line — wzwebs style hook */}
-                <div className="mb-8 px-4 py-3 rounded-xl bg-white/[0.03] border border-white/5 inline-block">
-                  <p className="text-[11px] font-mono text-white/30 uppercase tracking-widest">
-                    💬 {s.painLine}
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
-
-                  {/* Left — main info */}
-                  <div>
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
-                        <s.icon className="w-5 h-5" />
-                      </div>
-                      <span className="text-[10px] font-mono text-white/20 uppercase tracking-[0.3em]">{s.tag}</span>
-                    </div>
-
-                    <h3 className="text-3xl sm:text-4xl font-black tracking-tighter uppercase mb-2 group-hover:text-primary transition-colors duration-300">
-                      {s.title}
-                    </h3>
-                    <p className="text-primary/70 font-light text-sm sm:text-base mb-5 italic">
-                      {s.headline}
-                    </p>
-                    <p className="text-white/50 font-light leading-relaxed text-sm sm:text-base">
-                      {s.description}
-                    </p>
-
-                    {/* Timeline + ideal */}
-                    <div className="flex flex-wrap gap-4 mt-7">
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-3.5 h-3.5 text-primary/50" />
-                        <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">
-                          {s.timeline}
-                        </span>
-                      </div>
-                      <div className="h-3 w-[1px] bg-white/10 self-center hidden sm:block" />
-                      <span className="text-[10px] font-mono text-white/20 uppercase tracking-widest">
-                        {s.ideal}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Right — deliverables + CTA */}
-                  <div className="flex flex-col justify-between gap-8">
-                    <div>
-                      <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.25em] mb-4">
-                        WHAT YOU GET
-                      </p>
-                      <ul className="space-y-3">
-                        {s.deliverables.map((d, j) => (
-                          <li key={j} className="flex items-start gap-3">
-                            <CheckCircle2 className="w-4 h-4 text-primary/50 flex-shrink-0 mt-0.5" />
-                            <span className="text-sm text-white/60 font-light leading-snug">{d}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <button
-                      onClick={scrollToContact}
-                      className="flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 rounded-2xl bg-primary/10 border border-primary/20 hover:bg-primary hover:text-bg-dark text-primary font-bold text-sm transition-all duration-300 group/btn"
-                    >
-                      START A PROJECT
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
-                  </div>
-
-                </div>
-              </div>
-            </motion.div>
+              onClick={() => setActive(i)}
+              className={`transition-all duration-200 rounded-full ${
+                active === i
+                  ? 'w-5 h-2 bg-[#00572B]'
+                  : 'w-2 h-2 bg-gray-300'
+              }`}
+              aria-label={`Service ${i + 1}`}
+            />
           ))}
         </div>
 

@@ -1,166 +1,232 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Github, Linkedin, ArrowRight } from 'lucide-react';
+import { ArrowRight, Clock, Star, Zap } from 'lucide-react';
+import { Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google';
 
-// Threads icon (Meta) — not in lucide-react
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['700', '900'],
+  style: ['normal', 'italic'],
+  variable: '--font-playfair',
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-jakarta',
+});
+
+/* ── SVG Icons ───────────────────────────────────── */
 function ThreadsIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} xmlns="http://www.w3.org/2000/svg" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeSpeed" viewBox="0 0 512 512">
-      <path d="M105 0h302c57.75 0 105 47.25 105 105v302c0 57.75-47.25 105-105 105H105C47.25 512 0 464.75 0 407V105C0 47.25 47.25 0 105 0z" />
-      <path fill="currentColor" fillRule="nonzero" d="M337.36 243.58c-1.46-.7-2.95-1.38-4.46-2.02-2.62-48.36-29.04-76.05-73.41-76.33-25.6-.17-48.52 10.27-62.8 31.94l24.4 16.74c10.15-15.4 26.08-18.68 37.81-18.68h.4c14.61.09 25.64 4.34 32.77 12.62 5.19 6.04 8.67 14.37 10.39 24.89-12.96-2.2-26.96-2.88-41.94-2.02-42.18 2.43-69.3 27.03-67.48 61.21.92 17.35 9.56 32.26 24.32 42.01 12.48 8.24 28.56 12.27 45.26 11.35 22.07-1.2 39.37-9.62 51.45-25.01 9.17-11.69 14.97-26.84 17.53-45.92 10.51 6.34 18.3 14.69 22.61 24.73 7.31 17.06 7.74 45.1-15.14 67.96-20.04 20.03-44.14 28.69-80.55 28.96-40.4-.3-70.95-13.26-90.81-38.51-18.6-23.64-28.21-57.79-28.57-101.5.36-43.71 9.97-77.86 28.57-101.5 19.86-25.25 50.41-38.21 90.81-38.51 40.68.3 71.76 13.32 92.39 38.69 10.11 12.44 17.73 28.09 22.76 46.33l28.59-7.63c-6.09-22.45-15.67-41.8-28.72-57.85-26.44-32.53-65.1-49.19-114.92-49.54h-.2c-49.72.35-87.96 17.08-113.64 49.73-22.86 29.05-34.65 69.48-35.04 120.16v.24c.39 50.68 12.18 91.11 35.04 120.16 25.68 32.65 63.92 49.39 113.64 49.73h.2c44.2-.31 75.36-11.88 101.03-37.53 33.58-33.55 32.57-75.6 21.5-101.42-7.94-18.51-23.08-33.55-43.79-43.48zm-76.32 71.76c-18.48 1.04-37.69-7.26-38.64-25.03-.7-13.18 9.38-27.89 39.78-29.64 3.48-.2 6.9-.3 10.25-.3 11.04 0 21.37 1.07 30.76 3.13-3.5 43.74-24.04 50.84-42.15 51.84z" />
+    <svg className={className} viewBox="0 0 512 512" fill="currentColor">
+      <path d="M337.36 243.58c-1.46-.7-2.95-1.38-4.46-2.02-2.62-48.36-29.04-76.05-73.41-76.33-25.6-.17-48.52 10.27-62.8 31.94l24.4 16.74c10.15-15.4 26.08-18.68 37.81-18.68h.4c14.61.09 25.64 4.34 32.77 12.62 5.19 6.04 8.67 14.37 10.39 24.89-12.96-2.2-26.96-2.88-41.94-2.02-42.18 2.43-69.3 27.03-67.48 61.21.92 17.35 9.56 32.26 24.32 42.01 12.48 8.24 28.56 12.27 45.26 11.35 22.07-1.2 39.37-9.62 51.45-25.01 9.17-11.69 14.97-26.84 17.53-45.92 10.51 6.34 18.3 14.69 22.61 24.73 7.31 17.06 7.74 45.1-15.14 67.96-20.04 20.03-44.14 28.69-80.55 28.96-40.4-.3-70.95-13.26-90.81-38.51-18.6-23.64-28.21-57.79-28.57-101.5.36-43.71 9.97-77.86 28.57-101.5 19.86-25.25 50.41-38.21 90.81-38.51 40.68.3 71.76 13.32 92.39 38.69 10.11 12.44 17.73 28.09 22.76 46.33l28.59-7.63c-6.09-22.45-15.67-41.8-28.72-57.85-26.44-32.53-65.1-49.19-114.92-49.54h-.2c-49.72.35-87.96 17.08-113.64 49.73-22.86 29.05-34.65 69.48-35.04 120.16v.24c.39 50.68 12.18 91.11 35.04 120.16 25.68 32.65 63.92 49.39 113.64 49.73h.2c44.2-.31 75.36-11.88 101.03-37.53 33.58-33.55 32.57-75.6 21.5-101.42-7.94-18.51-23.08-33.55-43.79-43.48zm-76.32 71.76c-18.48 1.04-37.69-7.26-38.64-25.03-.7-13.18 9.38-27.89 39.78-29.64 3.48-.2 6.9-.3 10.25-.3 11.04 0 21.37 1.07 30.76 3.13-3.5 43.74-24.04 50.84-42.15 51.84z" />
     </svg>
   );
 }
 
-// Medium icon — not in lucide-react
+function GithubIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.23 1.84 1.23 1.07 1.83 2.8 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.82.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z" />
+    </svg>
+  );
+}
+
+function LinkedinIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 .77 1.72v20.56C0 23.23.79 24 1.77 24h20.45C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.22 0z" />
+    </svg>
+  );
+}
+
 function MediumIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
       <path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
     </svg>
   );
 }
 
+/* ── Data ────────────────────────────────────────── */
+const socials = [
+  { Icon: GithubIcon,   href: 'https://github.com/muhammadwaheedairi',       label: 'GitHub'   },
+  { Icon: LinkedinIcon, href: 'https://linkedin.com/in/muhammadwaheedairi',  label: 'LinkedIn' },
+  { Icon: ThreadsIcon,  href: 'https://www.threads.net/@muhammadwaheedairi', label: 'Threads'  },
+  { Icon: MediumIcon,   href: 'https://medium.com/@muhammadwaheedairi',      label: 'Medium'   },
+];
+
+// StoryBrand: Guide shows competence — these are OUTCOMES, not features
+const trust = [
+  { icon: Zap,   label: 'Live in 2–6 Weeks'   },
+  { icon: Clock, label: 'Reply Within 24hrs'   },
+  { icon: Star,  label: 'Zero Scope Surprises' },
+];
+
+/* ── Component ───────────────────────────────────── */
 export default function Hero() {
   return (
-    <section className="min-h-[100dvh] flex flex-col pt-36 pb-20 md:pt-24 md:justify-center px-6 md:px-12 lg:px-24 relative overflow-hidden">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className="max-w-5xl z-10 w-full"
-      >
-
-        {/* Badge */}
+    <section
+      className={`
+        ${playfair.variable} ${jakarta.variable}
+        relative min-h-screen flex flex-col items-center justify-center
+        px-6 md:px-12 lg:px-24 py-20 md:py-32
+        overflow-hidden bg-white
+        font-[family-name:var(--font-jakarta)]
+      `}
+    >
+      {/* Background orbs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.5 }}
-          className="flex items-center gap-3 mb-6 sm:mb-8"
+          animate={{ x: [0, 40, -20, 0], y: [0, -30, 20, 0] }}
+          transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute -top-48 -right-48 w-[500px] h-[500px] rounded-full bg-[#CCE5DA] mix-blend-multiply blur-3xl opacity-40"
+        />
+        <motion.div
+          animate={{ x: [0, -40, 30, 0], y: [0, 40, -20, 0] }}
+          transition={{ duration: 28, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+          className="absolute -bottom-48 -left-48 w-96 h-96 rounded-full bg-[#99C4B0] mix-blend-multiply blur-3xl opacity-25"
+        />
+      </div>
+
+      <div className="relative z-10 max-w-3xl mx-auto text-center">
+
+        {/* StoryBrand: Guide is available — builds immediate trust */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.06 }}
+          className="inline-flex items-center gap-2 px-4 py-1.5 mb-7 bg-[#F0F7F4] border border-[#99C4B0] rounded-full"
         >
-          <span className="px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.3em] glow-text-primary">
-            Problem → Software
-          </span>
-          <div className="h-[1px] w-8 sm:w-12 bg-primary/30" />
-          <span className="text-[9px] sm:text-[10px] font-mono text-white/30 uppercase tracking-widest">
-            Available Now
+          <span className="w-2 h-2 rounded-full bg-[#00572B] animate-pulse" />
+          <span className="text-xs font-semibold text-[#00572B] tracking-widest uppercase">
+            Taking on new projects
           </span>
         </motion.div>
 
-        {/* Headline — wzwebs style: bold claim, not a job title */}
-        <h1 className="text-[2.8rem] sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-6 sm:mb-8 leading-[1.05] sm:leading-[1] break-words">
-          <span className="block">YOUR PROBLEM.</span>
-          <span className="text-gradient block">MY CODE.</span>
-          <span className="block">SHIPPED.</span>
-        </h1>
+        {/*
+          StoryBrand Headline Rules:
+          1. Client is the HERO — "your website" not "I build"
+          2. Name the EXTERNAL problem clearly
+          3. Make them feel SEEN in one line
+        */}
+        <motion.h1
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, delay: 0.12 }}
+          className="mb-5 leading-[1.08]"
+        >
+          {/* Line 1 */}
+          <span className="block text-5xl sm:text-6xl lg:text-7xl">
+            <span className="font-bold text-black">Websites That Make </span>
+          </span>
+          {/* Line 2 */}
+          <span className="block text-5xl sm:text-6xl lg:text-7xl">
+            <span className="font-[family-name:var(--font-playfair)] italic font-black text-[#00572B]">
+              Clients Choose You First.
+            </span>
+          </span>
+        </motion.h1>
 
-        {/* Subtext — result focused, not feature focused */}
-        <p className="text-sm sm:text-xl md:text-2xl text-white/50 mb-10 sm:mb-12 max-w-2xl leading-relaxed font-light">
-          I turn your <span className="text-white font-normal">business problems</span> into working software —
-          AI-powered apps, automation tools, and full-stack products that{' '}
-          <span className="text-white font-normal">actually ship.</span>
-        </p>
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.22 }}
+          className="text-base md:text-lg text-gray-500 leading-relaxed max-w-xl mx-auto mb-8"
+        >
+          I build websites that make the right clients say{' '}
+          <span className="text-black font-semibold">
+            &ldquo;this is exactly who I need.&rdquo;
+          </span>
+        </motion.p>
 
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 mb-12 sm:mb-16">
-          <motion.button
-            whileHover={{ scale: 1.02, boxShadow: '0 0 40px rgba(0,255,136,0.2)' }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-8 sm:px-10 py-4 sm:py-5 bg-primary text-bg-dark font-black rounded-xl sm:rounded-2xl flex items-center justify-center gap-3 group transition-all text-xs sm:text-base"
+        {/*
+          StoryBrand CTA:
+          - Primary CTA = direct, specific action ("Tell Me About Your Project")
+          - Secondary CTA = transitional ("See What I've Built")
+          - Both should feel low-risk
+        */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-9"
+        >
+          <motion.a
+            href="mailto:muhammadwaheedairi@gmail.com"
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.96 }}
+            className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#00572B] text-white font-semibold text-sm rounded-full hover:bg-[#004A24] hover:shadow-xl hover:shadow-[#00572B]/25 transition-all"
           >
-            START A PROJECT
-            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
-          </motion.button>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#66C99A] animate-pulse" />
+            Fix My Website
+            <ArrowRight className="w-4 h-4" />
+          </motion.a>
 
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-8 sm:px-10 py-4 sm:py-5 border border-white/10 text-white/60 hover:text-white hover:border-white/30 font-bold rounded-xl sm:rounded-2xl flex items-center justify-center gap-3 transition-all text-xs sm:text-base"
+          <motion.a
+            href="#projects"
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.96 }}
+            className="inline-flex items-center gap-2 px-7 py-3.5 border border-gray-200 text-gray-700 font-semibold text-sm rounded-full hover:border-[#33B97C] hover:text-[#00572B] hover:bg-[#F0F7F4] transition-all"
           >
-            SEE MY WORK ↓
-          </motion.button>
+            See Proof It Works
+          </motion.a>
+        </motion.div>
 
-          {/* Social links */}
-          <div className="flex items-center justify-center sm:justify-start gap-6 sm:gap-8 px-4 py-2">
-            {[
-              { icon: Github, href: 'https://github.com/muhammadwaheedairi' },
-              { icon: Linkedin, href: 'https://linkedin.com/in/muhammadwaheedairi' },
-              { icon: ThreadsIcon, href: 'https://www.threads.net/@muhammadwaheedairi' },
-              { icon: MediumIcon, href: 'https://medium.com/@muhammadwaheedairi' },
-            ].map((s, i) => (
-              <motion.a
-                key={i}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ y: -3, color: '#00ff88' }}
-                className="text-white/30 transition-colors"
-              >
-                <s.icon className="w-5 h-5 sm:w-6 sm:h-6" />
-              </motion.a>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom 3 — client outcomes, not tech features */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 border-t border-white/10 pt-8 sm:pt-12">
-          {[
-            {
-              emoji: '⚡',
-              title: 'Fast Delivery',
-              desc: 'Working product in 2–6 weeks',
-              color: 'text-primary',
-            },
-            {
-              emoji: '🎯',
-              title: 'Spec-First',
-              desc: 'No surprises. No scope creep.',
-              color: 'text-secondary',
-            },
-            {
-              emoji: '🔒',
-              title: 'NDA Ready',
-              desc: 'Your idea stays private.',
-              color: 'text-white',
-            },
-          ].map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 + i * 0.1 }}
-              className="flex items-center sm:items-start gap-4 group"
-            >
-              <span className="text-xl sm:text-2xl shrink-0">{item.emoji}</span>
-              <div>
-                <h3 className="font-bold text-[10px] sm:text-sm mb-0.5 sm:mb-1 uppercase tracking-wider">
-                  {item.title}
-                </h3>
-                <p className="text-[9px] sm:text-xs text-white/30 font-mono">{item.desc}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* GitHub Badges */}
-        <div className="mt-10 sm:mt-16 flex flex-wrap gap-2 sm:gap-3 opacity-40 hover:opacity-100 transition-opacity duration-700">
-          {['Pair Extraordinaire', 'Pull Shark', 'YOLO'].map((badge) => (
-            <div
-              key={badge}
-              className="flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl border border-white/10 bg-white/5 text-[7px] sm:text-[9px] font-mono uppercase tracking-[0.2em]"
-            >
-              <span className="text-primary">★</span> {badge}
+        {/* StoryBrand: Guide shows authority — outcomes not features */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.38 }}
+          className="flex flex-wrap items-center justify-center gap-7 mb-10 text-sm text-gray-500"
+        >
+          {trust.map(({ icon: Icon, label }) => (
+            <div key={label} className="flex items-center gap-1.5">
+              <Icon className="w-4 h-4 text-[#00572B]" strokeWidth={2} />
+              <span>{label}</span>
             </div>
           ))}
-        </div>
-      </motion.div>
+        </motion.div>
 
-      {/* Background decorative text */}
-      <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/4 text-[20vw] font-black text-white/[0.02] select-none pointer-events-none whitespace-nowrap hidden lg:block">
-        SHIP_SOFTWARE
+        {/* Divider */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.46 }}
+          className="flex items-center justify-center gap-4 mb-5"
+        >
+          <div className="h-px w-16 bg-gray-200" />
+          <span className="text-[10px] text-gray-400 font-semibold tracking-widest uppercase">
+            Find me on
+          </span>
+          <div className="h-px w-16 bg-gray-200" />
+        </motion.div>
+
+        {/* Social icons */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.52 }}
+          className="flex items-center justify-center gap-3"
+        >
+          {socials.map(({ Icon, href, label }) => (
+            <motion.a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              whileHover={{ scale: 1.15, y: -2 }}
+              whileTap={{ scale: 0.9 }}
+              className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:text-[#00572B] hover:border-[#33B97C] hover:bg-[#F0F7F4] transition-all"
+            >
+              <Icon className="w-4 h-4" />
+            </motion.a>
+          ))}
+        </motion.div>
+
       </div>
     </section>
   );
