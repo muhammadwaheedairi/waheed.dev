@@ -52,8 +52,8 @@ function ProjectCard({ project, index }: { project: (typeof PROJECTS)[0]; index:
         {/* Number + type pill row */}
         <div className="flex items-center justify-between mb-3">
           <span
-            className="text-4xl font-black leading-none select-none text-gray-100 group-hover:text-[#E0F2EA] transition-colors duration-300"
-            style={{ fontFamily: 'var(--font-jakarta, sans-serif)', letterSpacing: '-0.04em' }}
+            className="text-4xl font-black leading-none select-none text-gray-100 group-hover:text-[#E0F2EA] transition-colors duration-300 font-sans"
+            style={{ letterSpacing: '-0.04em' }}
           >
             {num}
           </span>
@@ -120,8 +120,8 @@ function ProjectCard({ project, index }: { project: (typeof PROJECTS)[0]; index:
         {/* Giant number */}
         <div className="flex items-start pt-1">
           <span
-            className="text-[72px] lg:text-[80px] font-black leading-none select-none transition-colors duration-300 text-gray-100 group-hover:text-[#E0F2EA]"
-            style={{ fontFamily: 'var(--font-jakarta, sans-serif)', letterSpacing: '-0.04em' }}
+            className="text-[72px] lg:text-[80px] font-black leading-none select-none transition-colors duration-300 text-gray-100 group-hover:text-[#E0F2EA] font-sans"
+            style={{ letterSpacing: '-0.04em' }}
           >
             {num}
           </span>
