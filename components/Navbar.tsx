@@ -27,9 +27,10 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
-export default function Navbar({ onOpenPalette }: { onOpenPalette?: () => void }) {
+export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [paletteOpen, setPaletteOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
@@ -37,11 +38,13 @@ export default function Navbar({ onOpenPalette }: { onOpenPalette?: () => void }
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Lock body scroll when mobile menu open
+  // Lock body scroll when mobile menu open (palette handles its own lock)
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : 'unset';
+    if (!paletteOpen) {
+      document.body.style.overflow = mobileOpen ? 'hidden' : 'unset';
+    }
     return () => { document.body.style.overflow = 'unset'; };
-  }, [mobileOpen]);
+  }, [mobileOpen, paletteOpen]);
 
   return (
     <>
@@ -54,10 +57,10 @@ export default function Navbar({ onOpenPalette }: { onOpenPalette?: () => void }
 
           {/* Logo */}
           <a href="#home" className="flex items-baseline gap-1 group">
-            <span className="font-bold text-gray-900 text-base tracking-tight group-hover:text-[#00572B] transition-colors font-[family-name:var(--font-jakarta)]">
+            <span className="font-bold text-gray-900 text-base tracking-tight group-hover:text-[#00572B] transition-colors font-sans">
               Muhammad
             </span>
-            <span className="font-[family-name:var(--font-playfair)] italic font-black text-[#00572B] text-lg leading-none">
+            <span className="font-black text-[#00572B] text-lg leading-none">
               Waheed
             </span>
           </a>
@@ -99,7 +102,7 @@ export default function Navbar({ onOpenPalette }: { onOpenPalette?: () => void }
           {/* Mobile right side — search + hamburger */}
           <div className="md:hidden flex items-center gap-2">
             <button
-              onClick={onOpenPalette}
+              onClick={() => setPaletteOpen(true)}
               aria-label="Search"
               className="p-2 rounded-lg text-gray-400 hover:text-[#00572B] hover:bg-gray-100 transition-all"
             >
@@ -146,7 +149,7 @@ export default function Navbar({ onOpenPalette }: { onOpenPalette?: () => void }
                     <span className="text-[11px] font-bold text-gray-300 font-mono w-6">
                       {item.number}
                     </span>
-                    <span className="text-2xl font-bold text-gray-900 font-[family-name:var(--font-jakarta)] group-hover:text-[#00572B] transition-colors">
+                    <span className="text-2xl font-bold text-gray-900 font-sans group-hover:text-[#00572B] transition-colors">
                       {item.name}
                     </span>
                   </div>
@@ -174,7 +177,7 @@ export default function Navbar({ onOpenPalette }: { onOpenPalette?: () => void }
                   <Image src="/profile.jpg" alt="Muhammad Waheed" fill className="object-cover object-top" />
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-gray-900 font-[family-name:var(--font-jakarta)]">Muhammad Waheed</p>
+                  <p className="text-sm font-bold text-gray-900 font-sans">Muhammad Waheed</p>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#00572B] animate-pulse" />
                     <p className="text-xs text-gray-400">Open to new projects</p>
@@ -199,8 +202,8 @@ export default function Navbar({ onOpenPalette }: { onOpenPalette?: () => void }
         )}
       </AnimatePresence>
 
-      {/* Command Palette */}
-      <CommandPalette />
+      {/* Command Palette — controlled via paletteOpen state */}
+      <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} />
     </>
   );
 }

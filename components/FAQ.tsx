@@ -55,9 +55,9 @@ export default function FAQ() {
           <p className="text-xs font-bold uppercase tracking-widest text-[#00572B] mb-3">
             FAQ
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-[1.12] font-[family-name:var(--font-jakarta)]">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-[1.12] font-sans">
             Frequently asked{' '}
-            <span className="font-[family-name:var(--font-playfair)] italic font-black text-[#00572B]">
+            <span className="font-black text-[#00572B]">
               questions
             </span>
           </h2>
@@ -86,12 +86,12 @@ export default function FAQ() {
                 className="w-full px-6 py-5 flex items-center justify-between text-left gap-4"
               >
                 <div className="flex items-center gap-4">
-                  <span className={`text-xs font-bold w-6 flex-shrink-0 font-[family-name:var(--font-jakarta)] ${
+                  <span className={`text-xs font-bold w-6 flex-shrink-0 font-sans ${
                     open === i ? 'text-[#00572B]' : 'text-gray-300'
                   }`}>
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <span className={`text-sm sm:text-base font-semibold transition-colors leading-snug font-[family-name:var(--font-jakarta)] ${
+                  <span className={`text-sm sm:text-base font-semibold transition-colors leading-snug font-sans ${
                     open === i ? 'text-gray-900' : 'text-gray-700'
                   }`}>
                     {faq.q}

@@ -6,10 +6,10 @@ import { ArrowRight } from 'lucide-react';
 
 export default function About() {
   return (
-    <section className="bg-gray-50 py-16 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-24" id="about">
+    <section className="bg-gray-50 py-16 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-24 font-sans" id="about">
       <div className="max-w-5xl mx-auto">
 
-        {/* Section label — same pattern as Services */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -20,15 +20,15 @@ export default function About() {
           <p className="text-xs font-bold uppercase tracking-widest text-[#00572B] mb-3">
             Who You Are Working With
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-[1.12] font-[family-name:var(--font-jakarta)]">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-[1.12]">
             Meet the{' '}
-            <span className="font-[family-name:var(--font-playfair)] italic font-black text-[#00572B]">
+            <span className="font-black text-[#00572B]">
               expert.
             </span>
           </h2>
         </motion.div>
 
-        {/* Main card — same rounded-2xl border bg-white style as Services */}
+        {/* Main card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -48,7 +48,7 @@ export default function About() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                <p className="text-white font-bold text-base font-[family-name:var(--font-jakarta)]">
+                <p className="text-white font-bold text-base">
                   Muhammad Waheed
                 </p>
                 <p className="text-gray-400 text-xs mt-0.5">
@@ -72,7 +72,7 @@ export default function About() {
             {/* RIGHT — Content */}
             <div className="p-8 sm:p-10 flex flex-col justify-center">
 
-              {/* Pain badge — same style as Services pain line pill */}
+              {/* Pain badge */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border bg-gray-50 border-gray-200 w-fit mb-6">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#006B35] flex-shrink-0" />
                 <span className="text-[11px] font-medium text-gray-500">
@@ -93,7 +93,7 @@ export default function About() {
                 <span className="text-gray-900 font-semibold">Real results.</span>
               </p>
 
-              {/* Commitments — same checklist style as Services deliverables */}
+              {/* Commitments */}
               <div className="space-y-3 mb-10">
                 {[
                   'You talk directly to me — the person writing every line of code.',
@@ -111,7 +111,7 @@ export default function About() {
                 ))}
               </div>
 
-              {/* CTA — same style as Services */}
+              {/* CTA */}
               <a
                 href="#services"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-[#00572B] text-white hover:bg-[#004A24] hover:shadow-lg hover:shadow-[#00572B]/30 transition-all w-fit"

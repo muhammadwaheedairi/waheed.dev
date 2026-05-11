@@ -55,9 +55,9 @@ export default function Footer() {
             </div>
 
             {/* Headline */}
-            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-[1.1] font-[family-name:var(--font-jakarta)]">
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-[1.1] font-sans">
               Have a problem{' '}
-              <span className="font-[family-name:var(--font-playfair)] italic font-black text-[#66C99A]">
+              <span className="font-black text-[#66C99A]">
                 worth solving?
               </span>
             </h3>
@@ -68,7 +68,7 @@ export default function Footer() {
 
             {/* WhatsApp button */}
             <a
-              href="https://wa.me/923001234567?text=Hi%20Waheed%2C%20I%20have%20a%20project%20I%27d%20like%20to%20discuss."
+              href="https://wa.me/923180297567?text=Hi%20Waheed%2C%20I%20have%20a%20project%20I%27d%20like%20to%20discuss."
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-4 pl-2 pr-6 py-2 bg-[#00572B] hover:bg-[#006B35] rounded-full transition-all duration-300 hover:shadow-2xl hover:shadow-black/40 hover:scale-[1.02]"
@@ -129,15 +129,15 @@ export default function Footer() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-12 py-6">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
           <a href="#home" className="inline-flex items-baseline gap-1">
-            <span className="font-bold text-white/40 text-sm font-[family-name:var(--font-jakarta)]">
+            <span className="font-bold text-white/40 text-sm font-sans">
               Muhammad
             </span>
-            <span className="font-[family-name:var(--font-playfair)] italic font-black text-[#66C99A]/70 text-base">
+            <span className="font-black text-[#66C99A]/70 text-base">
               Waheed
             </span>
           </a>
           <p className="text-white/20 text-xs">
-            © 2025 · Karachi, Pakistan · Built with Next.js
+            © 2026 · Karachi, Pakistan · Built with Next.js
           </p>
         </div>
       </div>

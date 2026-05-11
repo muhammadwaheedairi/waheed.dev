@@ -63,9 +63,9 @@ function ProjectCard({ project, index }: { project: (typeof PROJECTS)[0]; index:
         </div>
 
         {/* Title */}
-        <h3 className="text-xl font-bold text-gray-900 leading-tight mb-2 font-[family-name:var(--font-jakarta)]">
+        <h3 className="text-xl font-bold text-gray-900 leading-tight mb-2 font-sans">
           {project.title.split(' ').slice(0, -1).join(' ')}{' '}
-          <span className="font-[family-name:var(--font-playfair)] italic font-black text-[#00572B]">
+          <span className="font-black text-[#00572B]">
             {project.title.split(' ').slice(-1)[0]}
           </span>
         </h3>
@@ -162,9 +162,9 @@ function ProjectCard({ project, index }: { project: (typeof PROJECTS)[0]; index:
           </div>
 
           {/* Title */}
-          <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 leading-tight mb-3 font-[family-name:var(--font-jakarta)]">
+          <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 leading-tight mb-3 font-sans">
             {project.title.split(' ').slice(0, -1).join(' ')}{' '}
-            <span className="font-[family-name:var(--font-playfair)] italic font-black text-[#00572B]">
+            <span className="font-black text-[#00572B]">
               {project.title.split(' ').slice(-1)[0]}
             </span>
           </h3>
@@ -211,9 +211,9 @@ export default function Projects() {
             Proof of Work
           </p>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 sm:gap-4">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-[1.12] font-[family-name:var(--font-jakarta)]">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-[1.12] font-sans">
               Projects that{' '}
-              <span className="font-[family-name:var(--font-playfair)] italic font-black text-[#00572B]">
+              <span className="font-black text-[#00572B]">
                 shipped.
               </span>
             </h2>

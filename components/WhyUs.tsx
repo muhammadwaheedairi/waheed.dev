@@ -35,10 +35,10 @@ function DeliveryVisual() {
 
 function ContractVisual() {
   const rows = [
-    { y: 42, w: 130, checked: true  },
-    { y: 62, w: 105, checked: true  },
-    { y: 82, w: 118, checked: true  },
-    { y: 102, w: 90, checked: false },
+    { y: 42,  w: 130, checked: true  },
+    { y: 62,  w: 105, checked: true  },
+    { y: 82,  w: 118, checked: true  },
+    { y: 102, w: 90,  checked: false },
   ];
   return (
     <div className="mt-5 w-full">
@@ -116,10 +116,10 @@ function FunnelVisual() {
     <div className="mt-5 w-full">
       <svg viewBox="0 0 240 100" className="w-full h-auto" fill="none">
         {[
-          { y: 8,  w: 200, h: 20, label: 'Visitors', pct: '100%', color: '#E0F2EA', stroke: '#99D9B8' },
-          { y: 32, w: 155, h: 20, label: 'Leads',    pct: '42%',  color: '#99D9B8', stroke: '#80C9A0' },
-          { y: 56, w: 110, h: 20, label: 'Prospects', pct: '18%', color: '#80C9A0', stroke: '#66C99A' },
-          { y: 80, w: 65,  h: 16, label: 'Clients',  pct: '9%',   color: '#00572B', stroke: '#004A24' },
+          { y: 8,  w: 200, h: 20, label: 'Visitors',  pct: '100%', color: '#E0F2EA', stroke: '#99D9B8' },
+          { y: 32, w: 155, h: 20, label: 'Leads',     pct: '42%',  color: '#99D9B8', stroke: '#80C9A0' },
+          { y: 56, w: 110, h: 20, label: 'Prospects', pct: '18%',  color: '#80C9A0', stroke: '#66C99A' },
+          { y: 80, w: 65,  h: 16, label: 'Clients',   pct: '9%',   color: '#00572B', stroke: '#004A24' },
         ].map(({ y, w, h, label, pct, color, stroke }) => {
           const cx = 120, x = cx - w / 2;
           return (
@@ -145,10 +145,10 @@ function QualityVisual() {
         <text x="120" y="52" textAnchor="middle" fontSize="7" fill="white" fontWeight="700">CLEAN</text>
         <text x="120" y="62" textAnchor="middle" fontSize="7" fill="white" fontWeight="700">CODE</text>
         {[
-          { angle: -60, label: 'Tested'     },
-          { angle: 20,  label: 'Documented' },
-          { angle: 110, label: 'Scalable'   },
-          { angle: 200, label: 'Maintained' },
+          { angle: -60,  label: 'Tested'     },
+          { angle: 20,   label: 'Documented' },
+          { angle: 110,  label: 'Scalable'   },
+          { angle: 200,  label: 'Maintained' },
         ].map(({ angle, label }) => {
           const rad = (angle * Math.PI) / 180;
           const dx = Math.cos(rad), dy = Math.sin(rad);
@@ -182,15 +182,12 @@ function CardIcon({ dark = false }: { dark?: boolean }) {
 }
 
 /* ══════════════════════════════════════════════════
-   CARDS DATA — StoryBrand copy
-   Rule: client is hero, I am guide showing outcomes
-   Each card = a benefit the CLIENT experiences, not a feature I offer
+   CARDS DATA
 ══════════════════════════════════════════════════ */
 const CARDS = [
   {
     title: 'Your Site Goes',
     titleAccent: 'Live in Weeks.',
-    // StoryBrand: success — paint the win, remove the fear of long timelines
     body: 'You get a real, working website in 2–6 weeks — not months. Focused sprints, daily progress, no drawn-out back-and-forth.',
     Visual: DeliveryVisual,
     dark: false,
@@ -198,7 +195,6 @@ const CARDS = [
   {
     title: 'You Approve',
     titleAccent: 'Everything First.',
-    // StoryBrand: plan — removes risk, shows guide has a clear process
     body: 'Every feature is agreed in writing before we start. You sign off before a single line of code is written. No surprises — ever.',
     Visual: ContractVisual,
     dark: false,
@@ -206,7 +202,6 @@ const CARDS = [
   {
     title: 'Code You',
     titleAccent: 'Actually Own.',
-    // StoryBrand: success + failure avoidance — they own the outcome
     body: 'Clean, documented code any developer can read. No lock-in. No black box. You own it completely — and can hand it to anyone.',
     Visual: CodeVisual,
     dark: false,
@@ -214,7 +209,6 @@ const CARDS = [
   {
     title: 'You Talk to',
     titleAccent: 'Me. Directly.',
-    // StoryBrand: empathy — removes the internal frustration of bad communication
     body: 'No account managers. No middlemen. You message me, I reply — within 24 hours, every time. The person you hired is the person building it.',
     Visual: ChatVisual,
     dark: false,
@@ -222,7 +216,6 @@ const CARDS = [
   {
     title: 'Built to',
     titleAccent: 'Win Clients.',
-    // StoryBrand: external problem solved — website converts, not just looks good
     body: 'Every design decision is made with one question: will this turn a visitor into a client? If not, it does not make the cut.',
     Visual: FunnelVisual,
     dark: false,
@@ -230,7 +223,6 @@ const CARDS = [
   {
     title: 'Quality That',
     titleAccent: 'Holds Up.',
-    // StoryBrand: stakes (failure avoided) — not just good now, good long-term
     body: 'Tested, scalable, and documented from day one. Your website will not break under pressure, growth, or a new developer.',
     Visual: QualityVisual,
     dark: true,
@@ -242,10 +234,10 @@ const CARDS = [
 ══════════════════════════════════════════════════ */
 export default function WhyUs() {
   return (
-    <section className="bg-gray-50 py-20 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-24" id="why-us">
+    <section className="bg-gray-50 py-20 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-24 font-sans" id="why-us">
       <div className="max-w-5xl mx-auto">
 
-        {/* Header — StoryBrand: name what client gets, not what I do */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -255,14 +247,12 @@ export default function WhyUs() {
           <p className="text-xs font-bold uppercase tracking-widest text-[#00572B] mb-3">
             What You Get
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-[1.12] font-[family-name:var(--font-jakarta)]">
-            This is what working with
-            <br className="hidden sm:block" />
-            <span className="font-[family-name:var(--font-playfair)] italic font-black text-[#00572B]">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-[1.12]">
+            This is what working with{' '}
+            <span className="font-black text-[#00572B]">
               the right developer feels like.
             </span>
           </h2>
-          {/* StoryBrand: stakes — name the failure they want to avoid */}
           <p className="text-gray-500 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
             Most businesses have hired a developer who disappeared, missed deadlines,
             or delivered something broken. This is what the alternative looks like.
@@ -286,13 +276,11 @@ export default function WhyUs() {
             >
               <CardIcon dark={card.dark} />
 
-              <h3 className="text-xl sm:text-2xl leading-tight mb-2 font-[family-name:var(--font-jakarta)]">
+              <h3 className="text-xl sm:text-2xl leading-tight mb-2 font-sans">
                 <span className={`font-bold ${card.dark ? 'text-white' : 'text-gray-900'}`}>
                   {card.title}{' '}
                 </span>
-                <span className={`font-[family-name:var(--font-playfair)] italic font-black ${
-                  card.dark ? 'text-[#99D9B8]' : 'text-[#00572B]'
-                }`}>
+                <span className={`font-black ${card.dark ? 'text-[#99D9B8]' : 'text-[#00572B]'}`}>
                   {card.titleAccent}
                 </span>
               </h3>

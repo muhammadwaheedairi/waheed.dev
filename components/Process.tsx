@@ -150,38 +150,35 @@ function CardIcon({ dark = false }: { dark?: boolean }) {
   );
 }
 
-/* ── Steps Data — StoryBrand copy ── */
+/* ── Steps Data ── */
 const STEPS = [
   {
     number: '01',
-    title: 'We Understand\nYour',
+    title: 'We Understand Your',
     titleAccent: 'Business First.',
     duration: '1–2 days',
     tag: 'Starts with a 1-1 call',
-    // StoryBrand: empathy — guide understands the problem before acting
     description: 'Most developers start building immediately. I start by listening. We talk about your business, your customers, and what a successful outcome actually looks like for you.',
     Visual: DiscoveryVisual,
     dark: false,
   },
   {
     number: '02',
-    title: 'You Approve\nEvery',
+    title: 'You Approve Every',
     titleAccent: 'Detail. In Writing.',
     duration: '2–3 days',
     tag: 'Zero surprises guarantee',
-    // StoryBrand: plan — clear simple steps, removes risk
     description: 'Before a single line of code is written, every feature, flow, and screen is documented. You review it. You sign off. That document is the contract — nothing gets built without your approval.',
     Visual: SpecVisual,
     dark: false,
   },
   {
     number: '03',
-    title: 'I Build It.\nYou',
+    title: 'I Build It. You',
     titleAccent: 'Watch It Happen.',
     duration: 'Project-dependent',
     tag: 'Daily progress updates',
-    // StoryBrand: guide executes the plan, hero stays informed
-    description: 'You get regular updates — not radio silence followed by a "it\'s done" two weeks later. If something comes up, you hear about it immediately. No hidden problems. No last-minute surprises.',
+    description: "You get regular updates — not radio silence followed by a \"it's done\" two weeks later. If something comes up, you hear about it immediately. No hidden problems. No last-minute surprises.",
     Visual: BuildVisual,
     dark: false,
   },
@@ -191,7 +188,6 @@ const STEPS = [
     titleAccent: 'You Own It. Fully.',
     duration: '1–2 days',
     tag: 'Your 24/7 asset',
-    // StoryBrand: success — paint the win, client owns the transformation
     description: 'Deployed, documented, and walked through until you understand it completely. You get the code, the deployment setup, and the confidence to run it yourself. This is yours — not mine.',
     Visual: ShipVisual,
     dark: true,
@@ -201,20 +197,22 @@ const STEPS = [
 /* ── Section ── */
 export default function Process() {
   return (
-    <section className="bg-white py-20 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-24" id="process">
+    <section className="bg-white py-20 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-24 font-sans" id="process">
       <div className="max-w-5xl mx-auto">
 
-        {/* Header — StoryBrand: client is hero, guide shows the plan */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-10 sm:mb-14"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-[1.12] font-[family-name:var(--font-jakarta)]">
-            You know what you want.
-            <br className="hidden sm:block" />
-            <span className="font-[family-name:var(--font-playfair)] italic font-black text-[#00572B]">
+          <p className="text-xs font-bold uppercase tracking-widest text-[#00572B] mb-3">
+            How It Works
+          </p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-[1.12]">
+            You know what you want.{' '}
+            <span className="font-black text-[#00572B]">
               Here is how we get there.
             </span>
           </h2>
@@ -241,11 +239,11 @@ export default function Process() {
             >
               <CardIcon dark={step.dark} />
 
-              <h3 className="text-xl sm:text-2xl leading-tight mb-1 font-[family-name:var(--font-jakarta)] whitespace-pre-line">
+              <h3 className="text-xl sm:text-2xl leading-tight mb-1 font-sans">
                 <span className={`font-bold ${step.dark ? 'text-white' : 'text-gray-900'}`}>
                   {step.title}{' '}
                 </span>
-                <span className={`font-[family-name:var(--font-playfair)] italic font-black ${
+                <span className={`font-black ${
                   step.dark ? 'text-[#99D9B8]' : 'text-[#00572B]'
                 }`}>
                   {step.titleAccent}
@@ -270,7 +268,7 @@ export default function Process() {
           ))}
         </div>
 
-        {/* Bottom CTA — StoryBrand: direct CTA, low risk */}
+        {/* Bottom CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

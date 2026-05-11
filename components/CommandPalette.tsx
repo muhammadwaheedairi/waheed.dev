@@ -13,26 +13,38 @@ interface CommandItem {
   action: () => void;
 }
 
-export default function CommandPalette() {
-  const [isOpen, setIsOpen] = useState(false);
+interface CommandPaletteProps {
+  open?: boolean;
+  onClose?: () => void;
+}
+
+export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
+  const [internalOpen, setInternalOpen] = useState(false);
   const [search, setSearch] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
 
+  // Controlled (from parent) OR internal (Ctrl+K on desktop)
+  const isOpen = (open ?? false) || internalOpen;
+  const close = () => {
+    onClose?.();
+    setInternalOpen(false);
+  };
+
   const scrollTo = (id: string) => {
     document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
-    setIsOpen(false);
+    close();
   };
 
   const commands: CommandItem[] = [
-    { id: 'home',     label: 'Home',           description: 'Back to top',                    icon: Home,       shortcut: 'H', action: () => scrollTo('#home')     },
-    { id: 'process',  label: 'Process',        description: 'How I work with clients',         icon: GitBranch,  shortcut: 'P', action: () => scrollTo('#process')  },
-    { id: 'why-us',   label: 'Why Me',         description: 'What makes me different',         icon: Star,       shortcut: 'W', action: () => scrollTo('#why-us')   },
-    { id: 'about',    label: 'About',          description: 'Who you are working with',        icon: User,       shortcut: 'A', action: () => scrollTo('#about')    },
-    { id: 'services', label: 'Services',       description: 'What I offer and pricing',        icon: Briefcase,  shortcut: 'S', action: () => scrollTo('#services') },
-    { id: 'work',     label: 'Work',           description: 'Real projects I have shipped',    icon: Code2,      shortcut: 'R', action: () => scrollTo('#projects') },
-    { id: 'faq',      label: 'FAQ',            description: 'Common questions answered',       icon: HelpCircle, shortcut: 'F', action: () => scrollTo('#faq')      },
-    { id: 'github',   label: 'Open GitHub',    description: 'github.com/muhammadwaheedairi',   icon: Github,     action: () => window.open('https://github.com/muhammadwaheedairi', '_blank') },
-    { id: 'linkedin', label: 'Open LinkedIn',  description: 'linkedin.com/in/muhammadwaheedairi', icon: Linkedin, action: () => window.open('https://linkedin.com/in/muhammadwaheedairi', '_blank') },
+    { id: 'home',     label: 'Home',           description: 'Back to top',                       icon: Home,       shortcut: 'H', action: () => scrollTo('#home')     },
+    { id: 'process',  label: 'Process',        description: 'How I work with clients',            icon: GitBranch,  shortcut: 'P', action: () => scrollTo('#process')  },
+    { id: 'why-us',   label: 'Why Me',         description: 'What makes me different',            icon: Star,       shortcut: 'W', action: () => scrollTo('#why-us')   },
+    { id: 'about',    label: 'About',          description: 'Who you are working with',           icon: User,       shortcut: 'A', action: () => scrollTo('#about')    },
+    { id: 'services', label: 'Services',       description: 'What I offer and pricing',           icon: Briefcase,  shortcut: 'S', action: () => scrollTo('#services') },
+    { id: 'work',     label: 'Work',           description: 'Real projects I have shipped',       icon: Code2,      shortcut: 'R', action: () => scrollTo('#projects') },
+    { id: 'faq',      label: 'FAQ',            description: 'Common questions answered',          icon: HelpCircle, shortcut: 'F', action: () => scrollTo('#faq')      },
+    { id: 'github',   label: 'Open GitHub',    description: 'github.com/muhammadwaheedairi',      icon: Github,     action: () => { window.open('https://github.com/muhammadwaheedairi', '_blank'); close(); } },
+    { id: 'linkedin', label: 'Open LinkedIn',  description: 'linkedin.com/in/muhammadwaheedairi', icon: Linkedin,   action: () => { window.open('https://linkedin.com/in/muhammadwaheedairi', '_blank'); close(); } },
   ];
 
   const filtered = commands.filter((c) =>
@@ -42,12 +54,19 @@ export default function CommandPalette() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); setIsOpen((p) => !p); }
-      if (e.key === 'Escape') setIsOpen(false);
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        if (isOpen) {
+          close();
+        } else {
+          setInternalOpen(true);
+        }
+      }
+      if (e.key === 'Escape') close();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, []);
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen) {
@@ -67,9 +86,9 @@ export default function CommandPalette() {
 
   return (
     <>
-      {/* Trigger button — fixed bottom right */}
+      {/* Trigger button — fixed bottom right, desktop only */}
       <button
-        onClick={() => setIsOpen(true)}
+        onClick={() => setInternalOpen(true)}
         className="fixed bottom-6 right-6 z-[150] hidden md:flex items-center gap-2 px-3.5 py-2 bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-lg hover:border-gray-300 transition-all group"
       >
         <Command className="w-3.5 h-3.5 text-gray-400 group-hover:text-[#00572B] transition-colors" />
@@ -86,7 +105,7 @@ export default function CommandPalette() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
-              onClick={() => setIsOpen(false)}
+              onClick={close}
               className="absolute inset-0 bg-black/20 backdrop-blur-sm"
             />
 
@@ -109,9 +128,9 @@ export default function CommandPalette() {
                   value={search}
                   onChange={(e) => { setSearch(e.target.value); setSelectedIndex(0); }}
                   onKeyDown={onKeyDown}
-                  className="w-full bg-transparent border-none outline-none text-gray-900 placeholder:text-gray-400 text-sm font-[family-name:var(--font-jakarta)]"
+                  className="w-full bg-transparent border-none outline-none text-gray-900 placeholder:text-gray-400 text-sm font-sans"
                 />
-                <div className="flex items-center gap-1 px-2 py-1 rounded-lg bg-gray-100 border border-gray-200 text-[10px] font-mono text-gray-400 flex-shrink-0">
+                <div className="hidden md:flex items-center gap-1 px-2 py-1 rounded-lg bg-gray-100 border border-gray-200 text-[10px] font-mono text-gray-400 flex-shrink-0">
                   <Command className="w-3 h-3" /><span>K</span>
                 </div>
               </div>
@@ -138,7 +157,7 @@ export default function CommandPalette() {
                         <cmd.icon className="w-4 h-4" />
                       </div>
                       <div className="flex flex-col">
-                        <span className={`text-sm font-semibold font-[family-name:var(--font-jakarta)] ${
+                        <span className={`text-sm font-semibold font-sans ${
                           idx === selectedIndex ? 'text-[#00572B]' : 'text-gray-800'
                         }`}>
                           {cmd.label}
@@ -160,7 +179,7 @@ export default function CommandPalette() {
                     )}
                   </button>
                 )) : (
-                  <div className="py-12 text-center text-gray-400 text-sm font-[family-name:var(--font-jakarta)]">
+                  <div className="py-12 text-center text-gray-400 text-sm font-sans">
                     No results for &quot;{search}&quot;
                   </div>
                 )}

@@ -2,20 +2,6 @@
 
 import { motion } from 'motion/react';
 import { ArrowRight, Clock, Star, Zap } from 'lucide-react';
-import { Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google';
-
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['700', '900'],
-  style: ['normal', 'italic'],
-  variable: '--font-playfair',
-});
-
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-jakarta',
-});
 
 /* ── SVG Icons ───────────────────────────────────── */
 function ThreadsIcon({ className }: { className?: string }) {
@@ -58,7 +44,6 @@ const socials = [
   { Icon: MediumIcon,   href: 'https://medium.com/@muhammadwaheedairi',      label: 'Medium'   },
 ];
 
-// StoryBrand: Guide shows competence — these are OUTCOMES, not features
 const trust = [
   { icon: Zap,   label: 'Live in 2–6 Weeks'   },
   { icon: Clock, label: 'Reply Within 24hrs'   },
@@ -68,15 +53,8 @@ const trust = [
 /* ── Component ───────────────────────────────────── */
 export default function Hero() {
   return (
-    <section
-      className={`
-        ${playfair.variable} ${jakarta.variable}
-        relative min-h-screen flex flex-col items-center justify-center
-        px-6 md:px-12 lg:px-24 py-20 md:py-32
-        overflow-hidden bg-white
-        font-[family-name:var(--font-jakarta)]
-      `}
-    >
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 md:px-12 lg:px-24 py-20 md:py-32 overflow-hidden bg-white font-sans">
+
       {/* Background orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -93,7 +71,7 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-3xl mx-auto text-center">
 
-        {/* StoryBrand: Guide is available — builds immediate trust */}
+        {/* Status pill */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -106,30 +84,22 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        {/*
-          StoryBrand Headline Rules:
-          1. Client is the HERO — "your website" not "I build"
-          2. Name the EXTERNAL problem clearly
-          3. Make them feel SEEN in one line
-        */}
+        {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.12 }}
           className="mb-5 leading-[1.08]"
         >
-          {/* Line 1 */}
-          <span className="block text-5xl sm:text-6xl lg:text-7xl">
-            <span className="font-bold text-black">Websites That Make </span>
+          <span className="block text-5xl sm:text-6xl lg:text-7xl font-bold text-black">
+            Websites That Make
           </span>
-          {/* Line 2 */}
-          <span className="block text-5xl sm:text-6xl lg:text-7xl">
-            <span className="font-[family-name:var(--font-playfair)] italic font-black text-[#00572B]">
-              Clients Choose You First.
-            </span>
+          <span className="block text-5xl sm:text-6xl lg:text-7xl font-black text-[#00572B]">
+            Clients Choose You First.
           </span>
         </motion.h1>
 
+        {/* Subtext */}
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -142,12 +112,7 @@ export default function Hero() {
           </span>
         </motion.p>
 
-        {/*
-          StoryBrand CTA:
-          - Primary CTA = direct, specific action ("Tell Me About Your Project")
-          - Secondary CTA = transitional ("See What I've Built")
-          - Both should feel low-risk
-        */}
+        {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -175,7 +140,7 @@ export default function Hero() {
           </motion.a>
         </motion.div>
 
-        {/* StoryBrand: Guide shows authority — outcomes not features */}
+        {/* Trust indicators */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -204,7 +169,7 @@ export default function Hero() {
           <div className="h-px w-16 bg-gray-200" />
         </motion.div>
 
-        {/* Social icons */}
+        {/* Socials */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
