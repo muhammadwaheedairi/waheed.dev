@@ -121,7 +121,7 @@ const STEPS = [
     titleAccent: 'Business (1–2 days)',
     duration: 'Starts with a call',
     tag: 'Pain-aware discovery',
-    description: 'Most developers ask "what colors do you like?" I ask "who's a client you'd clone 100 times?" and "what's the one thing that makes someone ready to buy?" We map out your actual sales process—not the one you think you should have. The one that actually works. Then we build around that.',
+    description: "Most developers ask \"what colors do you like?\" I ask \"who's a client you'd clone 100 times?\" and \"what's the one thing that makes someone ready to buy?\" We map out your actual sales process—not the one you think you should have. The one that actually works. Then we build around that.",
     details: [
       { icon: Sparkles, label: 'Sales Process', value: 'How you actually win' },
       { icon: Zap, label: 'Trust Killers', value: 'What breaks LinkedIn trust' },
@@ -147,7 +147,7 @@ const STEPS = [
     titleAccent: 'Watch It Happen',
     duration: 'Project-dependent',
     tag: 'Real progress updates',
-    description: 'You get real progress updates—not "still working on it." If something comes up, you hear about it immediately. If something's not landing, we fix it before it's finished. You stay in the loop the entire time. No radio silence. No last-minute surprises.',
+    description: "You get real progress updates—not \"still working on it.\" If something comes up, you hear about it immediately. If something's not landing, we fix it before it's finished. You stay in the loop the entire time. No radio silence. No last-minute surprises.",
     details: [
       { icon: Code, label: 'Development', value: 'Daily transparency' },
       { icon: Sparkles, label: 'AI Chat Setup', value: 'Lead qualification' },
@@ -160,7 +160,7 @@ const STEPS = [
     titleAccent: 'It Completely',
     duration: '1–2 days',
     tag: 'Your asset forever',
-    description: 'Deployed, documented, and fully explained. You get the code, the deployment setup, and a walkthrough until you understand it completely. This is yours—not mine. Hand it to another developer tomorrow if you want. Launch with confidence.',
+    description: "Deployed, documented, and fully explained. You get the code, the deployment setup, and a walkthrough until you understand it completely. This is yours—not mine. Hand it to another developer tomorrow if you want. Launch with confidence.",
     details: [
       { icon: CheckCircle2, label: 'Live Deploy', value: 'Full walkthrough' },
       { icon: Sparkles, label: 'Documentation', value: 'You understand it all' },
