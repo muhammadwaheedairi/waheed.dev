@@ -1,152 +1,115 @@
 'use client';
 
 import { motion } from 'motion/react';
+import { CheckCircle2, Sparkles, Code, Zap } from 'lucide-react';
 
-/* ── Card Visual 1 — Discovery ── */
-function DiscoveryVisual() {
-  const items = [
-    {
-      label: 'Business Analysis',
-      svg: (
-        <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 text-gray-400">
-          <polyline points="2,12 6,7 9,10 14,4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      ),
-    },
-    {
-      label: 'Problem Mapping',
-      svg: (
-        <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 text-gray-400">
-          <circle cx="8" cy="8" r="5" stroke="currentColor" strokeWidth="1.5" />
-          <circle cx="8" cy="8" r="2" stroke="currentColor" strokeWidth="1.5" />
-        </svg>
-      ),
-    },
-    {
-      label: 'Success Metrics',
-      svg: (
-        <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 text-gray-400">
-          <rect x="2" y="9" width="3" height="5" rx="0.5" stroke="currentColor" strokeWidth="1.3" />
-          <rect x="6.5" y="6" width="3" height="8" rx="0.5" stroke="currentColor" strokeWidth="1.3" />
-          <rect x="11" y="3" width="3" height="11" rx="0.5" stroke="currentColor" strokeWidth="1.3" />
-        </svg>
-      ),
-    },
-  ];
-
+/* ── Timeline Connector ── */
+function TimelineConnector({ isActive }: { isActive: boolean }) {
   return (
-    <div className="mt-5 relative">
-      <div className="absolute left-[10px] top-3 bottom-14 flex flex-col justify-between items-center" style={{ width: 1 }}>
-        <div className="w-px h-full" style={{ background: 'repeating-linear-gradient(to bottom, #d1d5db 0px, #d1d5db 4px, transparent 4px, transparent 8px)' }} />
+    <motion.div
+      initial={{ scaleY: 0 }}
+      whileInView={{ scaleY: 1 }}
+      transition={{ duration: 0.6 }}
+      className={`absolute left-1/2 top-full w-1 h-12 origin-top ${
+        isActive ? 'bg-gradient-to-b from-[#00572B] to-[#99C4B0]' : 'bg-gradient-to-b from-gray-200 to-gray-100'
+      }`}
+      style={{ transform: 'translateX(-50%)' }}
+    />
+  );
+}
+
+/* ── Step Node ── */
+function StepNode({ number, isActive }: { number: string; isActive: boolean }) {
+  return (
+    <motion.div
+      initial={{ scale: 0.5, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      transition={{ duration: 0.4 }}
+      className={`relative w-14 h-14 rounded-full flex items-center justify-center font-bold text-lg border-2 mb-6 transition-all ${
+        isActive
+          ? 'bg-[#00572B] border-[#00572B] text-white shadow-lg shadow-[#00572B]/30'
+          : 'bg-white border-gray-200 text-gray-400'
+      }`}
+    >
+      {number}
+      {isActive && (
+        <motion.div
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute inset-0 rounded-full border-2 border-[#00572B] opacity-30"
+        />
+      )}
+    </motion.div>
+  );
+}
+
+/* ── Step Content Card ── */
+function StepCard({
+  step,
+  index,
+  isLast,
+}: {
+  step: (typeof STEPS)[0];
+  index: number;
+  isLast: boolean;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      viewport={{ once: true }}
+      className={`relative flex gap-6 md:gap-8 ${!isLast ? 'mb-16 md:mb-24' : ''}`}
+    >
+      {/* Left side (timeline) */}
+      <div className="flex flex-col items-center flex-shrink-0">
+        <StepNode number={step.number} isActive={true} />
+        {!isLast && <TimelineConnector isActive={true} />}
       </div>
-      <div className="space-y-2 pl-0">
-        {items.map((item, i) => (
-          <div key={i} className="flex items-center gap-2">
-            <div className="w-5 h-5 rounded-full border border-gray-200 bg-white flex-shrink-0 flex items-center justify-center z-10">
-              <div className="w-1.5 h-1.5 rounded-full bg-gray-300" />
-            </div>
-            <div className="flex items-center justify-between flex-1 px-3 py-2 bg-white border border-gray-200 rounded-full text-xs font-medium text-gray-600">
-              <span>{item.label}</span>
-              <span className="ml-2 p-1 bg-gray-100 rounded-full">{item.svg}</span>
-            </div>
-          </div>
-        ))}
-        <div className="flex items-center gap-2 mt-1">
-          <div className="w-5 h-5 rounded-full bg-[#00572B] flex-shrink-0 flex items-center justify-center z-10">
-            <svg viewBox="0 0 10 10" fill="none" className="w-2.5 h-2.5">
-              <path d="M2 5h6M5 2l3 3-3 3" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          <div className="flex items-center gap-2 px-4 py-2 bg-[#00572B] rounded-full text-xs font-semibold text-white flex-1 justify-between">
-            <span>Strategy Direction</span>
-            <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 text-[#99D9B8]">
-              <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
+
+      {/* Right side (content) */}
+      <motion.div
+        whileHover={{ y: -4 }}
+        className="flex-1 rounded-2xl border border-gray-200 bg-gradient-to-br from-white via-white to-[#F0F7F4]/30 p-6 md:p-8 hover:border-[#99C4B0] hover:shadow-lg hover:shadow-[#00572B]/10 transition-all duration-300"
+      >
+        {/* Tag */}
+        <div className="flex items-center gap-2 mb-4">
+          <span className="w-2 h-2 rounded-full bg-[#00572B]" />
+          <span className="text-xs font-semibold text-[#00572B] tracking-widest uppercase">
+            {step.tag}
+          </span>
+          <span className="text-xs font-medium text-gray-400">• {step.duration}</span>
         </div>
-      </div>
-    </div>
-  );
-}
 
-/* ── Card Visual 2 — Specification ── */
-function SpecVisual() {
-  return (
-    <div className="mt-5">
-      <div className="flex justify-between mb-2 px-1">
-        <div className="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-[10px] font-medium text-gray-500">Feature Specs</div>
-        <div className="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-[10px] font-medium text-gray-500">Tech Stack</div>
-      </div>
-      <div className="flex gap-3">
-        <div className="flex-1 h-16 bg-white border border-gray-200 rounded-xl" />
-        <div className="flex-1 h-16 bg-white border border-gray-200 rounded-xl" />
-      </div>
-      <div className="flex justify-between mt-2 px-1">
-        <div className="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-[10px] font-medium text-gray-500">User Flows</div>
-        <div className="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-[10px] font-medium text-gray-500">Edge Cases</div>
-      </div>
-    </div>
-  );
-}
+        {/* Title */}
+        <h3 className="text-2xl md:text-3xl font-bold leading-snug mb-4">
+          <span className="text-gray-900">{step.title} </span>
+          <span className="text-[#00572B]">{step.titleAccent}</span>
+        </h3>
 
-/* ── Card Visual 3 — Build ── */
-function BuildVisual() {
-  return (
-    <div className="mt-5 w-full">
-      <svg viewBox="0 0 280 130" className="w-full h-auto" fill="none">
-        <path d="M80 65 Q110 35 140 45"  stroke="#d1d5db" strokeWidth="1" strokeDasharray="3 3" />
-        <path d="M80 65 Q110 90 140 85"  stroke="#d1d5db" strokeWidth="1" strokeDasharray="3 3" />
-        <path d="M140 45 Q175 25 200 55" stroke="#d1d5db" strokeWidth="1" strokeDasharray="3 3" />
-        <path d="M140 85 Q175 95 200 75" stroke="#d1d5db" strokeWidth="1" strokeDasharray="3 3" />
-        <path d="M140 45 Q155 65 140 85" stroke="#d1d5db" strokeWidth="1" strokeDasharray="3 3" />
-        <path d="M200 55 Q215 65 200 75" stroke="#d1d5db" strokeWidth="1" strokeDasharray="3 3" />
-        <rect x="40"  y="50" width="78" height="28" rx="14" fill="white" stroke="#e5e7eb" strokeWidth="1" />
-        <text x="79"  y="68" textAnchor="middle" fontSize="8.5" fill="#6b7280" fontWeight="500">Visual Identity</text>
-        <rect x="110" y="28" width="72" height="26" rx="13" fill="white" stroke="#e5e7eb" strokeWidth="1" />
-        <text x="146" y="45" textAnchor="middle" fontSize="8.5" fill="#6b7280" fontWeight="500">Brand Elements</text>
-        <rect x="110" y="74" width="76" height="26" rx="13" fill="white" stroke="#e5e7eb" strokeWidth="1" />
-        <text x="148" y="91" textAnchor="middle" fontSize="8.5" fill="#6b7280" fontWeight="500">Content Design</text>
-        <rect x="38"  y="96" width="76" height="26" rx="13" fill="white" stroke="#e5e7eb" strokeWidth="1" />
-        <text x="76"  y="113" textAnchor="middle" fontSize="8.5" fill="#6b7280" fontWeight="500">Template Design</text>
-        <rect x="186" y="50" width="78" height="28" rx="14" fill="#F0F7F4" stroke="#99D9B8" strokeWidth="1" />
-        <text x="225" y="68" textAnchor="middle" fontSize="8.5" fill="#00572B" fontWeight="600">Aesthetics</text>
-      </svg>
-    </div>
-  );
-}
+        {/* Description */}
+        <p className="text-gray-600 leading-relaxed mb-6 md:mb-8 text-sm md:text-base">
+          {step.description}
+        </p>
 
-/* ── Card Visual 4 — Ship ── */
-function ShipVisual() {
-  const items = ['Production Deploy', 'Full Documentation', 'Walkthrough Call', 'Post-launch Support'];
-  return (
-    <div className="mt-5 space-y-3">
-      {items.map((item, i) => (
-        <div key={i} className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-[#00572B] border border-[#006B35] flex-shrink-0 flex items-center justify-center">
-            <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 text-[#99D9B8]">
-              <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.2" />
-              <path d="M5.5 8l2 2 3-3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          <span className="text-sm font-medium text-[#D0EFE3]">{item}</span>
+        {/* Step details */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {step.details.map((detail, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.05 }}
+              className="flex items-start gap-3 p-3 rounded-lg bg-white border border-gray-100 hover:border-[#99C4B0] transition-all"
+            >
+              <detail.icon className="w-5 h-5 text-[#00572B] flex-shrink-0 mt-0.5" />
+              <div>
+                <div className="text-sm font-semibold text-gray-900">{detail.label}</div>
+                <div className="text-xs text-gray-500">{detail.value}</div>
+              </div>
+            </motion.div>
+          ))}
         </div>
-      ))}
-    </div>
-  );
-}
-
-/* ── Card Icon ── */
-function CardIcon({ dark = false }: { dark?: boolean }) {
-  return (
-    <div className="relative w-10 h-8 mb-5">
-      <div className={`absolute left-0 top-0 w-7 h-7 rounded-full border-2 ${dark ? 'border-[#33B97C] bg-transparent' : 'border-gray-200 bg-white'}`} />
-      <div className={`absolute left-4 top-0 w-7 h-7 rounded-full border-2 ${dark ? 'border-[#33B97C] bg-transparent' : 'border-gray-200 bg-white'}`} />
-      <div className="absolute -right-1 -top-1 w-4 h-4 rounded-full bg-[#006B35] flex items-center justify-center">
-        <svg viewBox="0 0 10 10" fill="none" className="w-2.5 h-2.5">
-          <path d="M2.5 5l2 2 3-3" stroke="white" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -159,8 +122,11 @@ const STEPS = [
     duration: '1–2 days',
     tag: 'Starts with a 1-1 call',
     description: 'Most developers start building immediately. I start by listening. We talk about your business, your customers, and what a successful outcome actually looks like for you.',
-    Visual: DiscoveryVisual,
-    dark: false,
+    details: [
+      { icon: Sparkles, label: 'Business Analysis', value: 'Goals & challenges' },
+      { icon: Zap, label: 'Problem Mapping', value: 'Real pain points' },
+      { icon: CheckCircle2, label: 'Success Metrics', value: 'Clear objectives' },
+    ],
   },
   {
     number: '02',
@@ -169,8 +135,11 @@ const STEPS = [
     duration: '2–3 days',
     tag: 'Zero surprises guarantee',
     description: 'Before a single line of code is written, every feature, flow, and screen is documented. You review it. You sign off. That document is the contract — nothing gets built without your approval.',
-    Visual: SpecVisual,
-    dark: false,
+    details: [
+      { icon: CheckCircle2, label: 'Feature Specs', value: 'Complete breakdown' },
+      { icon: Code, label: 'Tech Stack', value: 'Technology choices' },
+      { icon: Sparkles, label: 'User Flows', value: 'Experience design' },
+    ],
   },
   {
     number: '03',
@@ -178,9 +147,12 @@ const STEPS = [
     titleAccent: 'Watch It Happen.',
     duration: 'Project-dependent',
     tag: 'Daily progress updates',
-    description: "You get regular updates — not radio silence followed by a \"it's done\" two weeks later. If something comes up, you hear about it immediately. No hidden problems. No last-minute surprises.",
-    Visual: BuildVisual,
-    dark: false,
+    description: 'You get regular updates — not radio silence followed by a "it\'s done" two weeks later. If something comes up, you hear about it immediately. No hidden problems. No last-minute surprises.',
+    details: [
+      { icon: Code, label: 'Development', value: 'Transparent updates' },
+      { icon: Sparkles, label: 'Visual Design', value: 'Brand alignment' },
+      { icon: Zap, label: 'Performance', value: 'Optimization focus' },
+    ],
   },
   {
     number: '04',
@@ -189,8 +161,11 @@ const STEPS = [
     duration: '1–2 days',
     tag: 'Your 24/7 asset',
     description: 'Deployed, documented, and walked through until you understand it completely. You get the code, the deployment setup, and the confidence to run it yourself. This is yours — not mine.',
-    Visual: ShipVisual,
-    dark: true,
+    details: [
+      { icon: CheckCircle2, label: 'Production Deploy', value: 'Live & stable' },
+      { icon: Sparkles, label: 'Documentation', value: 'Complete guides' },
+      { icon: Zap, label: 'Support', value: 'Ongoing assistance' },
+    ],
   },
 ];
 
@@ -198,73 +173,41 @@ const STEPS = [
 export default function Process() {
   return (
     <section className="bg-white py-20 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-24 font-sans" id="process">
-      <div className="max-w-5xl mx-auto">
-
+      <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-10 sm:mb-14"
+          className="text-center mb-16 sm:mb-20"
         >
-          <p className="text-xs font-bold uppercase tracking-widest text-[#00572B] mb-3">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.1 }}
+            className="text-xs font-bold uppercase tracking-widest text-[#00572B] mb-4"
+          >
             How It Works
-          </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-[1.12]">
+          </motion.p>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-[1.1]">
             You know what you want.{' '}
-            <span className="font-black text-[#00572B]">
-              Here is how we get there.
-            </span>
+            <span className="text-[#00572B]">Here is how we get there.</span>
           </h2>
-          <p className="text-gray-500 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+          <p className="text-gray-500 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
             No disappearing acts. No vague timelines. Every project follows the same
             four steps — so you always know exactly where things stand.
           </p>
         </motion.div>
 
-        {/* Steps grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          {STEPS.map((step, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08, duration: 0.5 }}
-              viewport={{ once: true }}
-              className={`rounded-2xl border p-6 sm:p-7 transition-all duration-300 ${
-                step.dark
-                  ? 'bg-[#004A24] border-[#00572B]'
-                  : 'bg-[#f9f9f9] border-gray-100'
-              }`}
-            >
-              <CardIcon dark={step.dark} />
-
-              <h3 className="text-xl sm:text-2xl leading-tight mb-1 font-sans">
-                <span className={`font-bold ${step.dark ? 'text-white' : 'text-gray-900'}`}>
-                  {step.title}{' '}
-                </span>
-                <span className={`font-black ${
-                  step.dark ? 'text-[#99D9B8]' : 'text-[#00572B]'
-                }`}>
-                  {step.titleAccent}
-                </span>
-              </h3>
-
-              <span className={`inline-flex items-center gap-1.5 text-xs font-medium mb-3 ${
-                step.dark ? 'text-[#66C99A]' : 'text-gray-400'
-              }`}>
-                <span className={`w-1.5 h-1.5 rounded-full ${step.dark ? 'bg-[#66C99A]' : 'bg-[#006B35]'}`} />
-                {step.duration}
-              </span>
-
-              <p className={`text-xs sm:text-sm leading-relaxed ${
-                step.dark ? 'text-[#D0EFE3]' : 'text-gray-500'
-              }`}>
-                {step.description}
-              </p>
-
-              <step.Visual />
-            </motion.div>
+        {/* Timeline Steps */}
+        <div className="space-y-0">
+          {STEPS.map((step, index) => (
+            <StepCard
+              key={index}
+              step={step}
+              index={index}
+              isLast={index === STEPS.length - 1}
+            />
           ))}
         </div>
 
@@ -273,20 +216,24 @@ export default function Process() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-10 sm:mt-14 text-center"
+          className="mt-20 sm:mt-28 text-center"
         >
-          <p className="text-gray-400 text-sm mb-6 max-w-md mx-auto">
+          <p className="text-gray-500 text-base mb-8 max-w-lg mx-auto leading-relaxed">
             Every client goes through this exact process. It works because it removes
             the guesswork — for both of us.
           </p>
-          <a
+          <motion.a
             href="mailto:muhammadwaheedairi@gmail.com"
-            className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#00572B] text-white text-sm font-semibold rounded-full hover:bg-[#004A24] hover:shadow-lg hover:shadow-[#00572B]/25 transition-all"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-2.5 px-8 py-4 bg-[#00572B] text-white text-base font-semibold rounded-lg hover:bg-[#004A24] hover:shadow-xl hover:shadow-[#00572B]/30 transition-all"
           >
-            Start the Conversation →
-          </a>
+            Start the Conversation
+            <svg viewBox="0 0 16 16" fill="none" className="w-5 h-5">
+              <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </motion.a>
         </motion.div>
-
       </div>
     </section>
   );
