@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { ArrowRight, Clock, Star, Zap } from 'lucide-react';
+import { ArrowRight, Code, Zap, Sparkles, CheckCircle2 } from 'lucide-react';
 
 /* ── SVG Icons ───────────────────────────────────── */
 function ThreadsIcon({ className }: { className?: string }) {
@@ -44,136 +44,150 @@ const socials = [
   { Icon: MediumIcon,   href: 'https://medium.com/@muhammadwaheedairi',      label: 'Medium'   },
 ];
 
-const trust = [
-  { icon: Zap,   label: 'Live in 2–6 Weeks'   },
-  { icon: Clock, label: 'Reply Within 24hrs'   },
-  { icon: Star,  label: 'Zero Scope Surprises' },
+const features = [
+  { icon: Zap, label: 'Live in 2–6 Weeks', desc: 'Fast delivery' },
+  { icon: CheckCircle2, label: 'Reply Within 24hrs', desc: 'Always responsive' },
+  { icon: Sparkles, label: 'Zero Scope Surprises', desc: 'Clear communication' },
 ];
 
 /* ── Component ───────────────────────────────────── */
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 md:px-12 lg:px-24 py-20 md:py-32 overflow-hidden bg-white font-sans">
-
-      {/* Background orbs */}
+      
+      {/* Modern gradient background with animated elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Primary gradient orb */}
         <motion.div
           animate={{ x: [0, 40, -20, 0], y: [0, -30, 20, 0] }}
           transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute -top-48 -right-48 w-[500px] h-[500px] rounded-full bg-[#CCE5DA] mix-blend-multiply blur-3xl opacity-40"
+          className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-[#CCE5DA] mix-blend-multiply blur-3xl opacity-50"
         />
+        
+        {/* Secondary gradient orb */}
         <motion.div
           animate={{ x: [0, -40, 30, 0], y: [0, 40, -20, 0] }}
           transition={{ duration: 28, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-          className="absolute -bottom-48 -left-48 w-96 h-96 rounded-full bg-[#99C4B0] mix-blend-multiply blur-3xl opacity-25"
+          className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-[#99C4B0] mix-blend-multiply blur-3xl opacity-40"
+        />
+
+        {/* Accent orb */}
+        <motion.div
+          animate={{ x: [0, -20, 40, 0], y: [0, 30, -40, 0] }}
+          transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
+          className="absolute top-1/3 right-1/4 w-64 h-64 rounded-full bg-[#66C99A] mix-blend-multiply blur-3xl opacity-30"
         />
       </div>
 
-      <div className="relative z-10 max-w-3xl mx-auto text-center">
-
-        {/* Status pill */}
+      <div className="relative z-10 max-w-4xl mx-auto text-center">
+        
+        {/* Animated status badge */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.06 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 mb-7 bg-[#F0F7F4] border border-[#99C4B0] rounded-full"
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="inline-flex items-center gap-2 px-4 py-2 mb-8 bg-gradient-to-r from-[#F0F7F4] to-white border border-[#99C4B0]/40 rounded-full backdrop-blur-sm hover:border-[#99C4B0] transition-all"
         >
-          <span className="w-2 h-2 rounded-full bg-[#00572B] animate-pulse" />
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00572B] opacity-75" />
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#00572B]" />
+          </span>
           <span className="text-xs font-semibold text-[#00572B] tracking-widest uppercase">
             Taking on new projects
           </span>
         </motion.div>
 
-        {/* Headline */}
-        <motion.h1
+        {/* Main headline with gradient */}
+        <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65, delay: 0.12 }}
-          className="mb-5 leading-[1.08]"
+          transition={{ duration: 0.7, delay: 0.2 }}
         >
-          <span className="block text-5xl sm:text-6xl lg:text-7xl font-bold text-black">
-            Websites That Make
-          </span>
-          <span className="block text-5xl sm:text-6xl lg:text-7xl font-black text-[#00572B]">
-            Clients Choose You First.
-          </span>
-        </motion.h1>
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.1] text-balance mb-6">
+            <span className="block text-black">
+              Build Digital Products
+            </span>
+            <span className="block bg-gradient-to-r from-[#00572B] to-[#33B97C] bg-clip-text text-transparent">
+              That Convert & Scale
+            </span>
+          </h1>
+        </motion.div>
 
-        {/* Subtext */}
+        {/* Subheading */}
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.22 }}
-          className="text-base md:text-lg text-gray-500 leading-relaxed max-w-xl mx-auto mb-8"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto mb-10 text-balance"
         >
-          I build websites that make the right clients say{' '}
-          <span className="text-black font-semibold">
-            &ldquo;this is exactly who I need.&rdquo;
-          </span>
+          I craft full-stack AI automation and web products that solve real business problems. From concept to launch in{' '}
+          <span className="font-semibold text-[#00572B]">2–6 weeks</span>.
         </motion.p>
 
-        {/* CTAs */}
+        {/* Feature highlights grid */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-9"
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 max-w-2xl mx-auto"
         >
-          <motion.a
-            href="mailto:muhammadwaheedairi@gmail.com"
-            whileHover={{ scale: 1.04, y: -2 }}
-            whileTap={{ scale: 0.96 }}
-            className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#00572B] text-white font-semibold text-sm rounded-full hover:bg-[#004A24] hover:shadow-xl hover:shadow-[#00572B]/25 transition-all"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#66C99A] animate-pulse" />
-            Fix My Website
-            <ArrowRight className="w-4 h-4" />
-          </motion.a>
-
-          <motion.a
-            href="#projects"
-            whileHover={{ scale: 1.04, y: -2 }}
-            whileTap={{ scale: 0.96 }}
-            className="inline-flex items-center gap-2 px-7 py-3.5 border border-gray-200 text-gray-700 font-semibold text-sm rounded-full hover:border-[#33B97C] hover:text-[#00572B] hover:bg-[#F0F7F4] transition-all"
-          >
-            See Proof It Works
-          </motion.a>
-        </motion.div>
-
-        {/* Trust indicators */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.38 }}
-          className="flex flex-wrap items-center justify-center gap-7 mb-10 text-sm text-gray-500"
-        >
-          {trust.map(({ icon: Icon, label }) => (
-            <div key={label} className="flex items-center gap-1.5">
-              <Icon className="w-4 h-4 text-[#00572B]" strokeWidth={2} />
-              <span>{label}</span>
+          {features.map(({ icon: Icon, label, desc }) => (
+            <div key={label} className="flex items-center gap-3 px-4 py-3 bg-white/50 border border-gray-200/50 rounded-lg backdrop-blur-sm hover:border-[#99C4B0]/50 hover:bg-[#F0F7F4]/30 transition-all">
+              <Icon className="w-5 h-5 text-[#00572B] flex-shrink-0" strokeWidth={2} />
+              <div className="text-left">
+                <div className="text-sm font-semibold text-gray-900">{label}</div>
+                <div className="text-xs text-gray-500">{desc}</div>
+              </div>
             </div>
           ))}
         </motion.div>
 
-        {/* Divider */}
+        {/* CTA Buttons with enhanced styling */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.46 }}
-          className="flex items-center justify-center gap-4 mb-5"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
         >
-          <div className="h-px w-16 bg-gray-200" />
-          <span className="text-[10px] text-gray-400 font-semibold tracking-widest uppercase">
-            Find me on
-          </span>
-          <div className="h-px w-16 bg-gray-200" />
+          <motion.a
+            href="mailto:muhammadwaheedairi@gmail.com"
+            whileHover={{ scale: 1.05, y: -3 }}
+            whileTap={{ scale: 0.95 }}
+            className="group relative inline-flex items-center gap-2.5 px-8 py-4 bg-[#00572B] text-white font-semibold text-base rounded-lg hover:shadow-2xl hover:shadow-[#00572B]/30 transition-all overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-[#004A24] opacity-0 group-hover:opacity-100 transition-opacity" />
+            <span className="relative">Get Started</span>
+            <ArrowRight className="relative w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </motion.a>
+
+          <motion.a
+            href="#projects"
+            whileHover={{ scale: 1.05, y: -3 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-2 px-8 py-4 border-2 border-gray-300 text-gray-700 font-semibold text-base rounded-lg hover:border-[#00572B] hover:bg-[#F0F7F4] hover:text-[#00572B] transition-all"
+          >
+            <Code className="w-5 h-5" />
+            <span>See My Work</span>
+          </motion.a>
         </motion.div>
 
-        {/* Socials */}
+        {/* Social links divider */}
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0 }}
+          animate={{ opacity: 1, scaleX: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="flex items-center justify-center gap-3 mb-6"
+        >
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-300 to-transparent max-w-xs" />
+          <span className="text-xs text-gray-500 font-medium tracking-widest uppercase">Connect</span>
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-300 to-transparent max-w-xs" />
+        </motion.div>
+
+        {/* Social icons with enhanced styling */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.52 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
           className="flex items-center justify-center gap-3"
         >
           {socials.map(({ Icon, href, label }) => (
@@ -183,15 +197,15 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              whileHover={{ scale: 1.15, y: -2 }}
+              whileHover={{ scale: 1.2, y: -3 }}
               whileTap={{ scale: 0.9 }}
-              className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:text-[#00572B] hover:border-[#33B97C] hover:bg-[#F0F7F4] transition-all"
+              className="group relative w-11 h-11 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 bg-white/50 backdrop-blur-sm hover:border-[#00572B] hover:text-[#00572B] hover:bg-[#F0F7F4] transition-all overflow-hidden"
             >
-              <Icon className="w-4 h-4" />
+              <div className="absolute inset-0 bg-[#F0F7F4] opacity-0 group-hover:opacity-100 -z-10 transition-opacity rounded-full" />
+              <Icon className="w-5 h-5 relative z-10" />
             </motion.a>
           ))}
         </motion.div>
-
       </div>
     </section>
   );
