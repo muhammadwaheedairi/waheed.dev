@@ -1,6 +1,8 @@
 'use client';
 
 import { motion } from 'motion/react';
+import { CheckCircle2, Zap, Code, MessageCircle, TrendingUp, Shield } from 'lucide-react';
+import { useState } from 'react';
 
 /* ══════════════════════════════════════════════════
    CARD VISUALS — unchanged
@@ -186,6 +188,7 @@ function CardIcon({ dark = false }: { dark?: boolean }) {
 ══════════════════════════════════════════════════ */
 const CARDS = [
   {
+    icon: Zap,
     title: 'Your Site Goes',
     titleAccent: 'Live in Weeks.',
     body: 'You get a real, working website in 2–6 weeks — not months. Focused sprints, daily progress, no drawn-out back-and-forth.',
@@ -193,6 +196,7 @@ const CARDS = [
     dark: false,
   },
   {
+    icon: CheckCircle2,
     title: 'You Approve',
     titleAccent: 'Everything First.',
     body: 'Every feature is agreed in writing before we start. You sign off before a single line of code is written. No surprises — ever.',
@@ -200,6 +204,7 @@ const CARDS = [
     dark: false,
   },
   {
+    icon: Code,
     title: 'Code You',
     titleAccent: 'Actually Own.',
     body: 'Clean, documented code any developer can read. No lock-in. No black box. You own it completely — and can hand it to anyone.',
@@ -207,6 +212,7 @@ const CARDS = [
     dark: false,
   },
   {
+    icon: MessageCircle,
     title: 'You Talk to',
     titleAccent: 'Me. Directly.',
     body: 'No account managers. No middlemen. You message me, I reply — within 24 hours, every time. The person you hired is the person building it.',
@@ -214,6 +220,7 @@ const CARDS = [
     dark: false,
   },
   {
+    icon: TrendingUp,
     title: 'Built to',
     titleAccent: 'Win Clients.',
     body: 'Every design decision is made with one question: will this turn a visitor into a client? If not, it does not make the cut.',
@@ -221,6 +228,7 @@ const CARDS = [
     dark: false,
   },
   {
+    icon: Shield,
     title: 'Quality That',
     titleAccent: 'Holds Up.',
     body: 'Tested, scalable, and documented from day one. Your website will not break under pressure, growth, or a new developer.',
@@ -230,72 +238,223 @@ const CARDS = [
 ];
 
 /* ══════════════════════════════════════════════════
+   FEATURE CARD — React Bits style
+══════════════════════════════════════════════════ */
+function FeatureCard({
+  card,
+  index,
+  isSelected,
+  onSelect,
+}: {
+  card: (typeof CARDS)[0];
+  index: number;
+  isSelected: boolean;
+  onSelect: () => void;
+}) {
+  const Icon = card.icon;
+  
+  return (
+    <motion.button
+      onClick={onSelect}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.08, duration: 0.5 }}
+      viewport={{ once: true }}
+      className={`relative rounded-xl border p-5 text-left transition-all duration-300 w-full overflow-hidden group ${
+        isSelected
+          ? card.dark
+            ? 'bg-[#004A24] border-[#00572B]'
+            : 'bg-white border-[#00572B] shadow-lg shadow-[#00572B]/20'
+          : card.dark
+          ? 'bg-[#004A24] border-[#00572B]/30 hover:border-[#00572B]/60'
+          : 'bg-white border-gray-200 hover:border-[#99C4B0]'
+      }`}
+    >
+      {/* Animated background */}
+      {isSelected && !card.dark && (
+        <motion.div
+          layoutId="cardBg"
+          className="absolute inset-0 bg-gradient-to-br from-[#F0F7F4] to-white rounded-xl -z-10"
+          initial={false}
+          transition={{ duration: 0.3 }}
+        />
+      )}
+
+      {/* Icon */}
+      <motion.div
+        animate={{ rotate: isSelected ? 12 : 0 }}
+        transition={{ duration: 0.3 }}
+        className={`mb-3 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${
+          isSelected
+            ? card.dark
+              ? 'bg-[#99D9B8]/20 text-[#99D9B8]'
+              : 'bg-[#00572B]/10 text-[#00572B]'
+            : card.dark
+            ? 'bg-[#99D9B8]/10 text-[#99D9B8]/60'
+            : 'bg-gray-100 text-gray-400 group-hover:bg-[#F0F7F4] group-hover:text-[#00572B]'
+        }`}
+      >
+        <Icon className="w-5 h-5" strokeWidth={2} />
+      </motion.div>
+
+      {/* Title */}
+      <h3 className="text-sm sm:text-base font-bold leading-tight mb-1">
+        <span className={isSelected ? '' : 'text-gray-900'}>
+          {card.title}{' '}
+        </span>
+        <span className={`${
+          isSelected
+            ? card.dark
+              ? 'text-[#99D9B8]'
+              : 'text-[#00572B]'
+            : 'text-gray-400'
+        }`}>
+          {card.titleAccent}
+        </span>
+      </h3>
+
+      {/* Description (show on selected) */}
+      {isSelected && (
+        <motion.p
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          transition={{ duration: 0.3 }}
+          className={`text-xs leading-relaxed mt-3 ${
+            card.dark ? 'text-[#D0EFE3]' : 'text-gray-600'
+          }`}
+        >
+          {card.body}
+        </motion.p>
+      )}
+    </motion.button>
+  );
+}
+
+/* ══════════════════════════════════════════════════
    SECTION
 ══════════════════════════════════════════════════ */
 export default function WhyUs() {
-  return (
-    <section className="bg-gray-50 py-20 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-24 font-sans" id="why-us">
-      <div className="max-w-5xl mx-auto">
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const selectedCard = CARDS[selectedIndex];
+  const SelectedVisual = selectedCard.Visual;
 
+  return (
+    <section className="bg-white py-20 sm:py-28 px-4 sm:px-6 md:px-12 lg:px-24 font-sans" id="why-us">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-10 sm:mb-14"
+          className="text-center mb-12 sm:mb-16"
         >
-          <p className="text-xs font-bold uppercase tracking-widest text-[#00572B] mb-3">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.1 }}
+            className="text-xs font-bold uppercase tracking-widest text-[#00572B] mb-4"
+          >
             What You Get
-          </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-[1.12]">
+          </motion.p>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-[1.1]">
             This is what working with{' '}
-            <span className="font-black text-[#00572B]">
-              the right developer feels like.
+            <span className="text-[#00572B]">
+              the right developer
             </span>
+            <br />
+            <span className="text-[#00572B]">feels like.</span>
           </h2>
-          <p className="text-gray-500 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+          <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
             Most businesses have hired a developer who disappeared, missed deadlines,
             or delivered something broken. This is what the alternative looks like.
           </p>
         </motion.div>
 
-        {/* Cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-          {CARDS.map((card, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.07, duration: 0.5 }}
-              viewport={{ once: true }}
-              className={`rounded-2xl border p-6 transition-all duration-300 ${
-                card.dark
-                  ? 'bg-[#004A24] border-[#00572B] hover:bg-[#003D1E]'
-                  : 'bg-white border-gray-100 hover:shadow-md'
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+          {/* Left side - Features list with React Bits style */}
+          <motion.div
+            className="space-y-3"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            {CARDS.map((card, index) => (
+              <FeatureCard
+                key={index}
+                card={card}
+                index={index}
+                isSelected={selectedIndex === index}
+                onSelect={() => setSelectedIndex(index)}
+              />
+            ))}
+          </motion.div>
+
+          {/* Right side - Visual & Details */}
+          <motion.div
+            className="relative rounded-2xl border border-gray-200 p-8 bg-gradient-to-br from-white via-white to-[#F0F7F4]/30"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            key={selectedIndex}
+          >
+            {/* Icon display */}
+            <div className="mb-6 flex items-center gap-4">
+              <div className="w-14 h-14 rounded-xl bg-[#F0F7F4] flex items-center justify-center">
+                {selectedCard.icon && <selectedCard.icon className="w-7 h-7 text-[#00572B]" strokeWidth={1.5} />}
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-gray-900">
+                  {selectedCard.title}
+                  <span className="text-[#00572B]"> {selectedCard.titleAccent}</span>
+                </h3>
+              </div>
+            </div>
+
+            {/* Description */}
+            <motion.p
+              key={`desc-${selectedIndex}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className={`text-sm sm:text-base leading-relaxed mb-8 ${
+                selectedCard.dark ? 'text-[#D0EFE3]' : 'text-gray-600'
               }`}
             >
-              <CardIcon dark={card.dark} />
+              {selectedCard.body}
+            </motion.p>
 
-              <h3 className="text-xl sm:text-2xl leading-tight mb-2 font-sans">
-                <span className={`font-bold ${card.dark ? 'text-white' : 'text-gray-900'}`}>
-                  {card.title}{' '}
-                </span>
-                <span className={`font-black ${card.dark ? 'text-[#99D9B8]' : 'text-[#00572B]'}`}>
-                  {card.titleAccent}
-                </span>
-              </h3>
-
-              <p className={`text-xs sm:text-sm leading-relaxed ${
-                card.dark ? 'text-[#D0EFE3]' : 'text-gray-500'
-              }`}>
-                {card.body}
-              </p>
-
-              <card.Visual />
+            {/* Visual */}
+            <motion.div
+              key={`visual-${selectedIndex}`}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4 }}
+            >
+              <SelectedVisual />
             </motion.div>
-          ))}
-        </div>
 
+            {/* Indicator dots */}
+            <div className="flex gap-2 mt-8 justify-center">
+              {CARDS.map((_, index) => (
+                <motion.button
+                  key={index}
+                  onClick={() => setSelectedIndex(index)}
+                  animate={{
+                    scale: selectedIndex === index ? 1.2 : 1,
+                    backgroundColor: selectedIndex === index ? '#00572B' : '#e5e7eb',
+                  }}
+                  className="w-2 h-2 rounded-full transition-colors"
+                  whileHover={{ scale: 1.4 }}
+                />
+              ))}
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
