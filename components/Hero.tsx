@@ -45,9 +45,9 @@ const socials = [
 ];
 
 const features = [
-  { icon: Zap, label: 'Live in 2–6 Weeks', desc: 'Fast delivery' },
-  { icon: CheckCircle2, label: 'Reply Within 24hrs', desc: 'Always responsive' },
-  { icon: Sparkles, label: 'Zero Scope Surprises', desc: 'Clear communication' },
+  { icon: Zap, label: 'Live in 2–6 Weeks', desc: 'Actual launch' },
+  { icon: CheckCircle2, label: 'Written Approval First', desc: 'Zero surprises' },
+  { icon: Sparkles, label: 'You Own the Code', desc: 'Complete control' },
 ];
 
 /* ── Component ───────────────────────────────────── */
@@ -105,10 +105,10 @@ export default function Hero() {
         >
           <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.1] text-balance mb-6">
             <span className="block text-black">
-              Build Digital Products
+              Your Website Loses
             </span>
             <span className="block bg-gradient-to-r from-[#00572B] to-[#33B97C] bg-clip-text text-transparent">
-              That Convert & Scale
+              the Sales Your LinkedIn Wins
             </span>
           </h1>
         </motion.div>
@@ -120,8 +120,8 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto mb-10 text-balance"
         >
-          I craft full-stack AI automation and web products that solve real business problems. From concept to launch in{' '}
-          <span className="font-semibold text-[#00572B]">2–6 weeks</span>.
+          You build trust on LinkedIn. Your website breaks it in 5 seconds. AI-powered sites that sound like you, convert like crazy, and{' '}
+          <span className="font-semibold text-[#00572B]">launch in 2–6 weeks.</span>
         </motion.p>
 
         {/* Feature highlights grid */}

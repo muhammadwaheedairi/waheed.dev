@@ -21,9 +21,9 @@ export default function About() {
             Who You Are Working With
           </p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-[1.12]">
-            Meet the{' '}
+            I build websites that<br />
             <span className="font-black text-[#00572B]">
-              expert.
+              sound like you.
             </span>
           </h2>
         </motion.div>
@@ -76,29 +76,32 @@ export default function About() {
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border bg-gray-50 border-gray-200 w-fit mb-6">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#006B35] flex-shrink-0" />
                 <span className="text-[11px] font-medium text-gray-500">
-                  Not just another freelancer.
+                  For coaches & consultants
                 </span>
               </div>
 
               {/* Content */}
               <p className="text-gray-500 text-sm sm:text-base leading-[1.8] mb-3">
-                Hey, I&apos;m Waheed. I&apos;m not here to impress you with tech buzzwords — I&apos;m
-                here to build you something that{' '}
+                I built my first website for a coach in 2022. It looked nice. Nobody called. I watched her spend{' '}
                 <span className="text-gray-900 font-semibold">
-                  actually works for your business.
+                  months on LinkedIn building real relationships,
                 </span>
+                {' '}then watched her website kill every single one of them with generic sales copy and outdated design.
               </p>
               <p className="text-gray-500 text-sm sm:text-base leading-[1.8] mb-10">
-                Simple process. Clear communication.{' '}
-                <span className="text-gray-900 font-semibold">Real results.</span>
+                That&apos;s when I realized: coaches and consultants don&apos;t need "professional websites."{' '}
+                <span className="text-gray-900 font-semibold">
+                  They need their website to BE them
+                </span>
+                — the same voice, the same energy, the same conviction that wins clients on LinkedIn.
               </p>
 
               {/* Commitments */}
               <div className="space-y-3 mb-10">
                 {[
-                  'You talk directly to me — the person writing every line of code.',
-                  'Nothing gets built without your written approval. Full stop.',
-                  'Delivered on time, documented, and yours to own.',
+                  'Website that qualifies leads 24/7 with AI chat.',
+                  'Every word is yours — not a template, not generic.',
+                  'You own the code completely when it ships.',
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-2.5">
                     <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 flex-shrink-0 mt-0.5 text-[#00572B]">

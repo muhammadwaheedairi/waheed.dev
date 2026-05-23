@@ -118,53 +118,53 @@ const STEPS = [
   {
     number: '01',
     title: 'We Understand Your',
-    titleAccent: 'Business First.',
-    duration: '1–2 days',
-    tag: 'Starts with a 1-1 call',
-    description: 'Most developers start building immediately. I start by listening. We talk about your business, your customers, and what a successful outcome actually looks like for you.',
+    titleAccent: 'Business (1–2 days)',
+    duration: 'Starts with a call',
+    tag: 'Pain-aware discovery',
+    description: 'Most developers ask "what colors do you like?" I ask "who's a client you'd clone 100 times?" and "what's the one thing that makes someone ready to buy?" We map out your actual sales process—not the one you think you should have. The one that actually works. Then we build around that.',
     details: [
-      { icon: Sparkles, label: 'Business Analysis', value: 'Goals & challenges' },
-      { icon: Zap, label: 'Problem Mapping', value: 'Real pain points' },
-      { icon: CheckCircle2, label: 'Success Metrics', value: 'Clear objectives' },
+      { icon: Sparkles, label: 'Sales Process', value: 'How you actually win' },
+      { icon: Zap, label: 'Trust Killers', value: 'What breaks LinkedIn trust' },
+      { icon: CheckCircle2, label: 'Success', value: 'Booked calls, not visits' },
     ],
   },
   {
     number: '02',
-    title: 'You Approve Every',
-    titleAccent: 'Detail. In Writing.',
-    duration: '2–3 days',
-    tag: 'Zero surprises guarantee',
-    description: 'Before a single line of code is written, every feature, flow, and screen is documented. You review it. You sign off. That document is the contract — nothing gets built without your approval.',
+    title: 'You Approve Everything',
+    titleAccent: 'in Writing (2–3 days)',
+    duration: 'Zero surprises',
+    tag: 'Written contract',
+    description: 'Before a single line of code, every feature, every flow, every page is documented. You read it. You approve it. You sign off. That document is the contract. Nothing gets built without your green light. Zero surprises. Zero scope creep.',
     details: [
       { icon: CheckCircle2, label: 'Feature Specs', value: 'Complete breakdown' },
-      { icon: Code, label: 'Tech Stack', value: 'Technology choices' },
-      { icon: Sparkles, label: 'User Flows', value: 'Experience design' },
+      { icon: Code, label: 'Page Layout', value: 'Every screen mapped' },
+      { icon: Sparkles, label: 'User Flow', value: 'How people convert' },
     ],
   },
   {
     number: '03',
     title: 'I Build It. You',
-    titleAccent: 'Watch It Happen.',
+    titleAccent: 'Watch It Happen',
     duration: 'Project-dependent',
-    tag: 'Daily progress updates',
-    description: 'You get regular updates — not radio silence followed by a "it\'s done" two weeks later. If something comes up, you hear about it immediately. No hidden problems. No last-minute surprises.',
+    tag: 'Real progress updates',
+    description: 'You get real progress updates—not "still working on it." If something comes up, you hear about it immediately. If something's not landing, we fix it before it's finished. You stay in the loop the entire time. No radio silence. No last-minute surprises.',
     details: [
-      { icon: Code, label: 'Development', value: 'Transparent updates' },
-      { icon: Sparkles, label: 'Visual Design', value: 'Brand alignment' },
-      { icon: Zap, label: 'Performance', value: 'Optimization focus' },
+      { icon: Code, label: 'Development', value: 'Daily transparency' },
+      { icon: Sparkles, label: 'AI Chat Setup', value: 'Lead qualification' },
+      { icon: Zap, label: 'Your Voice', value: 'Brand alignment' },
     ],
   },
   {
     number: '04',
-    title: 'You Launch.',
-    titleAccent: 'You Own It. Fully.',
+    title: 'You Launch & Own',
+    titleAccent: 'It Completely',
     duration: '1–2 days',
-    tag: 'Your 24/7 asset',
-    description: 'Deployed, documented, and walked through until you understand it completely. You get the code, the deployment setup, and the confidence to run it yourself. This is yours — not mine.',
+    tag: 'Your asset forever',
+    description: 'Deployed, documented, and fully explained. You get the code, the deployment setup, and a walkthrough until you understand it completely. This is yours—not mine. Hand it to another developer tomorrow if you want. Launch with confidence.',
     details: [
-      { icon: CheckCircle2, label: 'Production Deploy', value: 'Live & stable' },
-      { icon: Sparkles, label: 'Documentation', value: 'Complete guides' },
-      { icon: Zap, label: 'Support', value: 'Ongoing assistance' },
+      { icon: CheckCircle2, label: 'Live Deploy', value: 'Full walkthrough' },
+      { icon: Sparkles, label: 'Documentation', value: 'You understand it all' },
+      { icon: Zap, label: 'Support', value: '24-hour replies' },
     ],
   },
 ];
@@ -187,15 +187,14 @@ export default function Process() {
             transition={{ delay: 0.1 }}
             className="text-xs font-bold uppercase tracking-widest text-[#00572B] mb-4"
           >
-            How It Works
+            The Process
           </motion.p>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-[1.1]">
-            You know what you want.{' '}
-            <span className="text-[#00572B]">Here is how we get there.</span>
+            No surprises.{' '}
+            <span className="text-[#00572B]">No vague timelines.</span>
           </h2>
           <p className="text-gray-500 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-            No disappearing acts. No vague timelines. Every project follows the same
-            four steps — so you always know exactly where things stand.
+            Four simple steps. You know exactly where things stand every single day.
           </p>
         </motion.div>
 
@@ -219,8 +218,7 @@ export default function Process() {
           className="mt-20 sm:mt-28 text-center"
         >
           <p className="text-gray-500 text-base mb-8 max-w-lg mx-auto leading-relaxed">
-            Every client goes through this exact process. It works because it removes
-            the guesswork — for both of us.
+            Every coach and consultant goes through this exact process. It works because it removes the guesswork—for both of us.
           </p>
           <motion.a
             href="mailto:muhammadwaheedairi@gmail.com"
@@ -228,7 +226,7 @@ export default function Process() {
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center gap-2.5 px-8 py-4 bg-[#00572B] text-white text-base font-semibold rounded-lg hover:bg-[#004A24] hover:shadow-xl hover:shadow-[#00572B]/30 transition-all"
           >
-            Start the Conversation
+            Let&apos;s Talk
             <svg viewBox="0 0 16 16" fill="none" className="w-5 h-5">
               <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>

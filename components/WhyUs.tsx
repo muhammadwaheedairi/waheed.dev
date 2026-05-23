@@ -189,49 +189,49 @@ function CardIcon({ dark = false }: { dark?: boolean }) {
 const CARDS = [
   {
     icon: Zap,
-    title: 'Your Site Goes',
-    titleAccent: 'Live in Weeks.',
-    body: 'You get a real, working website in 2–6 weeks — not months. Focused sprints, daily progress, no drawn-out back-and-forth.',
+    title: 'AI That',
+    titleAccent: 'Qualifies 24/7',
+    body: 'The site asks your questions, collects the right info, and books qualified calls. No bot that annoys people. One that actually sounds like you.',
     Visual: DeliveryVisual,
     dark: false,
   },
   {
     icon: CheckCircle2,
-    title: 'You Approve',
-    titleAccent: 'Everything First.',
-    body: 'Every feature is agreed in writing before we start. You sign off before a single line of code is written. No surprises — ever.',
+    title: 'Your Voice.',
+    titleAccent: 'Not a Template.',
+    body: 'Every word, every image, every interaction is built to sound like you talk to clients. Not generic. Not "professional." Just real.',
     Visual: ContractVisual,
     dark: false,
   },
   {
     icon: Code,
-    title: 'Code You',
-    titleAccent: 'Actually Own.',
-    body: 'Clean, documented code any developer can read. No lock-in. No black box. You own it completely — and can hand it to anyone.',
+    title: 'Live in',
+    titleAccent: '2–6 Weeks.',
+    body: 'Not "we\'ll start in 3 months." Live. Working. Converting. 2–6 weeks depending on scope.',
     Visual: CodeVisual,
     dark: false,
   },
   {
     icon: MessageCircle,
-    title: 'You Talk to',
-    titleAccent: 'Me. Directly.',
-    body: 'No account managers. No middlemen. You message me, I reply — within 24 hours, every time. The person you hired is the person building it.',
+    title: 'Written Approval',
+    titleAccent: 'Before Build.',
+    body: 'You don\'t have to trust me. You approve the plan. In writing. Then we execute exactly that. No surprises when you see it finished.',
     Visual: ChatVisual,
     dark: false,
   },
   {
     icon: TrendingUp,
-    title: 'Built to',
-    titleAccent: 'Win Clients.',
-    body: 'Every design decision is made with one question: will this turn a visitor into a client? If not, it does not make the cut.',
+    title: 'Code You',
+    titleAccent: 'Own Completely.',
+    body: 'No lock-in. No monthly fees to keep the lights on. You own it. Deploy it yourself. Hand it to another developer. It\'s yours.',
     Visual: FunnelVisual,
     dark: false,
   },
   {
     icon: Shield,
-    title: 'Quality That',
-    titleAccent: 'Holds Up.',
-    body: 'Tested, scalable, and documented from day one. Your website will not break under pressure, growth, or a new developer.',
+    title: 'Direct Access.',
+    titleAccent: 'Real Replies.',
+    body: 'No support tickets. No account managers. Message me, I reply—within 24 hours, every time. The person who built it is the person you talk to.',
     Visual: QualityVisual,
     dark: true,
   },
@@ -356,19 +356,16 @@ export default function WhyUs() {
             transition={{ delay: 0.1 }}
             className="text-xs font-bold uppercase tracking-widest text-[#00572B] mb-4"
           >
-            What You Get
+            What Sets This Apart
           </motion.p>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-[1.1]">
-            This is what working with{' '}
+            AI-powered sites that<br />
             <span className="text-[#00572B]">
-              the right developer
+              sound like you, not a template.
             </span>
-            <br />
-            <span className="text-[#00572B]">feels like.</span>
           </h2>
           <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            Most businesses have hired a developer who disappeared, missed deadlines,
-            or delivered something broken. This is what the alternative looks like.
+            You build trust on LinkedIn. Your website shouldn&apos;t kill it in 5 seconds. Here&apos;s what you get instead.
           </p>
         </motion.div>
 
